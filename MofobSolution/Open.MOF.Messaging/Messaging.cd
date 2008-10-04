@@ -21,5 +21,26 @@
       <FileName>Attributes\ReplyMessageDefinitionAttribute.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Open.MOF.Messaging.ServiceConfigurationElement">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configuration\ServiceConfigurationElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.MOF.Messaging.ServiceConfigurationCollection">
+    <Position X="9.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configuration\ServiceConfigurationCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.MOF.Messaging.ServiceConfigurationSettings">
+    <Position X="11" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configuration\ServiceConfigurationSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

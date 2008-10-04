@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace Open.MOF.Messaging
@@ -31,6 +30,26 @@ namespace Open.MOF.Messaging
         {
             get { return _action; }
             set { _action = value; }
+        }
+
+        public bool IsValid()
+        {
+            return IsValid(false);
+        }
+
+        protected bool IsValid(bool verifyEndpointConnectivity)
+        {
+            if (String.IsNullOrEmpty(_uri))
+                return false;
+
+            if (String.IsNullOrEmpty(_action))
+                return false;
+
+            if (verifyEndpointConnectivity)
+            {
+            }
+
+            return true;
         }
     }
 }

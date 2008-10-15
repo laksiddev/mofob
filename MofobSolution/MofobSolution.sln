@@ -5,9 +5,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging", "Open.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.BizTalk", "Open.MOF.BizTalk\Open.MOF.BizTalk.csproj", "{132B49C2-5569-421A-BB75-8D4F0A798B2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging.Test", "Open.MOF.Messaging.Test\Open.MOF.Messaging.Test.csproj", "{F25E0EE1-CDDF-4293-94E4-D8DC81FFD172}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{63E3A6C4-11F4-49FC-BC66-A81BB60A49CA}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		MofobSolution.vsmdi = MofobSolution.vsmdi
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.BizTalk.Test", "Open.MOF.BizTalk.Test\Open.MOF.BizTalk.Test.csproj", "{1483C606-3428-40C9-9F1B-D0299DDAB2C9}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs08.codeplex.com/
 		SccLocalPath0 = .
@@ -17,6 +27,15 @@ Global
 		SccProjectUniqueName2 = Open.MOF.BizTalk\\Open.MOF.BizTalk.csproj
 		SccProjectName2 = Open.MOF.BizTalk
 		SccLocalPath2 = Open.MOF.BizTalk
+		SccProjectUniqueName3 = Open.MOF.Messaging.Test\\Open.MOF.Messaging.Test.csproj
+		SccProjectName3 = Open.MOF.Messaging.Test
+		SccLocalPath3 = Open.MOF.Messaging.Test
+		SccProjectUniqueName4 = Open.MOF.BizTalk.Test\\Open.MOF.BizTalk.Test.csproj
+		SccProjectName4 = Open.MOF.BizTalk.Test
+		SccLocalPath4 = Open.MOF.BizTalk.Test
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = MofobSolution.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +50,14 @@ Global
 		{132B49C2-5569-421A-BB75-8D4F0A798B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{132B49C2-5569-421A-BB75-8D4F0A798B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{132B49C2-5569-421A-BB75-8D4F0A798B2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F25E0EE1-CDDF-4293-94E4-D8DC81FFD172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F25E0EE1-CDDF-4293-94E4-D8DC81FFD172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F25E0EE1-CDDF-4293-94E4-D8DC81FFD172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F25E0EE1-CDDF-4293-94E4-D8DC81FFD172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1483C606-3428-40C9-9F1B-D0299DDAB2C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1483C606-3428-40C9-9F1B-D0299DDAB2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1483C606-3428-40C9-9F1B-D0299DDAB2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1483C606-3428-40C9-9F1B-D0299DDAB2C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

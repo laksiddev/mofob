@@ -66,10 +66,10 @@ namespace Open.MOF.Messaging.Services
             MessagingService serviceInstance = null;
             if ((typeof(MessagingService).IsAssignableFrom(serviceType)) && (requiredInterfaceType != null) && (requiredInterfaceType.IsAssignableFrom(serviceType)))
             {
-                System.Reflection.MethodInfo constructorMethod = serviceType.GetMethod(null, System.Reflection.BindingFlags.CreateInstance | System.Reflection.BindingFlags.NonPublic, null, new Type[0], null);
+                System.Reflection.ConstructorInfo constructorMethod = serviceType.GetConstructor(System.Reflection.BindingFlags.CreateInstance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance, null, new Type[0], null);
                 if (constructorMethod != null)
                 {
-                    serviceInstance = (MessagingService)constructorMethod.Invoke(null, new object[0]);
+                    serviceInstance = (MessagingService)constructorMethod.Invoke(new object[0]);
                 }
                 else
                 {

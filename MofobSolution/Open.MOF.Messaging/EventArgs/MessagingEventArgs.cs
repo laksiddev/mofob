@@ -8,8 +8,7 @@ namespace Open.MOF.Messaging
     {
         private MessageBase _message;
 
-        public MessagingEventArgs(MessageBase message)
-            : base()
+        public MessagingEventArgs(MessageBase message) : base()
         {
             _message = message;
         }

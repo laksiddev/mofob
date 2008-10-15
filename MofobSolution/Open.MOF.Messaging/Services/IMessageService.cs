@@ -6,12 +6,12 @@ namespace Open.MOF.Messaging.Services
 {
     public interface IMessageService
     {
-        void SubmitMessageRequest(RequestMessage message);
+        void SubmitMessageRequest(MessageBase message);
 
-        void SubmitMessageRequest(RequestMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback);
+        void SubmitMessageRequest(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback);
 
-        IAsyncResult BeginSubmitMessageRequest(RequestMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback);
+        IAsyncResult BeginSubmitMessageRequest(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback);
 
-        RequestMessage EndSubmitMessageRequest(IAsyncResult ar);
+        MessageBase EndSubmitMessageRequest(IAsyncResult ar);
     }
 }

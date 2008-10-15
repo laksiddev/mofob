@@ -14,22 +14,22 @@ namespace Open.MOF.Messaging.Services
 
         #region IMessageService Members
 
-        public void SubmitMessageRequest(RequestMessage message)
+        public void SubmitMessageRequest(MessageBase message)
         {
             SubmitMessageRequest(message, null);
         }
 
-        public void SubmitMessageRequest(RequestMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback)
+        public void SubmitMessageRequest(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback)
         {
             BeginSubmitMessageRequest(message, messageResponseCallback, null);
         }
 
-        public IAsyncResult BeginSubmitMessageRequest(RequestMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback)
+        public IAsyncResult BeginSubmitMessageRequest(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback)
         {
             throw new NotImplementedException();
         }
 
-        public RequestMessage EndSubmitMessageRequest(IAsyncResult ar)
+        public MessageBase EndSubmitMessageRequest(IAsyncResult ar)
         {
             throw new NotImplementedException();
         }

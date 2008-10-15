@@ -6,8 +6,7 @@ namespace Open.MOF.Messaging
 {
     public class MessageReceivedEventArgs : MessagingEventArgs
     {
-        public MessageReceivedEventArgs(ResponseMessage message)
-            : base(message)
+        public MessageReceivedEventArgs(MessageBase message) : base(message)
         {
         }
     }

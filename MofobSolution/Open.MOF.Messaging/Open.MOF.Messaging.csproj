@@ -40,6 +40,12 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +59,7 @@
     <Compile Include="EventArgs\MessageReceivedEventArgs.cs" />
     <Compile Include="EventArgs\UnknownMessageEventArgs.cs" />
     <Compile Include="FaultMessage.cs" />
+    <Compile Include="GenericMessage.cs" />
     <Compile Include="MessageBase.cs" />
     <Compile Include="MessagingEndpoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

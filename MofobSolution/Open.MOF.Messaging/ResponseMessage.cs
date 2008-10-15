@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.Text;
 
 namespace Open.MOF.Messaging
 {
-    public class ResponseMessage : MessageBase
+    [MessageContract(IsWrapped = true, WrapperName = "ResponseMessage")]
+    public abstract class ResponseMessage<T> : GenericMessage<T> where T : MessageBase
     {
     }
 }

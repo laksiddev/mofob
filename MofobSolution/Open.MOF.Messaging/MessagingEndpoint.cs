@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Open.MOF.Messaging
 {
+    [DataContract(Name = "MessageEndpoint", Namespace = "http://mofob.open/Messaging/DataContracts/1/0/")]
     public class MessagingEndpoint
     {
         public MessagingEndpoint()
@@ -18,6 +20,7 @@ namespace Open.MOF.Messaging
             _action = action;
         }
 
+        [DataMember(Name = "uri", Order = 1)]
         protected string _uri;
         public string Uri
         {
@@ -25,6 +28,7 @@ namespace Open.MOF.Messaging
             set { _uri = value; }
         }
 
+        [DataMember(Name = "action", Order = 2)]
         protected string _action;
         public string Action
         {

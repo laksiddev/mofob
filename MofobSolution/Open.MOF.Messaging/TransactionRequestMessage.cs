@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.Text;
 
 namespace Open.MOF.Messaging
 {
-    public class TransactionRequestMessage : RequestMessage
+    [MessageContract(IsWrapped = true, WrapperName = "TransactionRequestMessage")]
+    public abstract class TransactionRequestMessage<T> : RequestMessage<T> where T : MessageBase
     {
     }
 }

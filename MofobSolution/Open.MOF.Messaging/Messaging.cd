@@ -1,45 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Open.MOF.Messaging.MessagingEndpoint">
-    <Position X="0.5" Y="1.5" Width="1.5" />
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAACAAAgAAAAAQ=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAACAAAAAACAAAgAAAAAQ=</HashCode>
       <FileName>MessagingEndpoint.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Open.MOF.Messaging.MessageBase">
-    <Position X="6" Y="2.5" Width="1.5" />
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AgAAAAAAAAAAAAQAgQAAAACAAgAIIQAEAAAAACAAAEA=</HashCode>
       <FileName>MessageBase.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Open.MOF.Messaging.ReplyMessageDefinitionAttribute">
-    <Position X="3" Y="2.75" Width="1.5" />
+  <Class Name="Open.MOF.Messaging.ResponseMessageTypeAttribute">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAACAAAAAAAAEAAAAAAI=</HashCode>
-      <FileName>Attributes\ReplyMessageDefinitionAttribute.cs</FileName>
+      <FileName>Attributes\ResponseMessageTypeAttribute.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Open.MOF.Messaging.ServiceConfigurationElement">
-    <Position X="8.5" Y="1.75" Width="1.5" />
+  <Class Name="Open.MOF.Messaging.DataRequestMessage" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Configuration\ServiceConfigurationElement.cs</FileName>
+      <FileName>DataRequestMessage.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Open.MOF.Messaging.ServiceConfigurationCollection">
-    <Position X="9.75" Y="3.25" Width="1.5" />
+  <Class Name="Open.MOF.Messaging.RequestMessage" Collapsed="true">
+    <Position X="5.5" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Configuration\ServiceConfigurationCollection.cs</FileName>
+      <FileName>RequestMessage.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Open.MOF.Messaging.ServiceConfigurationSettings">
-    <Position X="11" Y="1.75" Width="1.5" />
+  <Class Name="Open.MOF.Messaging.TransactionRequestMessage" Collapsed="true">
+    <Position X="5.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Configuration\ServiceConfigurationSettings.cs</FileName>
+      <FileName>TransactionRequestMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Open.MOF.Messaging.ResponseMessage" Collapsed="true">
+    <Position X="7.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ResponseMessage.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

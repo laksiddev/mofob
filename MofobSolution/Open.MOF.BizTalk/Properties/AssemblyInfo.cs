@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Open.MOF.Messaging")]
-[assembly: AssemblyDescription("Message Oriented Framework - Messaging")]
+[assembly: AssemblyTitle("Open.MOF.BizTalk")]
+[assembly: AssemblyDescription("Message Oriented Framework - BizTalk")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("jkitagr@hotmail.com")]
-[assembly: AssemblyProduct("Open.MOF.Messaging")]
+[assembly: AssemblyProduct("Open.MOF.BizTalk")]
 [assembly: AssemblyCopyright("Copyright © jkitagr@hotmail.com 2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("aaf3ef41-8eba-4b96-99f8-da45393127d2")]
+[assembly: Guid("fde5a72e-39c2-495c-8f0f-aa6b93a133a4")]
 
 // Version information for an assembly consists of the following four values:
 //

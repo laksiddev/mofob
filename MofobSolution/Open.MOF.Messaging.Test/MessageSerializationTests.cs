@@ -37,12 +37,11 @@ namespace Open.MOF.Messaging.Test
                 testContextInstance = value;
             }
         }
-
-
+        
         [TestMethod]
         public void DataRequestMessageSerializationTest()
         {
-            TestRequestMessage message = new TestRequestMessage();
+            TestDataRequestMessage message = new TestDataRequestMessage();
             message.Name = "TestMessage";
             message.MessageId = Guid.NewGuid();
             message.From = new MessagingEndpoint("http://me/", "myaction");
@@ -50,9 +49,117 @@ namespace Open.MOF.Messaging.Test
 
             Assert.IsNotNull(messageText);
 
-            TestRequestMessage testMessage = TestRequestMessage.FromXmlString(messageText);
+            TestDataRequestMessage testMessage = TestDataRequestMessage.FromXmlString(messageText);
+
+            Assert.IsNotNull(testMessage);
+            Assert.AreEqual(message.Name, testMessage.Name, "An unexpected value was returned.");
+            Assert.AreEqual(message.MessageId, testMessage.MessageId, "An unexpected value was returned.");
+            Assert.IsNotNull(testMessage.From);
+            Assert.AreEqual(message.From.Uri, testMessage.From.Uri, "An unexpected value was returned.");
+            Assert.AreEqual(message.From.Action, testMessage.From.Action, "An unexpected value was returned.");
         }
 
+        [TestMethod]
+        public void TransactionRequestMessageSerializationTest()
+        {
+            TestTransactionRequestMessage message = new TestTransactionRequestMessage();
+            message.Name = "TestMessage";
+            message.MessageId = Guid.NewGuid();
+            message.From = new MessagingEndpoint("http://me/", "myaction");
+            string messageText = message.ToXmlString();
+
+            Assert.IsNotNull(messageText);
+
+            TestTransactionRequestMessage testMessage = TestTransactionRequestMessage.FromXmlString(messageText);
+
+            Assert.IsNotNull(testMessage);
+            Assert.AreEqual(message.Name, testMessage.Name, "An unexpected value was returned.");
+            Assert.AreEqual(message.MessageId, testMessage.MessageId, "An unexpected value was returned.");
+            Assert.IsNotNull(testMessage.From);
+            Assert.AreEqual(message.From.Uri, testMessage.From.Uri, "An unexpected value was returned.");
+            Assert.AreEqual(message.From.Action, testMessage.From.Action, "An unexpected value was returned.");
+        }
+
+        [TestMethod]
+        public void FaultMessageSerializationTest()
+        {
+            FaultMessage message = new FaultMessage();
+            message.ExceptionInstanceId = Guid.NewGuid();
+            message.ApplicationName = "ApplicationName";
+            message.ServiceName = "ServiceName";
+            message.SetExceptionDetail(new ApplicationException("Test Exception"));
+            message.MessageId = Guid.NewGuid();
+            message.From = new MessagingEndpoint("http://me/", "myaction");
+            string messageText = message.ToXmlString();
+
+            Assert.IsNotNull(messageText);
+
+            FaultMessage testMessage = FaultMessage.FromXmlString(messageText);
+
+            Assert.IsNotNull(testMessage);
+            Assert.IsNotNull(testMessage.ExceptionDetail);
+            Assert.AreEqual(message.ExceptionDetail.ExceptionType, testMessage.ExceptionDetail.ExceptionType, "An unexpected value was returned.");
+            Assert.AreEqual(message.ExceptionDetail.Message, testMessage.ExceptionDetail.Message, "An unexpected value was returned.");
+            Assert.AreEqual(message.ApplicationName, testMessage.ApplicationName, "An unexpected value was returned.");
+            Assert.AreEqual(message.ServiceName, testMessage.ServiceName, "An unexpected value was returned.");
+            Assert.AreEqual(message.ExceptionInstanceId, testMessage.ExceptionInstanceId, "An unexpected value was returned.");
+            Assert.AreEqual(message.MessageId, testMessage.MessageId, "An unexpected value was returned.");
+            Assert.IsNotNull(testMessage.From);
+            Assert.AreEqual(message.From.Uri, testMessage.From.Uri, "An unexpected value was returned.");
+            Assert.AreEqual(message.From.Action, testMessage.From.Action, "An unexpected value was returned.");
+        }
+
+        [TestMethod]
+        public void SubscribeRequestMessageSerializationTest()
+        {
+            SubscribeRequestMessage message = new SubscribeRequestMessage();
+            message.EndpointUri = "http://endpointuri/";
+            message.Action = "messageaction";
+            message.SubscriptionMessageXmlType = MessageBase.GetMessageXmlType(typeof(TestDataRequestMessage));
+            Assert.IsTrue((!String.IsNullOrEmpty(message.SubscriptionMessageXmlType)), "No message xml information was available.");
+            message.MessageId = Guid.NewGuid();
+            message.From = new MessagingEndpoint("http://me/", "myaction");
+            string messageText = message.ToXmlString();
+
+            Assert.IsNotNull(messageText);
+
+            SubscribeRequestMessage testMessage = SubscribeRequestMessage.FromXmlString(messageText);
+
+            Assert.IsNotNull(testMessage);
+            Assert.AreEqual(message.EndpointUri, testMessage.EndpointUri, "An unexpected value was returned.");
+            Assert.AreEqual(message.Action, testMessage.Action, "An unexpected value was returned.");
+            Assert.AreEqual(message.SubscriptionMessageXmlType, testMessage.SubscriptionMessageXmlType, "An unexpected value was returned.");
+            Assert.AreEqual(message.MessageId, testMessage.MessageId, "An unexpected value was returned.");
+            Assert.IsNotNull(testMessage.From);
+            Assert.AreEqual(message.From.Uri, testMessage.From.Uri, "An unexpected value was returned.");
+            Assert.AreEqual(message.From.Action, testMessage.From.Action, "An unexpected value was returned.");
+        }
+
+        [TestMethod]
+        public void UnsubscribeRequestMessageSerializationTest()
+        {
+            UnsubscribeRequestMessage message = new UnsubscribeRequestMessage();
+            message.EndpointUri = "http://endpointuri/";
+            message.Action = "messageaction";
+            message.SubscriptionMessageXmlType = MessageBase.GetMessageXmlType(typeof(TestDataRequestMessage));
+            Assert.IsTrue((!String.IsNullOrEmpty(message.SubscriptionMessageXmlType)), "No message xml information was available.");
+            message.MessageId = Guid.NewGuid();
+            message.From = new MessagingEndpoint("http://me/", "myaction");
+            string messageText = message.ToXmlString();
+
+            Assert.IsNotNull(messageText);
+
+            UnsubscribeRequestMessage testMessage = UnsubscribeRequestMessage.FromXmlString(messageText);
+
+            Assert.IsNotNull(testMessage);
+            Assert.AreEqual(message.EndpointUri, testMessage.EndpointUri, "An unexpected value was returned.");
+            Assert.AreEqual(message.Action, testMessage.Action, "An unexpected value was returned.");
+            Assert.AreEqual(message.SubscriptionMessageXmlType, testMessage.SubscriptionMessageXmlType, "An unexpected value was returned.");
+            Assert.AreEqual(message.MessageId, testMessage.MessageId, "An unexpected value was returned.");
+            Assert.IsNotNull(testMessage.From);
+            Assert.AreEqual(message.From.Uri, testMessage.From.Uri, "An unexpected value was returned.");
+            Assert.AreEqual(message.From.Action, testMessage.From.Action, "An unexpected value was returned.");
+        }
 
         #region Additional test attributes
         //
@@ -83,22 +190,5 @@ namespace Open.MOF.Messaging.Test
         }
 
         #endregion
-
-        [MessageContract(IsWrapped = true, WrapperName = "TestRequestMessage", WrapperNamespace = "http://mofob.open/MessagingTests/ServiceContracts/1/0/")]
-        public class TestRequestMessage : DataRequestMessage<TestRequestMessage>
-        {
-            public TestRequestMessage() : base()
-            {
-                _name = null;
-            }
-
-            [MessageBodyMember(Name = "name", Order = 1, Namespace = "http://mofob.open/MessagingTests/DataContracts/1/0/")]
-            protected string _name;
-            public string Name
-            {
-                get { return _name; }
-                set { _name = value; }
-            }
-        }
     }
 }

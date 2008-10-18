@@ -6,36 +6,27 @@ using Open.MOF.Messaging;
 
 namespace Open.MOF.BizTalk.Services
 {
-    public class EsbMessagingService : Open.MOF.Messaging.Services.MessagingService, Open.MOF.Messaging.Services.IMessageService
+    public class EsbMessagingService : Open.MOF.Messaging.Services.MessagingService
     {
-        protected EsbMessagingService() : base()
+        protected EsbMessagingService(string serviceBindingName) : base(serviceBindingName)
         {
         }
 
-        #region IMessageService Members
+        public override IAsyncResult BeginSubmitMessage(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override MessageBase EndSubmitMessage(IAsyncResult ar)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Open.MOF.Messaging.Services.ServiceInterfaceType SuportedServiceInterfaces
+        {
+            get { return (Open.MOF.Messaging.Services.ServiceInterfaceType.TransactionService); }
+        }
         
-        public void SubmitMessageRequest(RequestMessage message)
-        {
-            SubmitMessageRequest(message, null);
-        }
-
-        public void SubmitMessageRequest(RequestMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback)
-        {
-            BeginSubmitMessageRequest(message, messageResponseCallback, null);
-        }
-
-        public IAsyncResult BeginSubmitMessageRequest(RequestMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback)
-        {
-            throw new NotImplementedException();
-        }
-
-        public RequestMessage EndSubmitMessageRequest(IAsyncResult ar)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
         public override void Dispose()
         {
         }

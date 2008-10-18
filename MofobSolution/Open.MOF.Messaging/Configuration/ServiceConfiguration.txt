@@ -3,6 +3,6 @@
   </configSections>
   <messagingServiceConfiguration>
     <serviceConfigurationItems>
-      <add name="WcfClientMessagingService" serviceInterfaceName="MessageService" serviceTypeName="Open.MOF.Messaging.Services.WcfClientMessagingService, Open.MOF.Messaging, Version=0.6.0.0, Culture=neutral, PublicKeyToken=null" />
+      <add name="WcfClientMessagingService" serviceInterfaceName="MessageService" serviceTypeName="Open.MOF.Messaging.Services.WcfClientMessagingService, Open.MOF.Messaging, Version=0.6.0.0, Culture=neutral, PublicKeyToken=null" serviceBindingName="" preferenceNumber="0" />
     </serviceConfigurationItems>
   </messagingServiceConfiguration>

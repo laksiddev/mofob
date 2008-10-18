@@ -29,14 +29,16 @@ namespace Open.MOF.Messaging.Configuration
         {
             get
             {
-                if (String.Compare(Open.MOF.Messaging.Services.ServiceInterfaceType.MessageService.ToString(), ServiceInterfaceName, StringComparison.CurrentCultureIgnoreCase) == 0)
-                    return Open.MOF.Messaging.Services.ServiceInterfaceType.MessageService;
+                if (String.Compare(Open.MOF.Messaging.Services.ServiceInterfaceType.DataService.ToString(), ServiceInterfaceName, StringComparison.CurrentCultureIgnoreCase) == 0)
+                    return Open.MOF.Messaging.Services.ServiceInterfaceType.DataService;
+                else if (String.Compare(Open.MOF.Messaging.Services.ServiceInterfaceType.TransactionService.ToString(), ServiceInterfaceName, StringComparison.CurrentCultureIgnoreCase) == 0)
+                    return Open.MOF.Messaging.Services.ServiceInterfaceType.TransactionService;
                 else if (String.Compare(Open.MOF.Messaging.Services.ServiceInterfaceType.ExceptionService.ToString(), ServiceInterfaceName, StringComparison.CurrentCultureIgnoreCase) == 0)
                     return Open.MOF.Messaging.Services.ServiceInterfaceType.ExceptionService;
                 else if (String.Compare(Open.MOF.Messaging.Services.ServiceInterfaceType.SubscriptionService.ToString(), ServiceInterfaceName, StringComparison.CurrentCultureIgnoreCase) == 0)
                     return Open.MOF.Messaging.Services.ServiceInterfaceType.SubscriptionService;
                 else
-                    return Open.MOF.Messaging.Services.ServiceInterfaceType.MessageService;
+                    return Open.MOF.Messaging.Services.ServiceInterfaceType.TransactionService;
             }
         }
 
@@ -66,6 +68,20 @@ namespace Open.MOF.Messaging.Configuration
 
                 return serviceType;
             }
+        }   //
+
+        [ConfigurationProperty("serviceBindingName", IsRequired = true)]
+        public string ServiceBindingName
+        {
+            get { return (string)this["serviceBindingName"]; }
+            set { this["serviceBindingName"] = value; }
+        }
+
+        [ConfigurationProperty("preferenceNumber", IsRequired = true)]
+        public int PreferenceNumber
+        {
+            get { return (int)this["preferenceNumber"]; }
+            set { this["preferenceNumber"] = value; }
         }
     }
 }

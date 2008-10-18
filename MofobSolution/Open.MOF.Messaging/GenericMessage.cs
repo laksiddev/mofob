@@ -11,6 +11,7 @@ namespace Open.MOF.Messaging
     {
         public string ToXmlString()
         {
+            DataContractFormatAttribute att = new DataContractFormatAttribute();
             System.ServiceModel.Description.TypedMessageConverter messageConverter = System.ServiceModel.Description.TypedMessageConverter.Create(typeof(T), "action");
             System.ServiceModel.Channels.Message message = messageConverter.ToMessage(this);
 

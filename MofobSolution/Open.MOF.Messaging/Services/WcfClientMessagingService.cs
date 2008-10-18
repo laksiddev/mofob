@@ -6,35 +6,26 @@ using Open.MOF.Messaging;
 
 namespace Open.MOF.Messaging.Services
 {
-    public class WcfClientMessagingService : MessagingService, IMessageService
+    public class WcfClientMessagingService : MessagingService
     {
-        protected WcfClientMessagingService() : base()
+        protected WcfClientMessagingService(string serviceBindingName) : base(serviceBindingName)
         {
         }
 
-        #region IMessageService Members
-
-        public void SubmitMessageRequest(MessageBase message)
-        {
-            SubmitMessageRequest(message, null);
-        }
-
-        public void SubmitMessageRequest(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback)
-        {
-            BeginSubmitMessageRequest(message, messageResponseCallback, null);
-        }
-
-        public IAsyncResult BeginSubmitMessageRequest(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback)
+        public override IAsyncResult BeginSubmitMessage(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback)
         {
             throw new NotImplementedException();
         }
 
-        public MessageBase EndSubmitMessageRequest(IAsyncResult ar)
+        public override MessageBase EndSubmitMessage(IAsyncResult ar)
         {
             throw new NotImplementedException();
         }
 
-        #endregion
+        public override ServiceInterfaceType SuportedServiceInterfaces
+        {
+            get { return (ServiceInterfaceType.DataService); }
+        }
 
         public override void Dispose()
         {

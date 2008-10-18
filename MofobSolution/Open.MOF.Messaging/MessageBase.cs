@@ -66,5 +66,30 @@ namespace Open.MOF.Messaging
             get { return _relatedMessageId; }
             set { _relatedMessageId = value; }
         }
+
+        public string MessageXmlType
+        {
+            get
+            {
+                return MessageBase.GetMessageXmlType(this.GetType());
+            }
+        }
+
+        public static string GetMessageXmlType(System.Type messageType)
+        {
+            if ((typeof(MessageBase).IsAssignableFrom(messageType)) && (!messageType.IsAbstract))
+            {
+                System.ServiceModel.MessageContractAttribute[] attributes = 
+                    (System.ServiceModel.MessageContractAttribute[])messageType.GetCustomAttributes(typeof(System.ServiceModel.MessageContractAttribute), false);
+
+                if (attributes.Length == 1)
+                {
+                    string messageNamespace = attributes[0].WrapperNamespace;
+                    return messageNamespace + "#" + messageType.Name;
+                }
+            }
+
+            return String.Empty;
+        }
     }
 }

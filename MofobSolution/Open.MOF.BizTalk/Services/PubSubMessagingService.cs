@@ -6,69 +6,26 @@ using Open.MOF.Messaging;
 
 namespace Open.MOF.BizTalk.Services
 {
-    public class PubSubMessagingService : Open.MOF.Messaging.Services.MessagingService, Open.MOF.Messaging.Services.IMessageService, Open.MOF.Messaging.Services.ISubscriptionService
+    public class PubSubMessagingService : Open.MOF.Messaging.Services.MessagingService
     {
-        protected PubSubMessagingService() : base()
+        protected PubSubMessagingService(string serviceBindingName) : base(serviceBindingName)
         {
         }
 
-        #region IMessageService Members
-
-        public void SubmitMessageRequest(RequestMessage message)
-        {
-            SubmitMessageRequest(message, null);
-        }
-
-        public void SubmitMessageRequest(RequestMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback)
-        {
-            BeginSubmitMessageRequest(message, messageResponseCallback, null);
-        }
-
-        public IAsyncResult BeginSubmitMessageRequest(RequestMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback)
+        public override IAsyncResult BeginSubmitMessage(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback)
         {
             throw new NotImplementedException();
         }
 
-        public RequestMessage EndSubmitMessageRequest(IAsyncResult ar)
+        public override MessageBase EndSubmitMessage(IAsyncResult ar)
         {
             throw new NotImplementedException();
         }
 
-        #endregion
-
-        #region ISubscriptionService Members
-
-        public void ProcessSubscribeRequest(Type messageType, string endpointUri, string action)
+        public override Open.MOF.Messaging.Services.ServiceInterfaceType SuportedServiceInterfaces
         {
-            BeginProcessSubscribeRequest(messageType, endpointUri, action, null);
+            get { return ((Open.MOF.Messaging.Services.ServiceInterfaceType.TransactionService) | (Open.MOF.Messaging.Services.ServiceInterfaceType.SubscriptionService)); }
         }
-
-        public IAsyncResult BeginProcessSubscribeRequest(Type messageType, string endpointUri, string action, AsyncCallback messageDeliveredCallback)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string EndSubmitSubscribeRequest(IAsyncResult ar)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ProcessUnsubscribeRequest(Type messageType, string endpointUri, string action)
-        {
-            BeginProcessUnsubscribeRequest(messageType, endpointUri, action, null);
-        }
-
-        public IAsyncResult BeginProcessUnsubscribeRequest(Type messageType, string endpointUri, string action, AsyncCallback messageDeliveredCallback)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string EndSubmitUnsubscribeRequest(IAsyncResult ar)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
 
         public override void Dispose()
         {

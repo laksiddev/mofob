@@ -8,7 +8,7 @@ namespace Open.MOF.BizTalk.Services
 {
     public class PubSubMessagingService : Open.MOF.Messaging.Services.MessagingService
     {
-        protected PubSubMessagingService(string serviceBindingName) : base(serviceBindingName)
+        public PubSubMessagingService(string serviceBindingName) : base(serviceBindingName)
         {
         }
 
@@ -24,7 +24,7 @@ namespace Open.MOF.BizTalk.Services
 
         public override Open.MOF.Messaging.Services.ServiceInterfaceType SuportedServiceInterfaces
         {
-            get { return ((Open.MOF.Messaging.Services.ServiceInterfaceType.TransactionService) | (Open.MOF.Messaging.Services.ServiceInterfaceType.SubscriptionService)); }
+            get { return (Open.MOF.Messaging.Services.ServiceInterfaceType.SubscriptionService); }
         }
 
         public override void Dispose()

@@ -41,79 +41,128 @@ namespace Open.MOF.BizTalk.Test
             }
         }
 
+        //[TestMethod]
+        //public void InstantiateServiceByNameTest()
+        //{
+        //    MessagingService service = MessagingService.CreateInstance("EsbMessagingService");
+
+        //    Assert.IsNotNull(service, "No item was returned.");
+        //    Assert.AreEqual(service.GetType(), typeof(EsbMessagingService), "An incorrect type was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
+        //    Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
+
+        //    service = MessagingService.CreateInstance("PubSubMessagingServiceSubscription");
+
+        //    Assert.IsNotNull(service, "No item was returned.");
+        //    Assert.AreEqual(service.GetType(), typeof(PubSubMessagingService), "An incorrect type was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
+        //    Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
+        //    Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
+
+        //    service = MessagingService.CreateInstance("EsbExceptionService");
+
+        //    Assert.IsNotNull(service, "No item was returned.");
+        //    Assert.AreEqual(service.GetType(), typeof(EsbExceptionService), "An incorrect type was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
+        //    Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
+
+        //    service = MessagingService.CreateInstance("PubSubMessagingServiceTransaction");
+
+        //    Assert.IsNotNull(service, "No item was returned.");
+        //    Assert.AreEqual(service.GetType(), typeof(PubSubMessagingService), "An incorrect type was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
+        //    Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
+        //    Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
+        //}
+
+        //[TestMethod]
+        //public void InstantiateServiceByInterfaceTypeTest()
+        //{
+        //    MessagingService service = MessagingService.CreateInstance(ServiceInterfaceType.DataService);
+
+        //    Assert.IsNull(service, "An item was returned when none was expected.");
+
+        //    service = MessagingService.CreateInstance(ServiceInterfaceType.TransactionService);
+
+        //    Assert.IsNotNull(service, "No item was returned.");
+        //    Assert.AreEqual(service.GetType(), typeof(EsbMessagingService), "An incorrect type was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
+        //    Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
+
+        //    service = MessagingService.CreateInstance(ServiceInterfaceType.ExceptionService);
+
+        //    Assert.IsNotNull(service, "No item was returned.");
+        //    Assert.AreEqual(service.GetType(), typeof(EsbExceptionService), "An incorrect type was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
+        //    Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
+
+        //    service = MessagingService.CreateInstance(ServiceInterfaceType.SubscriptionService);
+
+        //    Assert.IsNotNull(service, "No item was returned.");
+        //    Assert.AreEqual(service.GetType(), typeof(PubSubMessagingService), "An incorrect type was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
+        //    Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
+        //    Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
+        //    Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
+        //}
+
         [TestMethod]
-        public void InstantiateServiceByNameTest()
+        public void InstantiateServiceByMessageTypeGenericTest()
         {
-            MessagingService service = MessagingService.CreateInstance("EsbMessagingService");
-
-            Assert.IsNotNull(service, "No item was returned.");
-            Assert.AreEqual(service.GetType(), typeof(EsbMessagingService), "An incorrect type was returned.");
-            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
-            Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
-            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
-            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
-
-            service = MessagingService.CreateInstance("PubSubMessagingServiceSubscription");
-
-            Assert.IsNotNull(service, "No item was returned.");
-            Assert.AreEqual(service.GetType(), typeof(PubSubMessagingService), "An incorrect type was returned.");
-            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
-            Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
-            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
-            Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
-
-            service = MessagingService.CreateInstance("EsbExceptionService");
-
-            Assert.IsNotNull(service, "No item was returned.");
-            Assert.AreEqual(service.GetType(), typeof(EsbExceptionService), "An incorrect type was returned.");
-            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
-            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
-            Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
-            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
-
-            service = MessagingService.CreateInstance("PubSubMessagingServiceTransaction");
-
-            Assert.IsNotNull(service, "No item was returned.");
-            Assert.AreEqual(service.GetType(), typeof(PubSubMessagingService), "An incorrect type was returned.");
-            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
-            Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
-            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
-            Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
-        }
-
-        [TestMethod]
-        public void InstantiateServiceByInterfaceTypeTest()
-        {
-            MessagingService service = MessagingService.CreateInstance(ServiceInterfaceType.DataService);
+            MessagingService service = MessagingService.CreateInstance(typeof(TestDataRequestMessage));
 
             Assert.IsNull(service, "An item was returned when none was expected.");
 
-            service = MessagingService.CreateInstance(ServiceInterfaceType.TransactionService);
+            service = MessagingService.CreateInstance<TestTransactionRequestMessage>();
 
             Assert.IsNotNull(service, "No item was returned.");
             Assert.AreEqual(service.GetType(), typeof(EsbMessagingService), "An incorrect type was returned.");
+            Assert.AreEqual(service.ServiceBindingName, "myTransactionServiceBinding", "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
-            service = MessagingService.CreateInstance(ServiceInterfaceType.ExceptionService);
+            service = MessagingService.CreateInstance<FaultMessage>();
 
             Assert.IsNotNull(service, "No item was returned.");
             Assert.AreEqual(service.GetType(), typeof(EsbExceptionService), "An incorrect type was returned.");
+            Assert.AreEqual(service.ServiceBindingName, "myExceptionServiceBinding", "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
-            service = MessagingService.CreateInstance(ServiceInterfaceType.SubscriptionService);
+            service = MessagingService.CreateInstance<SubscribeRequestMessage>();
 
             Assert.IsNotNull(service, "No item was returned.");
             Assert.AreEqual(service.GetType(), typeof(PubSubMessagingService), "An incorrect type was returned.");
+            Assert.AreEqual(service.ServiceBindingName, "myPubSubServiceBinding", "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
-            Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
+            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
+
+            service = MessagingService.CreateInstance<UnsubscribeRequestMessage>();
+
+            Assert.IsNotNull(service, "No item was returned.");
+            Assert.AreEqual(service.GetType(), typeof(PubSubMessagingService), "An incorrect type was returned.");
+            Assert.AreEqual(service.ServiceBindingName, "myPubSubServiceBinding", "An incorrect item was returned.");
+            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
+            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
+            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
+            Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
+
         }
 
         [TestMethod]
@@ -127,6 +176,7 @@ namespace Open.MOF.BizTalk.Test
 
             Assert.IsNotNull(service, "No item was returned.");
             Assert.AreEqual(service.GetType(), typeof(EsbMessagingService), "An incorrect type was returned.");
+            Assert.AreEqual(service.ServiceBindingName, "myTransactionServiceBinding", "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
@@ -136,6 +186,7 @@ namespace Open.MOF.BizTalk.Test
 
             Assert.IsNotNull(service, "No item was returned.");
             Assert.AreEqual(service.GetType(), typeof(EsbExceptionService), "An incorrect type was returned.");
+            Assert.AreEqual(service.ServiceBindingName, "myExceptionServiceBinding", "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
@@ -145,8 +196,9 @@ namespace Open.MOF.BizTalk.Test
 
             Assert.IsNotNull(service, "No item was returned.");
             Assert.AreEqual(service.GetType(), typeof(PubSubMessagingService), "An incorrect type was returned.");
+            Assert.AreEqual(service.ServiceBindingName, "myPubSubServiceBinding", "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
-            Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
+            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
@@ -154,10 +206,12 @@ namespace Open.MOF.BizTalk.Test
 
             Assert.IsNotNull(service, "No item was returned.");
             Assert.AreEqual(service.GetType(), typeof(PubSubMessagingService), "An incorrect type was returned.");
+            Assert.AreEqual(service.ServiceBindingName, "myPubSubServiceBinding", "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
-            Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
+            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
+
         }
 
         #region Additional test attributes

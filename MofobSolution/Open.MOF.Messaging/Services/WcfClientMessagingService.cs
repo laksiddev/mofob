@@ -8,7 +8,7 @@ namespace Open.MOF.Messaging.Services
 {
     public class WcfClientMessagingService : MessagingService
     {
-        protected WcfClientMessagingService(string serviceBindingName) : base(serviceBindingName)
+        public WcfClientMessagingService(string serviceBindingName) : base(serviceBindingName)
         {
         }
 
@@ -24,7 +24,7 @@ namespace Open.MOF.Messaging.Services
 
         public override ServiceInterfaceType SuportedServiceInterfaces
         {
-            get { return (ServiceInterfaceType.DataService); }
+            get { return (ServiceInterfaceType.DataService | ServiceInterfaceType.TransactionService); }
         }
 
         public override void Dispose()

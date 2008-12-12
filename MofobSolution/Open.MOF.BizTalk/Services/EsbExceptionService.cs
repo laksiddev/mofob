@@ -7,21 +7,11 @@ using Open.MOF.Messaging;
 
 namespace Open.MOF.BizTalk.Services
 {
-    public class EsbExceptionService : Open.MOF.Messaging.Services.MessagingService, Open.MOF.Messaging.Services.IExceptionService
+    public class EsbExceptionService : Open.MOF.Messaging.Services.ExceptionService
     {
-        protected EsbExceptionService(string serviceBindingName) : base(serviceBindingName)
+        public EsbExceptionService(string serviceBindingName) : base(serviceBindingName)
         {
         }
-
-        #region IExceptionService Members
-
-        public void SubmitException(Exception faultException, Guid execeptionInstanceId, string serviceName, string applicationName)
-        {
-            FaultMessage faultMessage = new FaultMessage(execeptionInstanceId, serviceName, applicationName, faultException);
-            SubmitMessage(faultMessage);
-        }
-
-        #endregion
 
         public override IAsyncResult BeginSubmitMessage(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback)
         {

@@ -8,7 +8,7 @@ namespace Open.MOF.BizTalk.Services
 {
     public class PubSubMessagingService : Open.MOF.Messaging.Services.MessagingService
     {
-        public PubSubMessagingService(string serviceBindingName) : base(serviceBindingName)
+        protected PubSubMessagingService(string serviceBindingName) : base(serviceBindingName)
         {
         }
 

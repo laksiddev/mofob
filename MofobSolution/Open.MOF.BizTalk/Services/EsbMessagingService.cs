@@ -8,7 +8,7 @@ namespace Open.MOF.BizTalk.Services
 {
     public class EsbMessagingService : Open.MOF.Messaging.Services.MessagingService
     {
-        public EsbMessagingService(string serviceBindingName) : base(serviceBindingName)
+        protected EsbMessagingService(string serviceBindingName) : base(serviceBindingName)
         {
         }
 

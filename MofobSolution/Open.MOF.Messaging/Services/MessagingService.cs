@@ -6,19 +6,19 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 
 using Open.MOF.Messaging;
-//using Open.MOF.Messaging.Configuration;
+using Open.MOF.Messaging.Configuration;
 
 namespace Open.MOF.Messaging.Services
 {
     public abstract class MessagingService : IDisposable
     {
         //private static ServiceConfigurationSettings _configurationSettings = null;
-        //private static SortedList<ServiceInterfaceType, SortedList<int, ServiceConfigurationElement>> _serviceConfigurationLookup = null;
+        private static SortedList<ServiceInterfaceType, SortedList<int, string>> _serviceConfigurationLookup = null;
         private static IUnityContainer _container = null;
 
         protected string _serviceBindingName;
 
-        public MessagingService(string serviceBindingName) 
+        protected MessagingService(string serviceBindingName) 
         {
             _serviceBindingName = serviceBindingName;
         }
@@ -84,18 +84,19 @@ namespace Open.MOF.Messaging.Services
         {
             if (_container == null)
             {
-                _container = new UnityContainer();
-                UnityConfigurationSection section
-                  = (UnityConfigurationSection)ConfigurationManager.GetSection("unity");
-                section.Containers.Default.Configure(_container);
+                _container = InitializeContainer();
             }
 
+            string instanceName = ResolveInstanceName(interfaceType, 0);
             MessagingService service = null;
-            try
+            if (!String.IsNullOrEmpty(instanceName))
             {
-                service = _container.Resolve<MessagingService>(interfaceType.ToString() + "Type");
+                try
+                {
+                    service = _container.Resolve<MessagingService>(instanceName);
+                }
+                catch (Microsoft.Practices.Unity.ResolutionFailedException) { /* ignore */ }
             }
-            catch (Microsoft.Practices.Unity.ResolutionFailedException) { /* ignore */ }
 
             if (service != null)
             {
@@ -106,6 +107,27 @@ namespace Open.MOF.Messaging.Services
             }
 
             return service;
+        }
+
+        private static IUnityContainer InitializeContainer()
+        {
+            IUnityContainer container = new UnityContainer();
+            ServiceConfigurationSettings configurationSettings = (ServiceConfigurationSettings)ConfigurationManager.GetSection("messagingServiceConfiguration");
+
+            foreach (ServiceConfigurationElement item in configurationSettings.ServiceConfigurationItems)
+            {
+                // HACK RegisterType does not work with non-parameterless constructors
+                // So we have to new-up our own instances using reflection and use RegisterInstance insted
+
+                MessagingService service = TryCreateInstance(item);
+                if (service != null)
+                {
+                    container.RegisterInstance<MessagingService>(item.Name, service, new ContainerControlledLifetimeManager());
+                    RegisterInstanceName(item.InterfaceType, item.Name, item.PreferenceNumber);
+                }
+            }
+
+            return container;
         }
 
         //public static MessagingService CreateInstance(ServiceInterfaceType interfaceType)
@@ -159,34 +181,72 @@ namespace Open.MOF.Messaging.Services
         //    return serviceInstance;
         //}
 
-        //private static MessagingService TryCreateInstance(ServiceConfigurationElement item)
-        //{
-        //    MessagingService serviceInstance = null;
-        //    if (typeof(MessagingService).IsAssignableFrom(item.ServiceType)) 
-        //    {
-        //        System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.CreateInstance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
-        //        System.Reflection.ConstructorInfo constructorMethod = item.ServiceType.GetConstructor(flags, null, new Type[] { typeof(string) }, null);
-        //        if (constructorMethod != null)
-        //        {
-        //            serviceInstance = (MessagingService)constructorMethod.Invoke(new object[] { item.ServiceBindingName });
-        //        }
-        //        else
-        //        {
-        //            serviceInstance = (MessagingService)Activator.CreateInstance(item.ServiceType, flags, null, new object[] { item.ServiceBindingName }, System.Globalization.CultureInfo.CurrentCulture, null);
-        //        }
-        //    }
+        private static MessagingService TryCreateInstance(ServiceConfigurationElement item)
+        {
+            MessagingService serviceInstance = null;
+            if (typeof(MessagingService).IsAssignableFrom(item.ServiceType))
+            {
+                System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.CreateInstance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+                System.Reflection.ConstructorInfo constructorMethod = item.ServiceType.GetConstructor(flags, null, new Type[] { typeof(string) }, null);
+                if (constructorMethod != null)
+                {
+                    serviceInstance = (MessagingService)constructorMethod.Invoke(new object[] { item.ServiceBindingName });
+                }
+                else
+                {
+                    serviceInstance = (MessagingService)Activator.CreateInstance(item.ServiceType, flags, null, new object[] { item.ServiceBindingName }, System.Globalization.CultureInfo.CurrentCulture, null);
+                }
+            }
 
-        //    if (!serviceInstance.CanSupportInterface(item.InterfaceType))
-        //        return null;
+            if (!serviceInstance.CanSupportInterface(item.InterfaceType))
+                return null;
 
-        //    return serviceInstance;
-        //}
+            return serviceInstance;
+        }
+
+        private static void RegisterInstanceName(ServiceInterfaceType interfaceType, string instanceName, int preferenceNumber)
+        {
+            if (_serviceConfigurationLookup == null)
+            {
+                _serviceConfigurationLookup = new SortedList<ServiceInterfaceType, SortedList<int, string>>();
+            }
+
+            SortedList<int, string> innerLookup = null;
+            if (_serviceConfigurationLookup.ContainsKey(interfaceType))
+            {
+                innerLookup = _serviceConfigurationLookup[interfaceType];
+            }
+            else
+            {
+                innerLookup = new SortedList<int, string>();
+                _serviceConfigurationLookup.Add(interfaceType, innerLookup);
+            }
+
+            if (!innerLookup.ContainsKey(preferenceNumber))
+            {
+                innerLookup.Add(preferenceNumber, instanceName);
+            }
+        }
+
+        private static string ResolveInstanceName(ServiceInterfaceType interfaceType, int preferenceSkipFactor)
+        {
+            string instanceName = string.Empty;
+            if (_serviceConfigurationLookup.ContainsKey(interfaceType))
+            {
+                SortedList<int, string> innerLookup = _serviceConfigurationLookup[interfaceType];
+                if (innerLookup.Count > preferenceSkipFactor)
+                {
+                    instanceName = innerLookup.Values[preferenceSkipFactor];
+                }
+            }            
+
+            return instanceName;
+        }
 
         //private static void InitializeSettings()
         //{
         //    _configurationSettings = (ServiceConfigurationSettings)ConfigurationManager.GetSection("messagingServiceConfiguration");
 
-        //    _serviceConfigurationLookup = new SortedList<ServiceInterfaceType, SortedList<int, ServiceConfigurationElement>>();
         //    foreach (ServiceConfigurationElement item in _configurationSettings.ServiceConfigurationItems)
         //    {
         //        AddServiceToLookup(_serviceConfigurationLookup, item);

@@ -9,7 +9,7 @@ namespace Open.MOF.BizTalk.Services
 {
     public class EsbExceptionService : Open.MOF.Messaging.Services.ExceptionService
     {
-        public EsbExceptionService(string serviceBindingName) : base(serviceBindingName)
+        protected EsbExceptionService(string serviceBindingName) : base(serviceBindingName)
         {
         }
 

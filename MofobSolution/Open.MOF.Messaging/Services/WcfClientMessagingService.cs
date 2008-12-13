@@ -8,7 +8,7 @@ namespace Open.MOF.Messaging.Services
 {
     public class WcfClientMessagingService : MessagingService
     {
-        public WcfClientMessagingService(string serviceBindingName) : base(serviceBindingName)
+        protected WcfClientMessagingService(string serviceBindingName) : base(serviceBindingName)
         {
         }
 

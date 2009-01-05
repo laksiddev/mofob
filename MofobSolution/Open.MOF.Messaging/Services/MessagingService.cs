@@ -16,31 +16,80 @@ namespace Open.MOF.Messaging.Services
         private static SortedList<ServiceInterfaceType, SortedList<int, string>> _serviceConfigurationLookup = null;
         private static IUnityContainer _container = null;
 
-        protected string _serviceBindingName;
+        protected string _bindingName;
 
-        protected MessagingService(string serviceBindingName) 
+        protected MessagingService(string bindingName) 
         {
-            _serviceBindingName = serviceBindingName;
+            _bindingName = bindingName;
         }
 
-        public string ServiceBindingName
+        public string BindingName
         {
-            get { return _serviceBindingName; }
+            get { return _bindingName; }
         }
 
-        public void SubmitMessage(MessageBase message)
+        public MessageBase SubmitMessage(MessageBase message)
         {
-            SubmitMessage(message, null);
+            return SubmitMessage(message, null);
         }
 
-        public void SubmitMessage(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback)
+        public MessageBase SubmitMessage(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback)
         {
-            BeginSubmitMessage(message, messageResponseCallback, null);
+            IAsyncResult ar = BeginSubmitMessage(message, messageResponseCallback, null);
+            return EndSubmitMessage(ar); 
         }
 
-        public abstract IAsyncResult BeginSubmitMessage(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback);
+        public IAsyncResult BeginSubmitMessage(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback)
+        {
+            if (messageDeliveredCallback != null)
+            {
+                MessagingResult messagingResult = new MessagingResult(message);
+                IAsyncResult asyncResult = new AsyncResult<MessagingResult>(messageDeliveredCallback, messagingResult);
+                System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(PerformSubmitMessageAsync), asyncResult);
 
-        public abstract MessageBase EndSubmitMessage(IAsyncResult ar);
+                return asyncResult;
+            }
+            else
+            {
+                MessagingResult messagingResult = new MessagingResult(message);
+                AsyncResult<MessagingResult> asyncResult = new AsyncResult<MessagingResult>(messageDeliveredCallback, messagingResult);
+                messagingResult = PerformSubmitMessage(message);
+                asyncResult.SetAsCompleted(messagingResult, true);
+
+                return asyncResult;
+            }
+        }
+
+        protected void PerformSubmitMessageAsync(object state)
+        {
+            AsyncResult<MessagingResult> asyncResult = (AsyncResult<MessagingResult>)state;
+            MessagingResult messagingResult = (MessagingResult)asyncResult.AsyncState;
+            MessageBase requestMessage = messagingResult.RequestMessage;
+
+            try
+            {
+                messagingResult = PerformSubmitMessage(requestMessage);
+            }
+            catch (Exception ex)
+            {
+                EventLogUtility.LogException(ex);
+                asyncResult.SetAsCompleted(ex, false);
+            }
+
+            if (!asyncResult.IsCompleted)    // this would only show completed after an exception
+            {
+                asyncResult.SetAsCompleted(messagingResult, false);
+            }
+        }
+
+        protected abstract MessagingResult PerformSubmitMessage(MessageBase message);
+
+        public MessageBase EndSubmitMessage(IAsyncResult ar)
+        {
+            MessagingResult messagingResult = ((AsyncResult<MessagingResult>)ar).EndInvoke();
+
+            return messagingResult.ResponseMessage;
+        }
 
         public abstract ServiceInterfaceType SuportedServiceInterfaces { get; }
 
@@ -61,33 +110,47 @@ namespace Open.MOF.Messaging.Services
             if ((messageType.BaseType.IsGenericType) &&
                 (typeof(TransactionRequestMessage<>).IsAssignableFrom(messageType.BaseType.GetGenericTypeDefinition())))
             {
-                return TryResolveInstance(ServiceInterfaceType.TransactionService);
+                return CreateInstance(ServiceInterfaceType.TransactionService);
             }
             else if ((messageType.BaseType.IsGenericType) && 
                 (typeof(DataRequestMessage<>).IsAssignableFrom(messageType.BaseType.GetGenericTypeDefinition())))
             {
-                return TryResolveInstance(ServiceInterfaceType.DataService);
+                return CreateInstance(ServiceInterfaceType.DataService);
             }
             else if (messageType == typeof(FaultMessage))
             {
-                return TryResolveInstance(ServiceInterfaceType.ExceptionService);
+                return CreateInstance(ServiceInterfaceType.ExceptionService);
             }
             else if ((messageType == typeof(SubscribeRequestMessage)) || (messageType == typeof(UnsubscribeRequestMessage)))    
             {
-                return TryResolveInstance(ServiceInterfaceType.SubscriptionService);
+                return CreateInstance(ServiceInterfaceType.SubscriptionService);
             }
 
             return null;
         }
 
-        private static MessagingService TryResolveInstance(ServiceInterfaceType interfaceType)
+        public static MessagingService CreateInstance(ServiceInterfaceType interfaceType)
+        {
+            string instanceName = ResolveInstanceName(interfaceType, 0);
+            MessagingService service = CreateInstance(instanceName);
+            if (service != null)
+            {
+                if (!service.CanSupportInterface(interfaceType))
+                {
+                    throw new ApplicationException(String.Format("The configured Messaging Service {0} type does not support the {1} service interface.", service.GetType().FullName, interfaceType.ToString()));
+                }
+            }
+
+            return service;
+        }
+
+        public static MessagingService CreateInstance(string instanceName)
         {
             if (_container == null)
             {
                 _container = InitializeContainer();
             }
 
-            string instanceName = ResolveInstanceName(interfaceType, 0);
             MessagingService service = null;
             if (!String.IsNullOrEmpty(instanceName))
             {
@@ -96,14 +159,6 @@ namespace Open.MOF.Messaging.Services
                     service = _container.Resolve<MessagingService>(instanceName);
                 }
                 catch (Microsoft.Practices.Unity.ResolutionFailedException) { /* ignore */ }
-            }
-
-            if (service != null)
-            {
-                if (!service.CanSupportInterface(interfaceType))
-                {
-                    throw new ApplicationException(String.Format("The configured Messaging Service {0} type does not support the {1} service interface.", service.GetType().FullName, interfaceType.ToString()));
-                }
             }
 
             return service;
@@ -230,6 +285,11 @@ namespace Open.MOF.Messaging.Services
 
         private static string ResolveInstanceName(ServiceInterfaceType interfaceType, int preferenceSkipFactor)
         {
+            if (_container == null)
+            {
+                _container = InitializeContainer();
+            }
+
             string instanceName = string.Empty;
             if (_serviceConfigurationLookup.ContainsKey(interfaceType))
             {

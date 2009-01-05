@@ -786,6 +786,11 @@ namespace Open.MOF.BizTalk.Services.Proxy
         }
     }
 
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    public interface ExceptionHandlingOneWayChannel : ExceptionHandlingOneWay, System.ServiceModel.IClientChannel
+    {
+    }
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     public partial class ExceptionHandlingOneWayClient : System.ServiceModel.ClientBase<ExceptionHandlingOneWay>, ExceptionHandlingOneWay

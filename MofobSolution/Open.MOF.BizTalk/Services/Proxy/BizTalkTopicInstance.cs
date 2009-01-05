@@ -625,6 +625,11 @@ namespace Open.MOF.BizTalk.Services.Proxy
         }
     }
 
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    public interface ProcessTopicOneWayChannel : ProcessTopicOneWay, System.ServiceModel.IClientChannel
+    {
+    }
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     public partial class ProcessTopicOneWayClient : System.ServiceModel.ClientBase<ProcessTopicOneWay>, ProcessTopicOneWay

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Open.MOF.Messaging
 {
-    [MessageContract(IsWrapped = true, WrapperName = "FaultMessage")]
-    public class FaultMessage : GenericMessage<FaultMessage>
+    [MessageContract(IsWrapped = true, WrapperName = "FaultMessage", WrapperNamespace = "http://mofob.open/Messaging/ServiceContracts/1/0/")]
+    public class FaultMessage : RequestMessage<FaultMessage>
     {
         public FaultMessage() : base()
         {
@@ -31,6 +31,7 @@ namespace Open.MOF.Messaging
             _applicationName = applicationName;
             _exceptionDetail = exceptionDetail;
         }
+
         [MessageBodyMember(Name = "execeptionInstanceId", Order = 1, Namespace = "http://mofob.open/Messaging/DataContracts/1/0/")]
         private Guid? _execeptionInstanceId;
         public Guid? ExceptionInstanceId

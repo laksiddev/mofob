@@ -15,6 +15,11 @@ namespace Open.MOF.Messaging.Test
             _name = null;
         }
 
+        public TestDataRequestMessage(string name) : base()
+        {
+            _name = name;
+        }
+
         [MessageBodyMember(Name = "name", Order = 1, Namespace = "http://mofob.open/MessagingTests/DataContracts/1/0/")]
         protected string _name;
         public string Name

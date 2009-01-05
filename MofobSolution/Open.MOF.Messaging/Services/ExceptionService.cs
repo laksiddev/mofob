@@ -6,7 +6,7 @@ namespace Open.MOF.Messaging.Services
 {
     public abstract class ExceptionService : MessagingService
     {
-        protected ExceptionService(string serviceBindingName)  : base(serviceBindingName) 
+        protected ExceptionService(string bindingName)  : base(bindingName) 
         {
         }
 

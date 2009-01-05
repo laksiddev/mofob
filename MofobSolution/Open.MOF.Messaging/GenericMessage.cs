@@ -9,14 +9,6 @@ namespace Open.MOF.Messaging
     [MessageContract(IsWrapped = true, WrapperName = "Generic")]
     public abstract class GenericMessage<T> : MessageBase where T : MessageBase
     {
-        public string ToXmlString()
-        {
-            DataContractFormatAttribute att = new DataContractFormatAttribute();
-            System.ServiceModel.Description.TypedMessageConverter messageConverter = System.ServiceModel.Description.TypedMessageConverter.Create(typeof(T), "action");
-            System.ServiceModel.Channels.Message message = messageConverter.ToMessage(this);
-
-            return message.GetReaderAtBodyContents().ReadOuterXml();
-        }
 
         public static T FromXmlString(string xml)
         {

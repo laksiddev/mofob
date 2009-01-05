@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -49,6 +50,7 @@
     <Compile Include="AsyncResult\AsyncResult.cs" />
     <Compile Include="AsyncResult\AsyncResultNoResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Converters\ItineraryConverter.cs" />
     <Compile Include="Services\Converters\FaultMessageConverter.cs" />
     <Compile Include="Services\EsbExceptionService.cs" />
     <Compile Include="Services\Proxy\BizTalkExceptionInstance.cs" />

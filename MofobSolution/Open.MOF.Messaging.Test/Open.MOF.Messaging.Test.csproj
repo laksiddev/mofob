@@ -40,6 +40,9 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -47,11 +50,16 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestDataResultMessage.cs" />
     <Compile Include="MessageSerializationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MessagingServiceInstantiationTests.cs" />
     <Compile Include="TestDataRequestMessage.cs" />
     <Compile Include="TestTransactionRequestMessage.cs" />
+    <Compile Include="WcfClientMessagingTests.cs" />
+    <Compile Include="WcfService\ProxyInterface.cs" />
+    <Compile Include="WcfService\ITestDataService.cs" />
+    <Compile Include="WcfService\TestDataService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />
@@ -64,6 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Properties\DataSources\Open.MOF.Messaging.MessagingEndpoint.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

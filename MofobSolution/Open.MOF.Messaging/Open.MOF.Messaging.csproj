@@ -62,11 +62,20 @@
     <Compile Include="Attributes\MessageContractAssemblyAttribute.cs" />
     <Compile Include="Attributes\ResponseMessageTypeAttribute.cs" />
     <Compile Include="Common\EventLogUtility.cs" />
+    <Compile Include="Configuration\WcfEndpointConfigurationSettings.cs" />
+    <Compile Include="Configuration\WcfEndpointConfigurationElement.cs" />
+    <Compile Include="Configuration\WcfEndpointConfigurationCollection.cs" />
     <Compile Include="Converters\ExceptionDetailConverter.cs" />
+    <Compile Include="FaultResponse.cs" />
+    <Compile Include="MessageSubmittedResponse.cs" />
     <Compile Include="ExceptionDetail.cs" />
+    <Compile Include="Exceptions\MessagingConfigurationException.cs" />
+    <Compile Include="Exceptions\MessagingException.cs" />
+    <Compile Include="MessagingResult.cs" />
     <Compile Include="Services\ExceptionService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\WcfEndpointDetails.cs" />
     <Compile Include="SubscribeRequestMessage.cs" />
     <Compile Include="UnsubscribeRequestMessage.cs" />
     <Compile Include="DataRequestMessage.cs" />
@@ -96,9 +105,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configuration\ServiceConfiguration.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,16 +8,11 @@ namespace Open.MOF.BizTalk.Services
 {
     public class PubSubMessagingService : Open.MOF.Messaging.Services.MessagingService
     {
-        protected PubSubMessagingService(string serviceBindingName) : base(serviceBindingName)
+        protected PubSubMessagingService(string bindingName) : base(bindingName)
         {
         }
 
-        public override IAsyncResult BeginSubmitMessage(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override MessageBase EndSubmitMessage(IAsyncResult ar)
+        protected override MessagingResult PerformSubmitMessage(MessageBase message)
         {
             throw new NotImplementedException();
         }

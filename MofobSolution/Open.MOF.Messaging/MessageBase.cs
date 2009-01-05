@@ -11,7 +11,7 @@ namespace Open.MOF.Messaging
     {
         public MessageBase()
         {
-            _messageId = null;
+            _messageId = Guid.NewGuid();
             _to = null;
             _from = null;
             _replyTo = null;
@@ -73,6 +73,15 @@ namespace Open.MOF.Messaging
             {
                 return MessageBase.GetMessageXmlType(this.GetType());
             }
+        }
+
+        public string ToXmlString()
+        {
+            DataContractFormatAttribute att = new DataContractFormatAttribute();
+            System.ServiceModel.Description.TypedMessageConverter messageConverter = System.ServiceModel.Description.TypedMessageConverter.Create(this.GetType(), "action");
+            System.ServiceModel.Channels.Message message = messageConverter.ToMessage(this);
+
+            return message.GetReaderAtBodyContents().ReadOuterXml();
         }
 
         public static string GetMessageXmlType(System.Type messageType)

@@ -7,7 +7,7 @@ using Open.MOF.Messaging;
 
 namespace Open.MOF.Messaging.Test
 {
-    [MessageContract(IsWrapped = true, WrapperName = "TestDataResponseMessage", WrapperNamespace = "http://mofob.open/MessagingTests/ServiceContracts/1/0/")]
+    [MessageContract(IsWrapped = true, WrapperName = "TestDataResponseMessage", WrapperNamespace = "http://mof.open/MessagingTests/ServiceContracts/1/0/")]
     public class TestDataResponseMessage : ResponseMessage<TestDataResponseMessage>
     {
         public TestDataResponseMessage() : base()
@@ -20,7 +20,7 @@ namespace Open.MOF.Messaging.Test
             _value = value;
         }
 
-        [MessageBodyMember(Name = "value", Order = 1, Namespace = "http://mofob.open/MessagingTests/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "value", Order = 1, Namespace = "http://mof.open/MessagingTests/DataContracts/1/0/")]
         protected string _value;
         public string Value
         {

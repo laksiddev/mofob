@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Open.MOF.Messaging
 {
-    [DataContract(Name = "MessageEndpoint", Namespace = "http://mofob.open/Messaging/DataContracts/1/0/")]
+    [DataContract(Name = "MessageEndpoint", Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
     public class MessagingEndpoint
     {
         public MessagingEndpoint()

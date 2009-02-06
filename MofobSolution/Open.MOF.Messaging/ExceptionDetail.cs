@@ -6,7 +6,7 @@ using System.Text;
 namespace Open.MOF.Messaging
 {
     [System.ComponentModel.TypeConverter(typeof(ExceptionDetailConverter))]
-    [DataContract(Name = "ExceptionDetails", Namespace = "http://mofob.open/Messaging/DataContracts/1/0/")]
+    [DataContract(Name = "ExceptionDetails", Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
     public class ExceptionDetail
     {
         public ExceptionDetail()

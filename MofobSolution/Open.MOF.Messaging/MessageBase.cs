@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace Open.MOF.Messaging
 {
-    [MessageContract(IsWrapped = true, WrapperName = "MessageBase", WrapperNamespace = "http://mofob.open/Messaging/ServiceContracts/1/0/")]
+    [MessageContract(IsWrapped = true, WrapperName = "MessageBase", WrapperNamespace = "http://mof.open/Messaging/ServiceContracts/1/0/")]
     public abstract class MessageBase
     {
         public MessageBase()
@@ -19,7 +19,7 @@ namespace Open.MOF.Messaging
             _relatedMessageId = null;
         }
 
-        [MessageBodyMember(Name = "messageId", Order = 101, Namespace = "http://mofob.open/Messaging/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "messageId", Order = 101, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
         protected Guid? _messageId;
         public Guid? MessageId
         {
@@ -27,7 +27,7 @@ namespace Open.MOF.Messaging
             set { _messageId = value; }
         }
 
-        [MessageBodyMember(Name = "To", Order = 102, Namespace = "http://mofob.open/Messaging/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "To", Order = 102, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
         protected MessagingEndpoint _to;
         public MessagingEndpoint To
         {
@@ -35,7 +35,7 @@ namespace Open.MOF.Messaging
             set { _to = value; }
         }
 
-        [MessageBodyMember(Name = "From", Order = 103, Namespace = "http://mofob.open/Messaging/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "From", Order = 103, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
         protected MessagingEndpoint _from;
         public MessagingEndpoint From
         {
@@ -43,7 +43,7 @@ namespace Open.MOF.Messaging
             set { _from = value; }
         }
 
-        [MessageBodyMember(Name = "ReplyTo", Order = 104, Namespace = "http://mofob.open/Messaging/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "ReplyTo", Order = 104, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
         protected MessagingEndpoint _replyTo;
         public MessagingEndpoint ReplyTo
         {
@@ -51,7 +51,7 @@ namespace Open.MOF.Messaging
             set { _replyTo = value; }
         }
 
-        [MessageBodyMember(Name = "senderDescription", Order = 105, Namespace = "http://mofob.open/Messaging/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "senderDescription", Order = 105, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
         protected string _senderDescription;
         public string SenderDescription
         {
@@ -59,7 +59,7 @@ namespace Open.MOF.Messaging
             set { _senderDescription = value; }
         }
 
-        [MessageBodyMember(Name = "relatedMessageId", Order = 106, Namespace = "http://mofob.open/Messaging/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "relatedMessageId", Order = 106, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
         protected Guid? _relatedMessageId;
         public Guid? RelatedMessageId
         {

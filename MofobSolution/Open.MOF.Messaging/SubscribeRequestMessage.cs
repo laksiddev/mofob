@@ -8,7 +8,7 @@ namespace Open.MOF.Messaging
     [MessageContract(IsWrapped = true, WrapperName = "SubscribeRequestMessage")]
     public class SubscribeRequestMessage : RequestMessage<SubscribeRequestMessage> 
     {
-        [MessageBodyMember(Name = "subscriptionMessageXmlType", Order = 1, Namespace = "http://mofob.open/Messaging/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "subscriptionMessageXmlType", Order = 1, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
         private string _subscriptionMessageXmlType;
         public string SubscriptionMessageXmlType
         {
@@ -16,7 +16,7 @@ namespace Open.MOF.Messaging
             set { _subscriptionMessageXmlType = value; }
         }
 
-        [MessageBodyMember(Name = "endpointUri", Order = 2, Namespace = "http://mofob.open/Messaging/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "endpointUri", Order = 2, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
         private string _endpointUri;
         public string EndpointUri
         {
@@ -24,7 +24,7 @@ namespace Open.MOF.Messaging
             set { _endpointUri = value; }
         }
 
-        [MessageBodyMember(Name = "action", Order = 3, Namespace = "http://mofob.open/Messaging/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "action", Order = 3, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
         private string _action;
         public string Action
         {

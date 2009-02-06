@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Open.MOF.Messaging
 {
-    [MessageContract(IsWrapped = true, WrapperName = "FaultResponse", WrapperNamespace = "http://mofob.open/Messaging/ServiceContracts/1/0/")]
+    [MessageContract(IsWrapped = true, WrapperName = "FaultResponse", WrapperNamespace = "http://mof.open/Messaging/ServiceContracts/1/0/")]
     public class FaultResponse : ResponseMessage<FaultMessage>
     {
         public FaultResponse() : base()

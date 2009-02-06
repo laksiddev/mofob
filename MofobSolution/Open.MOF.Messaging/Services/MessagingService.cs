@@ -1,27 +1,30 @@
 ﻿using System;
 using System.Configuration;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
+using System.ServiceModel;
+using System.ServiceModel.Configuration;
 
 using Open.MOF.Messaging;
 using Open.MOF.Messaging.Configuration;
 
 namespace Open.MOF.Messaging.Services
 {
-    public abstract class MessagingService : IDisposable
+    public abstract class MessagingService : IMessagingService //, IDisposable
     {
         private static MessagingServiceLocator _locator = null;
 
-        protected string _bindingName;
+        protected string _channelEndpointName;
 
-        protected MessagingService(string bindingName) 
+        protected MessagingService(string channelEndpointName) 
         {
-            _bindingName = bindingName;
+            _channelEndpointName = channelEndpointName;
         }
 
-        public string BindingName
+        public string ChannelEndpointName
         {
-            get { return _bindingName; }
+            get { return _channelEndpointName; }
         }
 
         public MessageBase SubmitMessage(MessageBase message)
@@ -87,7 +90,7 @@ namespace Open.MOF.Messaging.Services
             return messagingResult.ResponseMessage;
         }
 
-        public abstract ServiceInterfaceType SuportedServiceInterfaces { get; }
+        protected abstract ServiceInterfaceType SuportedServiceInterfaces { get; }
 
         public bool CanSupportInterface(ServiceInterfaceType interfaceType)
         {
@@ -96,12 +99,12 @@ namespace Open.MOF.Messaging.Services
 
         public abstract void Dispose();
 
-        public static MessagingService CreateInstance<TMessage>()
+        public static IMessagingService CreateInstance<TMessage>()
         {
             return CreateInstance(typeof(TMessage));
         }
 
-        public static MessagingService CreateInstance(System.Type messageType)
+        public static IMessagingService CreateInstance(System.Type messageType)
         {
             if ((messageType.BaseType.IsGenericType) &&
                 (typeof(TransactionRequestMessage<>).IsAssignableFrom(messageType.BaseType.GetGenericTypeDefinition())))
@@ -125,7 +128,7 @@ namespace Open.MOF.Messaging.Services
             return null;
         }
 
-        public static MessagingService CreateInstance(ServiceInterfaceType interfaceType)
+        public static IMessagingService CreateInstance(ServiceInterfaceType interfaceType)
         {
             if (_locator == null)
             {
@@ -136,7 +139,7 @@ namespace Open.MOF.Messaging.Services
             if ((instanceNames == null) || (instanceNames.Count == 0))
                 return null;
 
-            MessagingService service = CreateInstance(instanceNames[0]);
+            IMessagingService service = CreateInstance(instanceNames[0]);
             if (service != null)
             {
                 if (!service.CanSupportInterface(interfaceType))
@@ -148,20 +151,106 @@ namespace Open.MOF.Messaging.Services
             return service;
         }
 
-        public static MessagingService CreateInstance(string instanceName)
+        public static IMessagingService CreateInstance(string instanceName)
         {
             if (_locator == null)
             {
                 _locator = new MessagingServiceLocator();
             }
 
-            MessagingService service = null;
+            IMessagingService service = null;
             if (!String.IsNullOrEmpty(instanceName))
             {
-                service = _locator.GetInstance<MessagingService>(instanceName);
+                service = _locator.GetInstance<IMessagingService>(instanceName);
             }
 
             return service;
+        }
+
+        protected static class WcfUtilities
+        {
+            private static ServiceModelSectionGroup _serviceModelGroup;
+            private static Dictionary<string, Type> _serviceContracts;
+
+            public static ChannelEndpointElement FindEndpointByName(string channelEndpointName)
+            {
+                Initialize();
+
+                for (int i = 0; i < _serviceModelGroup.Client.Endpoints.Count; i++)
+                {
+                    if (_serviceModelGroup.Client.Endpoints[i].Name == channelEndpointName)
+                        return _serviceModelGroup.Client.Endpoints[i];
+                }
+
+                return null;
+            }
+
+            public static Type GetChannelInterfaceType(ChannelEndpointElement channelEndpoint)
+            {
+                Initialize();
+
+                if (_serviceContracts.ContainsKey(channelEndpoint.Contract))
+                    return _serviceContracts[channelEndpoint.Contract];
+
+                return null;
+            }
+
+            public static bool DoesAddressMatchBinding(string addressUri, string bindingType)
+            {
+                if (((addressUri.StartsWith("http://", StringComparison.CurrentCultureIgnoreCase)) ||
+                    (addressUri.StartsWith("https://", StringComparison.CurrentCultureIgnoreCase))) &&
+                    ((bindingType == "wsHttpBinding") || (bindingType == "basicHttpBinding")))
+                {
+                    return true;
+                }
+                else if ((addressUri.StartsWith("net.tcp://", StringComparison.CurrentCultureIgnoreCase)) &&
+                    (bindingType == "netTcpBinding"))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            private static void Initialize()
+            {
+                if (_serviceModelGroup == null)
+                {
+                    _serviceModelGroup = ServiceModelSectionGroup.GetSectionGroup(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None));
+                }
+
+                if (_serviceContracts == null)
+                {
+                    _serviceContracts = new Dictionary<string, Type>();
+
+                    Assembly[] loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+                    foreach (Assembly assembly in loadedAssemblies)
+                    {
+                        Type[] assemblyTypes = assembly.GetTypes();
+                        foreach (Type type in assemblyTypes)
+                        {
+                            if (type.IsInterface)
+                            {
+                                ServiceContractAttribute[] attributes = (ServiceContractAttribute[])type.GetCustomAttributes(typeof(ServiceContractAttribute), false);
+                                if ((attributes != null) && (attributes.Length > 0))
+                                {
+                                    string configurationName;
+                                    if (!String.IsNullOrEmpty(attributes[0].ConfigurationName))
+                                    {
+                                        configurationName = attributes[0].ConfigurationName;
+                                    }
+                                    else
+                                    {
+                                        configurationName = type.FullName;
+                                    }
+
+                                    _serviceContracts.Add(configurationName, type);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

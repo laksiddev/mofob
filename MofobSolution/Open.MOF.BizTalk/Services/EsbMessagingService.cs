@@ -23,11 +23,10 @@ namespace Open.MOF.BizTalk.Services
         
         protected override MessagingResult PerformSubmitMessage(MessageBase message)
         {
-            if (String.IsNullOrEmpty(_bindingName))
+            if (String.IsNullOrEmpty(_channelEndpointName))
                 throw new MessagingConfigurationException("ESB Exception Binding Name not properly configured in application settings.");
 
-            ServiceModelSectionGroup serviceModelGroup = ServiceModelSectionGroup.GetSectionGroup(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None));
-            ChannelEndpointElement channel = serviceModelGroup.Client.Endpoints[_bindingName];
+            ChannelEndpointElement channel = WcfUtilities.FindEndpointByName(_channelEndpointName);
             bool isOneWayContract = (channel.Contract.IndexOf("OneWay", StringComparison.CurrentCultureIgnoreCase) != -1);
 
             if (message.To.IsValid())
@@ -51,7 +50,7 @@ namespace Open.MOF.BizTalk.Services
 
                 if (_topicOneWayChannelFactory == null)
                 {
-                    _topicOneWayChannelFactory = new ChannelFactory<ProcessTopicOneWayChannel>(_bindingName);
+                    _topicOneWayChannelFactory = new ChannelFactory<ProcessTopicOneWayChannel>(_channelEndpointName);
                     _topicOneWayChannelFactory.Open();
                 }
 
@@ -70,7 +69,7 @@ namespace Open.MOF.BizTalk.Services
 
                 if (_topicChannelFactory == null)
                 {
-                    _topicChannelFactory = new ChannelFactory<ProcessTopicChannel>(_bindingName);
+                    _topicChannelFactory = new ChannelFactory<ProcessTopicChannel>(_channelEndpointName);
                     _topicChannelFactory.Open();
                 }
 
@@ -100,7 +99,7 @@ namespace Open.MOF.BizTalk.Services
 
                 if (_itineraryOneWayChannelFactory == null)
                 {
-                    _itineraryOneWayChannelFactory = new ChannelFactory<ProcessRequestOneWayChannel>(_bindingName);
+                    _itineraryOneWayChannelFactory = new ChannelFactory<ProcessRequestOneWayChannel>(_channelEndpointName);
                     _itineraryOneWayChannelFactory.Open();
                 }
 
@@ -119,7 +118,7 @@ namespace Open.MOF.BizTalk.Services
 
                 if (_itineraryChannelFactory == null)
                 {
-                    _itineraryChannelFactory = new ChannelFactory<ProcessRequestChannel>(_bindingName);
+                    _itineraryChannelFactory = new ChannelFactory<ProcessRequestChannel>(_channelEndpointName);
                     _itineraryChannelFactory.Open();
                 }
 
@@ -136,7 +135,7 @@ namespace Open.MOF.BizTalk.Services
             return new MessagingResult(message, wasMessageDelivered, responseMessage);
         }
 
-        public override Open.MOF.Messaging.Services.ServiceInterfaceType SuportedServiceInterfaces
+        protected override Open.MOF.Messaging.Services.ServiceInterfaceType SuportedServiceInterfaces
         {
             get { return (Open.MOF.Messaging.Services.ServiceInterfaceType.TransactionService); }
         }

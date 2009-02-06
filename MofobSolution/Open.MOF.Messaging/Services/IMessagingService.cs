@@ -4,14 +4,16 @@ using System.Text;
 
 namespace Open.MOF.Messaging.Services
 {
-    public interface IMessagingService
+    public interface IMessagingService : IDisposable
     {
-        void SubmitMessage(MessageBase message);
+        MessageBase SubmitMessage(MessageBase message);
 
-        void SubmitMessage(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback);
+        MessageBase SubmitMessage(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback);
 
         IAsyncResult BeginSubmitMessage(MessageBase message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback);
 
         MessageBase EndSubmitMessage(IAsyncResult ar);
+
+        bool CanSupportInterface(ServiceInterfaceType interfaceType);
     }
 }

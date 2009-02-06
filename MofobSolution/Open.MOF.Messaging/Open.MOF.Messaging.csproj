@@ -81,6 +81,7 @@
     <Compile Include="Services\ExceptionService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\IMessagingService.cs" />
     <Compile Include="Services\MessagingServiceLocator.cs" />
     <Compile Include="Services\WcfEndpointDetails.cs" />
     <Compile Include="SubscribeRequestMessage.cs" />

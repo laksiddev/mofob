@@ -43,11 +43,11 @@ namespace Open.MOF.Messaging.Test
         [TestMethod]
         public void InstantiateServiceByNameTest()
         {
-            MessagingService service = MessagingService.CreateInstance("WcfClientMessagingDataServiceDefinition");
+            IMessagingService service = MessagingService.CreateInstance("WcfClientMessagingDataServiceDefinition");
 
             Assert.IsNotNull(service, "No item was returned.");
             Assert.AreEqual(service.GetType(), typeof(WcfClientMessagingService), "An incorrect type was returned.");
-            Assert.AreEqual(service.BindingName, "myDataServiceBinding", "An incorrect item was returned.");
+            Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "myDataServiceBinding", "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
@@ -69,11 +69,11 @@ namespace Open.MOF.Messaging.Test
         [TestMethod]
         public void InstantiateServiceByInterfaceTypeTest()
         {
-            MessagingService service = MessagingService.CreateInstance(ServiceInterfaceType.DataService);
+            IMessagingService service = MessagingService.CreateInstance(ServiceInterfaceType.DataService);
 
             Assert.IsNotNull(service, "No item was returned.");
             Assert.AreEqual(service.GetType(), typeof(WcfClientMessagingService), "An incorrect type was returned.");
-            Assert.AreEqual(service.BindingName, "myDataServiceBinding", "An incorrect item was returned.");
+            Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "myDataServiceBinding", "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
@@ -95,11 +95,11 @@ namespace Open.MOF.Messaging.Test
         [TestMethod]
         public void InstantiateServiceByMessageTypeGenericTest()
         {
-            MessagingService service = MessagingService.CreateInstance<TestDataRequestMessage>();
+            IMessagingService service = MessagingService.CreateInstance<TestDataRequestMessage>();
 
             Assert.IsNotNull(service, "No item was returned.");
             Assert.AreEqual(service.GetType(), typeof(WcfClientMessagingService), "An incorrect type was returned.");
-            Assert.AreEqual(service.BindingName, "myDataServiceBinding", "An incorrect item was returned.");
+            Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "myDataServiceBinding", "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
@@ -125,11 +125,11 @@ namespace Open.MOF.Messaging.Test
         [TestMethod]
         public void InstantiateServiceByMessageTypeTest()
         {
-            MessagingService service = MessagingService.CreateInstance(typeof(TestDataRequestMessage));
+            IMessagingService service = MessagingService.CreateInstance(typeof(TestDataRequestMessage));
 
             Assert.IsNotNull(service, "No item was returned.");
             Assert.AreEqual(service.GetType(), typeof(WcfClientMessagingService), "An incorrect type was returned.");
-            Assert.AreEqual(service.BindingName, "myDataServiceBinding", "An incorrect item was returned.");
+            Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "myDataServiceBinding", "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");

@@ -26,7 +26,7 @@ namespace Open.MOF.Messaging.Configuration
 
         protected override Object GetElementKey(ConfigurationElement element)
         {
-            return ((WcfEndpointConfigurationElement)element).BindingName;
+            return ((WcfEndpointConfigurationElement)element).ChannelEndpointName;
         }
 
         public WcfEndpointConfigurationElement this[int index]
@@ -71,7 +71,7 @@ namespace Open.MOF.Messaging.Configuration
         public void Remove(WcfEndpointConfigurationElement element)
         {
             if (BaseIndexOf(element) >= 0)
-                BaseRemove(element.BindingName);
+                BaseRemove(element.ChannelEndpointName);
         }
 
         public void RemoveAt(int index)

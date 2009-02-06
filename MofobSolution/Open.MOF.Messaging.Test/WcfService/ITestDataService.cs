@@ -9,10 +9,10 @@ using Open.MOF.Messaging.Test;
 namespace Open.MOF.Messaging.Test.WcfService
 {
     // NOTE: If you change the interface name "IService1" here, you must also update the reference to "IService1" in App.config.
-    [ServiceContract]
+    [ServiceContract(Name = "ITestDataService", ConfigurationName = "Open.MOF.Messaging.Test.WcfService.ITestDataService", Namespace = "http://mof.open/MessagingTests/ServiceContracts/1/0/")]
     public interface ITestDataService
     {
-        [OperationContract]
+        [OperationContract(Name = "ProcessTestDataRequest", Action = "http://mof.open/MessagingTests/ServiceContracts/1/0/ITestDataService/ProcessTestDataRequest")]
         TestDataResponseMessage ProcessTestDataRequest(TestDataRequestMessage messsage);
     }
 }

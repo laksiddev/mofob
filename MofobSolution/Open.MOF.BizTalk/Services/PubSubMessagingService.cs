@@ -17,7 +17,7 @@ namespace Open.MOF.BizTalk.Services
             throw new NotImplementedException();
         }
 
-        public override Open.MOF.Messaging.Services.ServiceInterfaceType SuportedServiceInterfaces
+        protected override Open.MOF.Messaging.Services.ServiceInterfaceType SuportedServiceInterfaces
         {
             get { return (Open.MOF.Messaging.Services.ServiceInterfaceType.SubscriptionService); }
         }

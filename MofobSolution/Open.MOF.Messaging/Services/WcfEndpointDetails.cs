@@ -11,17 +11,19 @@ namespace Open.MOF.Messaging.Services
         {
         }
 
-        public WcfEndpointDetails(string bindingName, Type endpointInterfaceType, Type factoryConstructedType, System.Reflection.MethodInfo interfaceMethod)
+        public WcfEndpointDetails(string channelEndpointName, Type endpointInterfaceType, Type factoryConstructedType, System.Reflection.MethodInfo interfaceMethod, string bindingType)
         {
-            BindingName = bindingName;
+            ChannelEndpointName = channelEndpointName;
             EndpointInterfaceType = endpointInterfaceType;
             FactoryConstructedType = factoryConstructedType;
             InterfaceMethod = interfaceMethod;
+            BindingType = bindingType;
         }
 
-        public string BindingName { get; set; }
+        public string ChannelEndpointName { get; set; }
         public System.Type EndpointInterfaceType { get; set; }
         public System.Type FactoryConstructedType { get; set; }
         public System.Reflection.MethodInfo InterfaceMethod { get; set; }
+        public string BindingType { get; set; }
     }
 }

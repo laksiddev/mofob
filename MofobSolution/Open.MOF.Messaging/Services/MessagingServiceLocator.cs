@@ -45,29 +45,29 @@ namespace Open.MOF.Messaging.Services
                 // HACK RegisterType does not work with non-parameterless constructors
                 // So we have to new-up our own instances using reflection and use RegisterInstance insted
 
-                MessagingService service = TryCreateInstance(item);
+                IMessagingService service = TryCreateInstance(item);
                 if (service != null)
                 {
-                    _container.RegisterInstance<MessagingService>(item.Name, service, new ContainerControlledLifetimeManager());
+                    _container.RegisterInstance<IMessagingService>(item.Name, service, new ContainerControlledLifetimeManager());
                     RegisterInstanceName(item.InterfaceType, item.Name, item.PreferenceNumber, service.GetType());
                 }
             }
         }
 
-        private static MessagingService TryCreateInstance(ServiceConfigurationElement item)
+        private static IMessagingService TryCreateInstance(ServiceConfigurationElement item)
         {
-            MessagingService serviceInstance = null;
-            if (typeof(MessagingService).IsAssignableFrom(item.ServiceType))
+            IMessagingService serviceInstance = null;
+            if (typeof(IMessagingService).IsAssignableFrom(item.ServiceType))
             {
                 System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.CreateInstance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
                 System.Reflection.ConstructorInfo constructorMethod = item.ServiceType.GetConstructor(flags, null, new Type[] { typeof(string) }, null);
                 if (constructorMethod != null)
                 {
-                    serviceInstance = (MessagingService)constructorMethod.Invoke(new object[] { item.ServiceBindingName });
+                    serviceInstance = (IMessagingService)constructorMethod.Invoke(new object[] { item.ChannelEndpointName });
                 }
                 else
                 {
-                    serviceInstance = (MessagingService)Activator.CreateInstance(item.ServiceType, flags, null, new object[] { item.ServiceBindingName }, System.Globalization.CultureInfo.CurrentCulture, null);
+                    serviceInstance = (IMessagingService)Activator.CreateInstance(item.ServiceType, flags, null, new object[] { item.ChannelEndpointName }, System.Globalization.CultureInfo.CurrentCulture, null);
                 }
             }
 

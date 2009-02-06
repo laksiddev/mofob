@@ -7,7 +7,7 @@ namespace Open.MOF.Messaging
 {
     public class EventLogUtility
     {
-        private const string _constEventLogSource = "Otto Approval Workflow";
+        private const string _constEventLogSource = "Message Oriented Framework";
         private const int _constEventLogId = 1001;
 
         public static void LogException(System.Exception ex)

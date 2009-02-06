@@ -26,15 +26,14 @@ namespace Open.MOF.BizTalk.Services
             {
                 throw new ArgumentException("An invalid message type was provided.", "message");
             }
-            if (String.IsNullOrEmpty(_bindingName))
+            if (String.IsNullOrEmpty(_channelEndpointName))
                 throw new MessagingConfigurationException("ESB Exception Binding Name not properly configured in application settings.");
 
             Open.MOF.Messaging.FaultMessage localFaultMessage = (Open.MOF.Messaging.FaultMessage)message;
             FaultMessageConverter converter = new FaultMessageConverter();
             Open.MOF.BizTalk.Services.Proxy.FaultMessage proxyFaultMessage = (Open.MOF.BizTalk.Services.Proxy.FaultMessage)converter.ConvertFrom(localFaultMessage);
 
-            ServiceModelSectionGroup serviceModelGroup = ServiceModelSectionGroup.GetSectionGroup(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None));
-            ChannelEndpointElement channelEndpoint = serviceModelGroup.Client.Endpoints[_bindingName];
+            ChannelEndpointElement channelEndpoint = WcfUtilities.FindEndpointByName(_channelEndpointName);
             bool isOneWayContract = (channelEndpoint.Contract.IndexOf("OneWay", StringComparison.CurrentCultureIgnoreCase) != -1);
 
             bool wasMessageDelivered = false;
@@ -44,7 +43,7 @@ namespace Open.MOF.BizTalk.Services
             {
                 if (_exceptionOneWayChannelFactory == null)
                 {
-                    _exceptionOneWayChannelFactory = new ChannelFactory<ExceptionHandlingOneWayChannel>(_bindingName);
+                    _exceptionOneWayChannelFactory = new ChannelFactory<ExceptionHandlingOneWayChannel>(_channelEndpointName);
                     _exceptionOneWayChannelFactory.Open();
                 }
 
@@ -61,7 +60,7 @@ namespace Open.MOF.BizTalk.Services
             {
                 if (_exceptionChannelFactory == null)
                 {
-                    _exceptionChannelFactory = new ChannelFactory<ExceptionHandlingChannel>(_bindingName);
+                    _exceptionChannelFactory = new ChannelFactory<ExceptionHandlingChannel>(_channelEndpointName);
                     _exceptionChannelFactory.Open();
                 }
 
@@ -78,7 +77,7 @@ namespace Open.MOF.BizTalk.Services
             return new MessagingResult(message, wasMessageDelivered, responseMessage);
         }
 
-        public override Open.MOF.Messaging.Services.ServiceInterfaceType SuportedServiceInterfaces
+        protected override Open.MOF.Messaging.Services.ServiceInterfaceType SuportedServiceInterfaces
         {
             get { return (Open.MOF.Messaging.Services.ServiceInterfaceType.ExceptionService); }
         }

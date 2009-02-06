@@ -70,11 +70,11 @@ namespace Open.MOF.Messaging.Configuration
             }
         }   //
 
-        [ConfigurationProperty("serviceBindingName", IsRequired = true)]
-        public string ServiceBindingName
+        [ConfigurationProperty("channelEndpointName", IsRequired = true)]
+        public string ChannelEndpointName
         {
-            get { return (string)this["serviceBindingName"]; }
-            set { this["serviceBindingName"] = value; }
+            get { return (string)this["channelEndpointName"]; }
+            set { this["channelEndpointName"] = value; }
         }
 
         [ConfigurationProperty("preferenceNumber", IsRequired = true)]

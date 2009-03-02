@@ -6,7 +6,8 @@ using System.Text;
 namespace Open.MOF.Messaging
 {
     [MessageContract(IsWrapped = true, WrapperName = "MessageSubmittedResponse", WrapperNamespace = "http://mof.open/Messaging/ServiceContracts/1/0/")]
-    public class MessageSubmittedResponse : ResponseMessage<MessageSubmittedResponse>
+    [MessageTransactionBehavior(true, false)]
+    public class MessageSubmittedResponse : FrameworkMessage
     {
         public MessageSubmittedResponse() : base()
         {

@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Message Oriented Framework - Messaging")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("jkitagr@hotmail.com")]
-[assembly: AssemblyProduct("Open.MOF.Messaging")]
-[assembly: AssemblyCopyright("Copyright © jkitagr@hotmail.com 2008")]
+[assembly: AssemblyProduct("Message Oriented Framework On BizTalk")]
+[assembly: AssemblyCopyright("Copyright © James Kita 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -34,3 +34,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.6.0.0")]
 [assembly: AssemblyFileVersion("0.6.0.0")]
+
+[assembly: InternalsVisibleTo("Open.MOF.Messaging.Services")]

@@ -8,7 +8,8 @@ using Open.MOF.Messaging;
 namespace Open.MOF.Messaging.Test
 {
     [MessageContract(IsWrapped = true, WrapperName = "TestDataResponseMessage", WrapperNamespace = "http://mof.open/MessagingTests/ServiceContracts/1/0/")]
-    public class TestDataResponseMessage : ResponseMessage<TestDataResponseMessage>
+    [MessageTransactionBehavior(true, false)]
+    public class TestDataResponseMessage : FrameworkMessage
     {
         public TestDataResponseMessage() : base()
         {

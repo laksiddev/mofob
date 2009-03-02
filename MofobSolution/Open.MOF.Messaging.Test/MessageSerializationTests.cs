@@ -49,7 +49,7 @@ namespace Open.MOF.Messaging.Test
 
             Assert.IsNotNull(messageText);
 
-            TestDataRequestMessage testMessage = TestDataRequestMessage.FromXmlString(messageText);
+            TestDataRequestMessage testMessage = TestDataRequestMessage.FromXmlString<TestDataRequestMessage>(messageText);
 
             Assert.IsNotNull(testMessage);
             Assert.AreEqual(message.Name, testMessage.Name, "An unexpected value was returned.");
@@ -70,7 +70,7 @@ namespace Open.MOF.Messaging.Test
 
             Assert.IsNotNull(messageText);
 
-            TestTransactionRequestMessage testMessage = TestTransactionRequestMessage.FromXmlString(messageText);
+            TestTransactionRequestMessage testMessage = TestTransactionRequestMessage.FromXmlString<TestTransactionRequestMessage>(messageText);
 
             Assert.IsNotNull(testMessage);
             Assert.AreEqual(message.Name, testMessage.Name, "An unexpected value was returned.");
@@ -94,7 +94,7 @@ namespace Open.MOF.Messaging.Test
 
             Assert.IsNotNull(messageText);
 
-            FaultMessage testMessage = FaultMessage.FromXmlString(messageText);
+            FaultMessage testMessage = FaultMessage.FromXmlString<FaultMessage>(messageText);
 
             Assert.IsNotNull(testMessage);
             Assert.IsNotNull(testMessage.ExceptionDetail);
@@ -115,7 +115,7 @@ namespace Open.MOF.Messaging.Test
             SubscribeRequestMessage message = new SubscribeRequestMessage();
             message.EndpointUri = "http://endpointuri/";
             message.Action = "messageaction";
-            message.SubscriptionMessageXmlType = MessageBase.GetMessageXmlType(typeof(TestDataRequestMessage));
+            message.SubscriptionMessageXmlType = FrameworkMessage.GetMessageXmlType(typeof(TestDataRequestMessage));
             Assert.IsTrue((!String.IsNullOrEmpty(message.SubscriptionMessageXmlType)), "No message xml information was available.");
             message.MessageId = Guid.NewGuid();
             message.From = new MessagingEndpoint("http://me/", "myaction");
@@ -123,7 +123,7 @@ namespace Open.MOF.Messaging.Test
 
             Assert.IsNotNull(messageText);
 
-            SubscribeRequestMessage testMessage = SubscribeRequestMessage.FromXmlString(messageText);
+            SubscribeRequestMessage testMessage = SubscribeRequestMessage.FromXmlString<SubscribeRequestMessage>(messageText);
 
             Assert.IsNotNull(testMessage);
             Assert.AreEqual(message.EndpointUri, testMessage.EndpointUri, "An unexpected value was returned.");
@@ -141,7 +141,7 @@ namespace Open.MOF.Messaging.Test
             UnsubscribeRequestMessage message = new UnsubscribeRequestMessage();
             message.EndpointUri = "http://endpointuri/";
             message.Action = "messageaction";
-            message.SubscriptionMessageXmlType = MessageBase.GetMessageXmlType(typeof(TestDataRequestMessage));
+            message.SubscriptionMessageXmlType = FrameworkMessage.GetMessageXmlType(typeof(TestDataRequestMessage));
             Assert.IsTrue((!String.IsNullOrEmpty(message.SubscriptionMessageXmlType)), "No message xml information was available.");
             message.MessageId = Guid.NewGuid();
             message.From = new MessagingEndpoint("http://me/", "myaction");
@@ -149,7 +149,7 @@ namespace Open.MOF.Messaging.Test
 
             Assert.IsNotNull(messageText);
 
-            UnsubscribeRequestMessage testMessage = UnsubscribeRequestMessage.FromXmlString(messageText);
+            UnsubscribeRequestMessage testMessage = UnsubscribeRequestMessage.FromXmlString<UnsubscribeRequestMessage>(messageText);
 
             Assert.IsNotNull(testMessage);
             Assert.AreEqual(message.EndpointUri, testMessage.EndpointUri, "An unexpected value was returned.");

@@ -48,17 +48,17 @@ namespace Open.MOF.Messaging.Test
         public void TestSubmitMesssage()
         {
             Open.MOF.Messaging.Test.TestDataRequestMessage testMessage = new Open.MOF.Messaging.Test.TestDataRequestMessage("MessageName");
-            using (IMessagingService service = MessagingService.CreateInstance(testMessage.GetType()))
+            using (IMessagingService service = MessagingService.CreateInstance(testMessage))
             {
                 Assert.IsNotNull(service, "No item was returned.");
-                Assert.AreEqual(service.GetType(), typeof(WcfClientMessagingService), "An incorrect type was returned.");
-                Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "myDataServiceBinding", "An incorrect item was returned.");
+                Assert.AreEqual(typeof(WcfClientMessagingService), service.GetType(), "An incorrect type was returned.");
+                Assert.AreEqual("WSHttpBinding_ITestDataService", ((MessagingService)service).ChannelEndpointName, "An incorrect item was returned.");
                 Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
-                MessageBase responseMessage = service.SubmitMessage(testMessage);
+                FrameworkMessage responseMessage = service.SubmitMessage(testMessage);
 
                 Assert.IsNotNull(responseMessage, "No item was returned.");
                 Assert.AreEqual(responseMessage.GetType(), typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), "An incorrect type was returned.");
@@ -73,11 +73,11 @@ namespace Open.MOF.Messaging.Test
         public void TestSubmitMesssageAsync()
         {
             Open.MOF.Messaging.Test.TestDataRequestMessage testMessage = new Open.MOF.Messaging.Test.TestDataRequestMessage("MessageName");
-            using (IMessagingService service = MessagingService.CreateInstance(testMessage.GetType()))
+            using (IMessagingService service = MessagingService.CreateInstance(testMessage))
             {
                 Assert.IsNotNull(service, "No item was returned.");
-                Assert.AreEqual(service.GetType(), typeof(WcfClientMessagingService), "An incorrect type was returned.");
-                Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "myDataServiceBinding", "An incorrect item was returned.");
+                Assert.AreEqual(typeof(WcfClientMessagingService), service.GetType(), "An incorrect type was returned.");
+                Assert.AreEqual("WSHttpBinding_ITestDataService", ((MessagingService)service).ChannelEndpointName, "An incorrect item was returned.");
                 Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
@@ -89,7 +89,7 @@ namespace Open.MOF.Messaging.Test
                 _waitHandle = new System.Threading.AutoResetEvent(false);
                 _waitHandle.WaitOne();
 
-                MessageBase responseMessage = null;
+                FrameworkMessage responseMessage = null;
                 if (_asyncResult != null)
                 {
                     responseMessage = service.EndSubmitMessage(_asyncResult);
@@ -109,17 +109,17 @@ namespace Open.MOF.Messaging.Test
         {
             Open.MOF.Messaging.Test.WcfServiceProxyReference.TestDataRequestMessage testMessage = new Open.MOF.Messaging.Test.WcfServiceProxyReference.TestDataRequestMessage();
             testMessage.name = "MessageName";
-            using (IMessagingService service = MessagingService.CreateInstance(testMessage.GetType()))
+            using (IMessagingService service = MessagingService.CreateInstance(testMessage))
             {
                 Assert.IsNotNull(service, "No item was returned.");
-                Assert.AreEqual(service.GetType(), typeof(WcfClientMessagingService), "An incorrect type was returned.");
-                Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "myDataServiceBinding", "An incorrect item was returned.");
+                Assert.AreEqual(typeof(WcfClientMessagingService), service.GetType(), "An incorrect type was returned.");
+                Assert.AreEqual("WSHttpBinding_ITestDataService_ClientProxy", ((MessagingService)service).ChannelEndpointName, "An incorrect item was returned.");
                 Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
-                MessageBase responseMessage = service.SubmitMessage(testMessage);
+                FrameworkMessage responseMessage = service.SubmitMessage(testMessage);
 
                 Assert.IsNotNull(responseMessage, "No item was returned.");
                 Assert.AreEqual(responseMessage.GetType(), typeof(Open.MOF.Messaging.Test.WcfServiceProxyReference.TestDataResponseMessage), "An incorrect type was returned.");
@@ -134,39 +134,39 @@ namespace Open.MOF.Messaging.Test
         public void TestMultipleSubmitMesssage()
         {
             Open.MOF.Messaging.Test.TestDataRequestMessage testMessage = new Open.MOF.Messaging.Test.TestDataRequestMessage("MessageName");
-            using (IMessagingService service = MessagingService.CreateInstance(testMessage.GetType()))
+            using (IMessagingService service = MessagingService.CreateInstance(testMessage))
             {
                 Assert.IsNotNull(service, "No item was returned.");
-                Assert.AreEqual(service.GetType(), typeof(WcfClientMessagingService), "An incorrect type was returned.");
-                Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "myDataServiceBinding", "An incorrect item was returned.");
+                Assert.AreEqual(typeof(WcfClientMessagingService), service.GetType(), "An incorrect type was returned.");
+                Assert.AreEqual("WSHttpBinding_ITestDataService", ((MessagingService)service).ChannelEndpointName, "An incorrect item was returned.");
                 Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
-                MessageBase responseMessage1 = service.SubmitMessage(testMessage);
+                FrameworkMessage responseMessage1 = service.SubmitMessage(testMessage);
 
                 Assert.IsNotNull(responseMessage1, "No item was returned.");
-                Assert.AreEqual(responseMessage1.GetType(), typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), "An incorrect type was returned.");
+                Assert.AreEqual(typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), responseMessage1.GetType(), "An incorrect type was returned.");
                 Assert.AreEqual(testMessage.Name, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage1).Value, "An incorrect item was returned.");
                 Assert.AreNotEqual(((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage1).MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage1).RelatedMessageId, "An incorrect item was returned.");
                 Assert.AreNotEqual(testMessage.MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage1).MessageId, "An incorrect item was returned.");
                 Assert.AreEqual(testMessage.MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage1).RelatedMessageId, "An incorrect item was returned.");
 
-                MessageBase responseMessage2 = service.SubmitMessage(testMessage);
+                FrameworkMessage responseMessage2 = service.SubmitMessage(testMessage);
 
                 Assert.IsNotNull(responseMessage2, "No item was returned.");
-                Assert.AreEqual(responseMessage2.GetType(), typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), "An incorrect type was returned.");
+                Assert.AreEqual(typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), responseMessage2.GetType(), "An incorrect type was returned.");
                 Assert.AreEqual(testMessage.Name, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage2).Value, "An incorrect item was returned.");
                 Assert.AreNotEqual(((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage2).MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage2).RelatedMessageId, "An incorrect item was returned.");
                 Assert.AreNotEqual(testMessage.MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage2).MessageId, "An incorrect item was returned.");
                 Assert.AreEqual(testMessage.MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage2).RelatedMessageId, "An incorrect item was returned.");
                 Assert.AreNotEqual(((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage1).MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage2).MessageId, "An incorrect item was returned.");
 
-                MessageBase responseMessage3 = service.SubmitMessage(testMessage);
+                FrameworkMessage responseMessage3 = service.SubmitMessage(testMessage);
 
                 Assert.IsNotNull(responseMessage3, "No item was returned.");
-                Assert.AreEqual(responseMessage3.GetType(), typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), "An incorrect type was returned.");
+                Assert.AreEqual(typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), responseMessage3.GetType(), "An incorrect type was returned.");
                 Assert.AreEqual(testMessage.Name, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage3).Value, "An incorrect item was returned.");
                 Assert.AreNotEqual(((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage3).MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage3).RelatedMessageId, "An incorrect item was returned.");
                 Assert.AreNotEqual(testMessage.MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage3).MessageId, "An incorrect item was returned.");
@@ -174,10 +174,10 @@ namespace Open.MOF.Messaging.Test
                 Assert.AreNotEqual(((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage1).MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage3).MessageId, "An incorrect item was returned.");
                 Assert.AreNotEqual(((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage2).MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage3).MessageId, "An incorrect item was returned.");
 
-                MessageBase responseMessage4 = service.SubmitMessage(testMessage);
+                FrameworkMessage responseMessage4 = service.SubmitMessage(testMessage);
 
                 Assert.IsNotNull(responseMessage4, "No item was returned.");
-                Assert.AreEqual(responseMessage4.GetType(), typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), "An incorrect type was returned.");
+                Assert.AreEqual(typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), responseMessage4.GetType(), "An incorrect type was returned.");
                 Assert.AreEqual(testMessage.Name, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage4).Value, "An incorrect item was returned.");
                 Assert.AreNotEqual(((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage4).MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage4).RelatedMessageId, "An incorrect item was returned.");
                 Assert.AreNotEqual(testMessage.MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage4).MessageId, "An incorrect item was returned.");
@@ -186,10 +186,10 @@ namespace Open.MOF.Messaging.Test
                 Assert.AreNotEqual(((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage2).MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage4).MessageId, "An incorrect item was returned.");
                 Assert.AreNotEqual(((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage3).MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage4).MessageId, "An incorrect item was returned.");
 
-                MessageBase responseMessage5 = service.SubmitMessage(testMessage);
+                FrameworkMessage responseMessage5 = service.SubmitMessage(testMessage);
 
                 Assert.IsNotNull(responseMessage5, "No item was returned.");
-                Assert.AreEqual(responseMessage5.GetType(), typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), "An incorrect type was returned.");
+                Assert.AreEqual(typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), responseMessage5.GetType(), "An incorrect type was returned.");
                 Assert.AreEqual(testMessage.Name, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage5).Value, "An incorrect item was returned.");
                 Assert.AreNotEqual(((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage5).MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage5).RelatedMessageId, "An incorrect item was returned.");
                 Assert.AreNotEqual(testMessage.MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage5).MessageId, "An incorrect item was returned.");
@@ -206,20 +206,20 @@ namespace Open.MOF.Messaging.Test
         {
             Open.MOF.Messaging.Test.TestDataRequestMessage testMessage = new Open.MOF.Messaging.Test.TestDataRequestMessage("MessageName");
             testMessage.To = new MessagingEndpoint("http://localhost:8931/WcfServiceProject/TestDataService/", "http://mof.open/MessagingTests/ServiceContracts/1/0/ITestDataService/ProcessTestDataRequest");
-            using (IMessagingService service = MessagingService.CreateInstance(testMessage.GetType()))
+            using (IMessagingService service = MessagingService.CreateInstance(testMessage))
             {
                 Assert.IsNotNull(service, "No item was returned.");
-                Assert.AreEqual(service.GetType(), typeof(WcfClientMessagingService), "An incorrect type was returned.");
-                Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "myDataServiceBinding", "An incorrect item was returned.");
+                Assert.AreEqual(typeof(WcfClientMessagingService), service.GetType(), "An incorrect type was returned.");
+                Assert.AreEqual("WSHttpBinding_ITestDataService", ((MessagingService)service).ChannelEndpointName, "An incorrect item was returned.");
                 Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
-                MessageBase responseMessage = service.SubmitMessage(testMessage);
+                FrameworkMessage responseMessage = service.SubmitMessage(testMessage);
 
                 Assert.IsNotNull(responseMessage, "No item was returned.");
-                Assert.AreEqual(responseMessage.GetType(), typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), "An incorrect type was returned.");
+                Assert.AreEqual(typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), responseMessage.GetType(), "An incorrect type was returned.");
                 Assert.AreEqual(testMessage.Name, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage).Value, "An incorrect item was returned.");
                 Assert.AreNotEqual(((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage).MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage).RelatedMessageId, "An incorrect item was returned.");
                 Assert.AreNotEqual(testMessage.MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage).MessageId, "An incorrect item was returned.");
@@ -232,20 +232,20 @@ namespace Open.MOF.Messaging.Test
         {
             Open.MOF.Messaging.Test.TestDataRequestMessage testMessage = new Open.MOF.Messaging.Test.TestDataRequestMessage("MessageName");
             testMessage.To = new MessagingEndpoint("net.tcp://localhost:7931/WcfServiceProject/TestDataService/", "http://mof.open/MessagingTests/ServiceContracts/1/0/ITestDataService/ProcessTestDataRequest");
-            using (IMessagingService service = MessagingService.CreateInstance(testMessage.GetType()))
+            using (IMessagingService service = MessagingService.CreateInstance(testMessage))
             {
                 Assert.IsNotNull(service, "No item was returned.");
-                Assert.AreEqual(service.GetType(), typeof(WcfClientMessagingService), "An incorrect type was returned.");
-                Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "myDataServiceBinding", "An incorrect item was returned.");
+                Assert.AreEqual(typeof(WcfClientMessagingService), service.GetType(), "An incorrect type was returned.");
+                Assert.AreEqual("NetTcpBinding_ITestDataService", ((MessagingService)service).ChannelEndpointName, "An incorrect item was returned.");
                 Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
                 Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
-                MessageBase responseMessage = service.SubmitMessage(testMessage);
+                FrameworkMessage responseMessage = service.SubmitMessage(testMessage);
 
                 Assert.IsNotNull(responseMessage, "No item was returned.");
-                Assert.AreEqual(responseMessage.GetType(), typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), "An incorrect type was returned.");
+                Assert.AreEqual(typeof(Open.MOF.Messaging.Test.TestDataResponseMessage), responseMessage.GetType(), "An incorrect type was returned.");
                 Assert.AreEqual(testMessage.Name, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage).Value, "An incorrect item was returned.");
                 Assert.AreNotEqual(((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage).MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage).RelatedMessageId, "An incorrect item was returned.");
                 Assert.AreNotEqual(testMessage.MessageId, ((Open.MOF.Messaging.Test.TestDataResponseMessage)responseMessage).MessageId, "An incorrect item was returned.");

@@ -9,15 +9,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging.Test", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{63E3A6C4-11F4-49FC-BC66-A81BB60A49CA}"
 	ProjectSection(SolutionItems) = preProject
+		btsschema_svcutil.bat = btsschema_svcutil.bat
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 		MofobSolution.vsmdi = MofobSolution.vsmdi
+		runsvcutil.bat = runsvcutil.bat
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.BizTalk.Test", "Open.MOF.BizTalk.Test\Open.MOF.BizTalk.Test.csproj", "{1483C606-3428-40C9-9F1B-D0299DDAB2C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.SchemaReferenceUtil", "Open.MOF.SchemaReferenceUtil\Open.MOF.SchemaReferenceUtil.csproj", "{2C0C2DBC-52E1-472A-A426-E576F253DA23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging.Configuration", "Open.MOF.Messaging.Configuration\Open.MOF.Messaging.Configuration.csproj", "{2167C1EE-724A-4C33-A05B-F973624336AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging.Services", "Open.MOF.Messaging.Services\Open.MOF.Messaging.Services.csproj", "{1C8118FB-D210-4528-B215-0A10AFAF4AF6}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs08.codeplex.com/
 		SccLocalPath0 = .
@@ -33,6 +41,15 @@ Global
 		SccProjectUniqueName4 = Open.MOF.BizTalk.Test\\Open.MOF.BizTalk.Test.csproj
 		SccProjectName4 = Open.MOF.BizTalk.Test
 		SccLocalPath4 = Open.MOF.BizTalk.Test
+		SccProjectUniqueName5 = Open.MOF.SchemaReferenceUtil\\Open.MOF.SchemaReferenceUtil.csproj
+		SccProjectName5 = Open.MOF.SchemaReferenceUtil
+		SccLocalPath5 = Open.MOF.SchemaReferenceUtil
+		SccProjectUniqueName6 = Open.MOF.Messaging.Configuration\\Open.MOF.Messaging.Configuration.csproj
+		SccProjectName6 = Open.MOF.Messaging.Configuration
+		SccLocalPath6 = Open.MOF.Messaging.Configuration
+		SccProjectUniqueName7 = Open.MOF.Messaging.Services\\Open.MOF.Messaging.Services.csproj
+		SccProjectName7 = Open.MOF.Messaging.Services
+		SccLocalPath7 = Open.MOF.Messaging.Services
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = MofobSolution.vsmdi
@@ -58,6 +75,18 @@ Global
 		{1483C606-3428-40C9-9F1B-D0299DDAB2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1483C606-3428-40C9-9F1B-D0299DDAB2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1483C606-3428-40C9-9F1B-D0299DDAB2C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C0C2DBC-52E1-472A-A426-E576F253DA23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C0C2DBC-52E1-472A-A426-E576F253DA23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C0C2DBC-52E1-472A-A426-E576F253DA23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C0C2DBC-52E1-472A-A426-E576F253DA23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2167C1EE-724A-4C33-A05B-F973624336AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2167C1EE-724A-4C33-A05B-F973624336AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2167C1EE-724A-4C33-A05B-F973624336AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2167C1EE-724A-4C33-A05B-F973624336AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C8118FB-D210-4528-B215-0A10AFAF4AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C8118FB-D210-4528-B215-0A10AFAF4AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C8118FB-D210-4528-B215-0A10AFAF4AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C8118FB-D210-4528-B215-0A10AFAF4AF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

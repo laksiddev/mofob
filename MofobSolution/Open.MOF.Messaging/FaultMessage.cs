@@ -6,7 +6,7 @@ using System.Text;
 namespace Open.MOF.Messaging
 {
     [MessageContract(IsWrapped = true, WrapperName = "FaultMessage", WrapperNamespace = "http://mof.open/Messaging/ServiceContracts/1/0/")]
-    public class FaultMessage : RequestMessage<FaultMessage>
+    public class FaultMessage : FrameworkMessage
     {
         public FaultMessage() : base()
         {
@@ -68,6 +68,14 @@ namespace Open.MOF.Messaging
         {
             System.ComponentModel.TypeConverter converter = System.ComponentModel.TypeDescriptor.GetConverter(typeof(ExceptionDetail));
             _exceptionDetail = (ExceptionDetail)converter.ConvertFrom(ex);
+        }
+
+        public static MessageBehavior Behavior
+        {
+            get
+            {
+                return MessageBehavior.FaultReporting;
+            }
         }
     }
 }

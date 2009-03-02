@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Open.MOF.Messaging
 {
-    [MessageContract(IsWrapped = true, WrapperName = "UnsubscribeRequestMessage")]
-    public class UnsubscribeRequestMessage : RequestMessage<UnsubscribeRequestMessage> 
+    [MessageContract(IsWrapped = true, WrapperName = "UnsubscribeRequestMessage", WrapperNamespace = "http://mof.open/Messaging/ServiceContracts/1/0/")]
+    public class UnsubscribeRequestMessage : FrameworkMessage 
     {
         [MessageBodyMember(Name = "subscriptionMessageXmlType", Order = 1, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
         private string _subscriptionMessageXmlType;
@@ -30,6 +30,14 @@ namespace Open.MOF.Messaging
         {
             get { return _action; }
             set { _action = value; }
+        }
+
+        public static MessageBehavior Behavior
+        {
+            get
+            {
+                return MessageBehavior.SubscriptionControl;
+            }
         }
     }
 }

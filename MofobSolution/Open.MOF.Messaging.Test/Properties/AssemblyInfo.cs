@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Open.MOF.Messaging.Test")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Open.MOF.SchemaReferenceUtil")]
+[assembly: AssemblyDescription("Message Oriented Framework - Messaging / Test")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Open.MOF.Messaging.Test")]
-[assembly: AssemblyCopyright("Copyright ©  2008")]
+[assembly: AssemblyCompany("jkitagr@hotmail.com")]
+[assembly: AssemblyProduct("Message Oriented Framework On BizTalk")]
+[assembly: AssemblyCopyright("Copyright © James Kita 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

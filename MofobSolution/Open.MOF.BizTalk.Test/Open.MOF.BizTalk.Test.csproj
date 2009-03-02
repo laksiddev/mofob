@@ -57,6 +57,10 @@
       <Project>{132B49C2-5569-421A-BB75-8D4F0A798B2F}</Project>
       <Name>Open.MOF.BizTalk</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Open.MOF.Messaging.Services\Open.MOF.Messaging.Services.csproj">
+      <Project>{1C8118FB-D210-4528-B215-0A10AFAF4AF6}</Project>
+      <Name>Open.MOF.Messaging.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Open.MOF.Messaging\Open.MOF.Messaging.csproj">
       <Project>{9750443B-DDB6-4A67-9470-37109B5C47D6}</Project>
       <Name>Open.MOF.Messaging</Name>

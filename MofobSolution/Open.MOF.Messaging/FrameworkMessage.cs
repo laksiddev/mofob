@@ -6,10 +6,12 @@ using System.Xml;
 
 namespace Open.MOF.Messaging
 {
-    [MessageContract(IsWrapped = true, WrapperName = "MessageBase", WrapperNamespace = "http://mof.open/Messaging/ServiceContracts/1/0/")]
-    public abstract class MessageBase
+    [MessageContract(IsWrapped = true, WrapperName = "FrameworkMessage")]
+    public abstract class FrameworkMessage
     {
-        public MessageBase()
+        protected static Dictionary<Type, MessageTransactionBehaviorAttribute> _transactionMessageAttributeLookup;
+
+        public FrameworkMessage()
         {
             _messageId = Guid.NewGuid();
             _to = null;
@@ -71,7 +73,7 @@ namespace Open.MOF.Messaging
         {
             get
             {
-                return MessageBase.GetMessageXmlType(this.GetType());
+                return FrameworkMessage.GetMessageXmlType(this.GetType());
             }
         }
 
@@ -84,9 +86,20 @@ namespace Open.MOF.Messaging
             return message.GetReaderAtBodyContents().ReadOuterXml();
         }
 
+        public static T FromXmlString<T>(string xml) where T : FrameworkMessage
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(xml);
+
+            System.ServiceModel.Channels.Message message = System.ServiceModel.Channels.Message.CreateMessage(System.ServiceModel.Channels.MessageVersion.Soap11WSAddressing10, "action", xmlDocument.DocumentElement);
+            System.ServiceModel.Description.TypedMessageConverter messageConverter = System.ServiceModel.Description.TypedMessageConverter.Create(typeof(T), "action");
+
+            return (T)messageConverter.FromMessage(message);
+        }
+
         public static string GetMessageXmlType(System.Type messageType)
         {
-            if ((typeof(MessageBase).IsAssignableFrom(messageType)) && (!messageType.IsAbstract))
+            if ((typeof(FrameworkMessage).IsAssignableFrom(messageType)) && (!messageType.IsAbstract))
             {
                 System.ServiceModel.MessageContractAttribute[] attributes = 
                     (System.ServiceModel.MessageContractAttribute[])messageType.GetCustomAttributes(typeof(System.ServiceModel.MessageContractAttribute), false);
@@ -99,6 +112,43 @@ namespace Open.MOF.Messaging
             }
 
             return String.Empty;
+        }
+
+        protected internal static MessageBehavior MessageBehaviorForType(Type messageType)
+        {
+            if (!typeof(FrameworkMessage).IsAssignableFrom(messageType))
+                throw new MessagingException("The message type being processed is not defined correctly.  All messages must extend from MessageBase.");
+
+            System.Reflection.PropertyInfo behaviorProperty = messageType.GetProperty("Behavior", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.FlattenHierarchy);
+            if (behaviorProperty != null)
+            {
+                return (MessageBehavior)behaviorProperty.GetValue(null, null);
+            }
+
+            if (_transactionMessageAttributeLookup == null)
+                _transactionMessageAttributeLookup = new Dictionary<Type, MessageTransactionBehaviorAttribute>();
+
+            MessageTransactionBehaviorAttribute transactionMessageAttribute;
+            if (_transactionMessageAttributeLookup.ContainsKey(messageType))
+            {
+                transactionMessageAttribute = _transactionMessageAttributeLookup[messageType];
+            }
+            else
+            {
+                MessageTransactionBehaviorAttribute[] attributes = (MessageTransactionBehaviorAttribute[])messageType.GetCustomAttributes(typeof(MessageTransactionBehaviorAttribute), false);
+                if ((attributes != null) && (attributes.Length > 0))
+                {
+                    transactionMessageAttribute = attributes[0];
+                }
+                else
+                {
+                    transactionMessageAttribute = new MessageTransactionBehaviorAttribute(true, false);
+                }
+                _transactionMessageAttributeLookup.Add(messageType, transactionMessageAttribute);
+            }
+
+            return transactionMessageAttribute.Behavior;
+
         }
     }
 }

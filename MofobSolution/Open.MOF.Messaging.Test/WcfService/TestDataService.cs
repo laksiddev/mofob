@@ -18,5 +18,9 @@ namespace Open.MOF.Messaging.Test.WcfService
 
             return responseMessage;
         }
+
+        public void ProcessTestDataRequest(TestDataResponseMessage message)
+        {
+        }
     }
 }

@@ -37,14 +37,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Practices.ObjectBuilder2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -63,14 +55,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncResult\AsyncResult.cs" />
-    <Compile Include="AsyncResult\AsyncResultNoResult.cs" />
+    <Compile Include="Attributes\MessageBehavior.cs" />
+    <Compile Include="Attributes\MessageTransactionBehaviorAttribute.cs" />
     <Compile Include="Attributes\MessageContractAssemblyAttribute.cs" />
     <Compile Include="Attributes\ResponseMessageTypeAttribute.cs" />
     <Compile Include="Common\EventLogUtility.cs" />
-    <Compile Include="Configuration\WcfEndpointConfigurationSettings.cs" />
-    <Compile Include="Configuration\WcfEndpointConfigurationElement.cs" />
-    <Compile Include="Configuration\WcfEndpointConfigurationCollection.cs" />
     <Compile Include="Converters\ExceptionDetailConverter.cs" />
     <Compile Include="FaultResponse.cs" />
     <Compile Include="MessageSubmittedResponse.cs" />
@@ -78,41 +67,20 @@
     <Compile Include="Exceptions\MessagingConfigurationException.cs" />
     <Compile Include="Exceptions\MessagingException.cs" />
     <Compile Include="MessagingResult.cs" />
-    <Compile Include="Services\ExceptionService.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Services\IMessagingService.cs" />
-    <Compile Include="Services\MessagingServiceLocator.cs" />
-    <Compile Include="Services\WcfEndpointDetails.cs" />
     <Compile Include="SubscribeRequestMessage.cs" />
     <Compile Include="UnsubscribeRequestMessage.cs" />
-    <Compile Include="DataRequestMessage.cs" />
     <Compile Include="EventArgs\MessagingEventArgs.cs" />
     <Compile Include="EventArgs\MessageDeliveredEventArgs.cs" />
     <Compile Include="EventArgs\MessageReceivedEventArgs.cs" />
     <Compile Include="EventArgs\UnknownMessageEventArgs.cs" />
     <Compile Include="FaultMessage.cs" />
-    <Compile Include="GenericMessage.cs" />
-    <Compile Include="MessageBase.cs" />
+    <Compile Include="FrameworkMessage.cs" />
     <Compile Include="MessagingEndpoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Configuration\ServiceConfigurationCollection.cs" />
-    <Compile Include="Configuration\ServiceConfigurationElement.cs" />
-    <Compile Include="Configuration\ServiceConfigurationSettings.cs" />
-    <Compile Include="RequestMessage.cs" />
-    <Compile Include="ResponseMessage.cs" />
-    <Compile Include="Services\MessagingService.cs" />
-    <Compile Include="Services\ServiceInterfaceType.cs" />
-    <Compile Include="Services\WcfClientMessagingService.cs" />
-    <Compile Include="TransactionRequestMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Configuration\Configuration.cd" />
     <None Include="Messaging.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Configuration\ServiceConfiguration.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

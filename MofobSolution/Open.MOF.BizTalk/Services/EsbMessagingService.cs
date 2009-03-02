@@ -21,7 +21,7 @@ namespace Open.MOF.BizTalk.Services
         {
         }
         
-        protected override MessagingResult PerformSubmitMessage(MessageBase message)
+        protected override MessagingResult PerformSubmitMessage(FrameworkMessage message)
         {
             if (String.IsNullOrEmpty(_channelEndpointName))
                 throw new MessagingConfigurationException("ESB Exception Binding Name not properly configured in application settings.");
@@ -29,7 +29,7 @@ namespace Open.MOF.BizTalk.Services
             ChannelEndpointElement channel = WcfUtilities.FindEndpointByName(_channelEndpointName);
             bool isOneWayContract = (channel.Contract.IndexOf("OneWay", StringComparison.CurrentCultureIgnoreCase) != -1);
 
-            if (message.To.IsValid())
+            if ((message.To != null) && (message.To.IsValid()))
             {
                 return PerformSubmitItineraryMessage(message, isOneWayContract);
             }
@@ -39,7 +39,7 @@ namespace Open.MOF.BizTalk.Services
             }
         }
 
-        private MessagingResult PerformSubmitTopicMessage(MessageBase message, bool isOneWayContract)
+        private MessagingResult PerformSubmitTopicMessage(FrameworkMessage message, bool isOneWayContract)
         {
             bool wasMessageDelivered = false;
             MessageSubmittedResponse responseMessage = null;
@@ -86,7 +86,7 @@ namespace Open.MOF.BizTalk.Services
             return new MessagingResult(message, wasMessageDelivered, responseMessage);
         }
 
-        private MessagingResult PerformSubmitItineraryMessage(MessageBase message, bool isOneWayContract)
+        private MessagingResult PerformSubmitItineraryMessage(FrameworkMessage message, bool isOneWayContract)
         {
             bool wasMessageDelivered = false;
             MessageSubmittedResponse responseMessage = null;
@@ -139,7 +139,12 @@ namespace Open.MOF.BizTalk.Services
         {
             get { return (Open.MOF.Messaging.Services.ServiceInterfaceType.TransactionService); }
         }
-        
+
+        protected override bool CanSupportMessage(FrameworkMessage message)
+        {
+            return (typeof(FrameworkMessage).IsAssignableFrom(message.GetType()));
+        }
+
         public override void Dispose()
         {
             if (_topicOneWayChannelFactory != null)

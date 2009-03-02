@@ -1,4 +1,4 @@
-﻿
+
 namespace Open.MOF.Messaging.Test.WcfServiceProxyReference {
 
 
@@ -11,7 +11,7 @@ namespace Open.MOF.Messaging.Test.WcfServiceProxyReference {
     }
 
     [System.ServiceModel.MessageContractAttribute(WrapperName = "TestDataRequestMessage", WrapperNamespace = "http://mof.open/MessagingTests/ServiceContracts/1/0/", IsWrapped = true)]
-    public partial class TestDataRequestMessage : Open.MOF.Messaging.DataRequestMessage<TestDataRequestMessage> {
+    public partial class TestDataRequestMessage : Open.MOF.Messaging.FrameworkMessage {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://mof.open/MessagingTests/DataContracts/1/0/", Order=0)]
         public string name;
@@ -23,7 +23,7 @@ namespace Open.MOF.Messaging.Test.WcfServiceProxyReference {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="TestDataResponseMessage", WrapperNamespace="http://mof.open/MessagingTests/ServiceContracts/1/0/", IsWrapped=true)]
-    public partial class TestDataResponseMessage : Open.MOF.Messaging.ResponseMessage<TestDataResponseMessage> {
+    public partial class TestDataResponseMessage : Open.MOF.Messaging.FrameworkMessage {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://mof.open/MessagingTests/DataContracts/1/0/", Order=0)]
         public string value;

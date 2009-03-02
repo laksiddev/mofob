@@ -20,7 +20,7 @@ namespace Open.MOF.BizTalk.Services
         {
         }
 
-        protected override MessagingResult PerformSubmitMessage(MessageBase message)
+        protected override MessagingResult PerformSubmitMessage(FrameworkMessage message)
         {
             if (!(message is Open.MOF.Messaging.FaultMessage))
             {
@@ -81,7 +81,12 @@ namespace Open.MOF.BizTalk.Services
         {
             get { return (Open.MOF.Messaging.Services.ServiceInterfaceType.ExceptionService); }
         }
-        
+
+        protected override bool CanSupportMessage(FrameworkMessage message)
+        {
+            return (message is Open.MOF.Messaging.FaultMessage);
+        }
+
         public override void Dispose()
         {
             if (_exceptionOneWayChannelFactory != null)

@@ -14,5 +14,8 @@ namespace Open.MOF.Messaging.Test.WcfService
     {
         [OperationContract(Name = "ProcessTestDataRequest", Action = "http://mof.open/MessagingTests/ServiceContracts/1/0/ITestDataService/ProcessTestDataRequest")]
         TestDataResponseMessage ProcessTestDataRequest(TestDataRequestMessage messsage);
+
+        [OperationContract(Name = "ProcessTestDataResponse", Action = "http://mof.open/MessagingTests/ServiceContracts/1/0/ITestDataService/ProcessTestDataResponse")]
+        void ProcessTestDataRequest(TestDataResponseMessage messsage);
     }
 }

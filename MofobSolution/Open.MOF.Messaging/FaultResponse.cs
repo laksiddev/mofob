@@ -6,10 +6,18 @@ using System.Text;
 namespace Open.MOF.Messaging
 {
     [MessageContract(IsWrapped = true, WrapperName = "FaultResponse", WrapperNamespace = "http://mof.open/Messaging/ServiceContracts/1/0/")]
-    public class FaultResponse : ResponseMessage<FaultMessage>
+    public class FaultResponse : FrameworkMessage
     {
         public FaultResponse() : base()
         {
+        }
+
+        public static MessageBehavior Behavior
+        {
+            get
+            {
+                return MessageBehavior.TransactionsSupported;
+            }
         }
     }
 }

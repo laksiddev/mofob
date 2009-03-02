@@ -6,7 +6,7 @@ namespace Open.MOF.Messaging
 {
     public class UnknownMessageEventArgs : MessagingEventArgs
     {
-        public UnknownMessageEventArgs(MessageBase message)
+        public UnknownMessageEventArgs(FrameworkMessage message)
             : base(message)
         {
         }

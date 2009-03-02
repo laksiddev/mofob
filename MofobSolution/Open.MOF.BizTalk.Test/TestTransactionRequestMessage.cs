@@ -6,7 +6,8 @@ using Open.MOF.Messaging;
 
 namespace Open.MOF.BizTalk.Test
 {
-    public class TestTransactionRequestMessage : TransactionRequestMessage<TestTransactionRequestMessage>
+    [MessageTransactionBehavior(true, true)]
+    public class TestTransactionRequestMessage : FrameworkMessage
     {
     }
 }

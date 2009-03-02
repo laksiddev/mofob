@@ -8,8 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace Open.MOF.BizTalk.Services.Proxy
 {
+
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace = "http://Microsoft.BizTalk.ESB/", ConfigurationName = "ProcessRequest")]
@@ -22,6 +24,7 @@ namespace Open.MOF.BizTalk.Services.Proxy
         SubmitRequestResponse SubmitRequest(SubmitRequestRequest request);
     }
 
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace = "http://Microsoft.BizTalk.ESB/", ConfigurationName = "ProcessRequestOneWay")]
     public interface ProcessRequestOneWay
@@ -31,8 +34,7 @@ namespace Open.MOF.BizTalk.Services.Proxy
         [System.ServiceModel.OperationContractAttribute(Action = "SubmitRequest", IsOneWay = true)]
         [System.ServiceModel.XmlSerializerFormatAttribute()]
         void SubmitRequest(SubmitRequestRequestOneWay request);
-    } 
-
+    }
 
     //This is added from the two way service as the same schema is used....[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace = "http://microsoft.practices.esb/", ConfigurationName = "ProcessRequestResponse")]
@@ -330,6 +332,10 @@ namespace Open.MOF.BizTalk.Services.Proxy
 
         private bool isRequestResponseFieldSpecified;
 
+        private Stages stageField;
+
+        private bool stageFieldSpecified;
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string uuid
@@ -441,6 +447,34 @@ namespace Open.MOF.BizTalk.Services.Proxy
                 this.isRequestResponseFieldSpecified = value;
             }
         }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public Stages stage
+        {
+            get
+            {
+                return this.stageField;
+            }
+            set
+            {
+                this.stageField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool stageSpecified
+        {
+            get
+            {
+                return this.stageFieldSpecified;
+            }
+            set
+            {
+                this.stageFieldSpecified = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -503,6 +537,14 @@ namespace Open.MOF.BizTalk.Services.Proxy
         private bool positionFieldSpecified;
 
         private string serviceInstanceIdField;
+
+        private bool isTrackingEnabledField;
+
+        private bool isTrackingEnabledFieldSpecified;
+
+        private Stages stageField;
+
+        private bool stageFieldSpecified;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -685,6 +727,86 @@ namespace Open.MOF.BizTalk.Services.Proxy
                 this.serviceInstanceIdField = value;
             }
         }
+
+
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool isTrackingEnabled
+        {
+            get
+            {
+                return this.isTrackingEnabledField;
+            }
+            set
+            {
+                this.isTrackingEnabledField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool isTrackingEnabledSpecified
+        {
+            get
+            {
+                return this.isTrackingEnabledFieldSpecified;
+            }
+            set
+            {
+                this.isTrackingEnabledFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public Stages stage
+        {
+            get
+            {
+                return this.stageField;
+            }
+            set
+            {
+                this.stageField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool stageSpecified
+        {
+            get
+            {
+                return this.stageFieldSpecified;
+            }
+            set
+            {
+                this.stageFieldSpecified = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.biztalk.practices.esb.com/itinerary")]
+    public enum Stages
+    {
+
+        /// <remarks/>
+        notSpecified,
+
+        /// <remarks/>
+        receiveInbound,
+
+        /// <remarks/>
+        receiveTransmit,
+
+        /// <remarks/>
+        sendTransmit,
+
+        /// <remarks/>
+        sendInbound,
     }
 
     /// <remarks/>
@@ -732,7 +854,6 @@ namespace Open.MOF.BizTalk.Services.Proxy
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     [System.ServiceModel.MessageContractAttribute(IsWrapped = false, ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign)]
-    //System.ServiceModel.MessageContractAttribute(IsWrapped = false, ProtectionLevel = System.Net.Security.ProtectionLevel.None)]
     public partial class SubmitRequestRequest
     {
 
@@ -740,7 +861,6 @@ namespace Open.MOF.BizTalk.Services.Proxy
         public Itinerary Itinerary;
 
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "", ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign, Order = 0)]
-        //[System.ServiceModel.MessageBodyMemberAttribute(Namespace = "", ProtectionLevel = System.Net.Security.ProtectionLevel.None, Order = 0)]
         public object part;
 
         public SubmitRequestRequest()
@@ -782,7 +902,6 @@ namespace Open.MOF.BizTalk.Services.Proxy
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     [System.ServiceModel.MessageContractAttribute(IsWrapped = false, ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign)]
-    //[System.ServiceModel.MessageContractAttribute(IsWrapped = false, ProtectionLevel = System.Net.Security.ProtectionLevel.None)]
     public partial class SubmitRequestResponse
     {
 
@@ -842,6 +961,8 @@ namespace Open.MOF.BizTalk.Services.Proxy
             SubmitRequestResponse retVal = ((ProcessRequest)(this)).SubmitRequest(inValue);
         }
     }
+    //This is added from the two way service as the same schema is used....
+
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     public interface ProcessRequestOneWayChannel : ProcessRequestOneWay, System.ServiceModel.IClientChannel
@@ -891,11 +1012,9 @@ namespace Open.MOF.BizTalk.Services.Proxy
             SubmitRequestRequestOneWay inValue = new SubmitRequestRequestOneWay();
             inValue.Itinerary = Itinerary;
             inValue.part = part;
-            ((ProcessRequestOneWay)this).SubmitRequest(inValue);
+            ((ProcessRequestOneWay)(this)).SubmitRequest(inValue);
         }
     }
-    //This is added from the two way service as the same schema is used.... 
-    
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -991,5 +1110,4 @@ namespace Open.MOF.BizTalk.Services.Proxy
             part = retVal.part;
         }
     }
-
 }

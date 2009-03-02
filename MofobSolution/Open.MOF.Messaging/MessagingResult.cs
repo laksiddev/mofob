@@ -14,20 +14,20 @@ namespace Open.MOF.Messaging
             ResponseMessage = null;
         }
 
-        public MessagingResult(MessageBase requestMessage) : base()
+        public MessagingResult(FrameworkMessage requestMessage) : base()
         {
             RequestMessage = requestMessage;
         }
 
-        public MessagingResult(MessageBase requestMessage, bool wasMessageDelivered, MessageBase responseMessage)
+        public MessagingResult(FrameworkMessage requestMessage, bool wasMessageDelivered, FrameworkMessage responseMessage)
         {
             RequestMessage = requestMessage;
             WasMessageDelivered = (bool?)wasMessageDelivered;
             ResponseMessage = responseMessage;
         }
 
-        public MessageBase RequestMessage { get; set; }
+        public FrameworkMessage RequestMessage { get; set; }
         public bool? WasMessageDelivered { get; set; }
-        public MessageBase ResponseMessage { get; set; }
+        public FrameworkMessage ResponseMessage { get; set; }
     }
 }

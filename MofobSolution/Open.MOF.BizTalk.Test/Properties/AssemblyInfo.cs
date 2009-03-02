@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Open.MOF.BizTalk.Test")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Message Oriented Framework - BizTalk / Test")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Open.MOF.BizTalk.Test")]
-[assembly: AssemblyCopyright("Copyright ©  2008")]
+[assembly: AssemblyCompany("jkitagr@hotmail.com")]
+[assembly: AssemblyProduct("Message Oriented Framework On BizTalk")]
+[assembly: AssemblyCopyright("Copyright © James Kita 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

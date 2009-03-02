@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Message Oriented Framework - BizTalk")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("jkitagr@hotmail.com")]
-[assembly: AssemblyProduct("Open.MOF.BizTalk")]
-[assembly: AssemblyCopyright("Copyright © jkitagr@hotmail.com 2008")]
+[assembly: AssemblyProduct("Message Oriented Framework On BizTalk")]
+[assembly: AssemblyCopyright("Copyright © James Kita 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

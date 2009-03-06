@@ -122,6 +122,7 @@ namespace Open.MOF.Messaging.Services
                 }
             }
 
+            EventLogUtility.LogWarningMessage(String.Format("WARNING:  No Messaging Service was located for the message type: {0}", message.GetType().FullName));
             return null;
         }
 

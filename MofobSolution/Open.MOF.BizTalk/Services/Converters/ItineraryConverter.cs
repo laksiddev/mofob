@@ -15,10 +15,11 @@ namespace Open.MOF.BizTalk.Services
         private const string _constServiceType = "Messaging";
         private const string _constTransformType = "";
         private const string _constDefaultServiceName = "BizTalkEsbService";
+        private const string _constVersionNumber = "1.0";
         
         public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType)
         {
-            if (sourceType == typeof(Open.MOF.Messaging.MessagingEndpoint))
+            if (typeof(FrameworkMessage).IsAssignableFrom(sourceType))
                 return true;
 
             return base.CanConvertFrom(context, sourceType);
@@ -26,24 +27,25 @@ namespace Open.MOF.BizTalk.Services
 
         public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
         {
-            if (value.GetType() == typeof(Open.MOF.Messaging.MessagingEndpoint))
+            if (value is Open.MOF.Messaging.FrameworkMessage)
             {
-                Open.MOF.Messaging.MessagingEndpoint toEndpoint = (Open.MOF.Messaging.MessagingEndpoint)value;
+                Open.MOF.Messaging.FrameworkMessage message = (Open.MOF.Messaging.FrameworkMessage)value;
+                //Open.MOF.Messaging.MessagingEndpoint toEndpoint = message.To;
 
-                Open.MOF.BizTalk.Services.Proxy.Itinerary itinerary = new Open.MOF.BizTalk.Services.Proxy.Itinerary();
+                Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.Itinerary itinerary = new Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.Itinerary();
                 string itineraryUUID = Guid.NewGuid().ToString();
                 string serviceName = (((ConfigurationManager.AppSettings["EsbServiceName"] != null) && (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["EsbServiceName"]))) ? ConfigurationManager.AppSettings["EsbServiceName"] : _constDefaultServiceName);
 
-                List<Open.MOF.BizTalk.Services.Proxy.ItineraryServices> wcfItineraryServices = new List<Open.MOF.BizTalk.Services.Proxy.ItineraryServices>();
-                List<Open.MOF.BizTalk.Services.Proxy.ItineraryResolvers> wcfItineraryResolvers = new List<Open.MOF.BizTalk.Services.Proxy.ItineraryResolvers>();
+                List<Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.ItineraryServices> wcfItineraryServices = new List<Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.ItineraryServices>();
+                List<Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.ItineraryResolvers> wcfItineraryResolvers = new List<Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.ItineraryResolvers>();
 
-                Open.MOF.BizTalk.Services.Proxy.ItineraryResolvers itinResolvers = new Open.MOF.BizTalk.Services.Proxy.ItineraryResolvers();
+                Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.ItineraryResolvers itinResolvers = new Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.ItineraryResolvers();
                 itinResolvers.serviceId = serviceName + "0";
-                itinResolvers.Value = GetResolverString(toEndpoint);
+                itinResolvers.Value = GetResolverString(message);
                 wcfItineraryResolvers.Add(itinResolvers);
 
-                Open.MOF.BizTalk.Services.Proxy.ItineraryServices services = new Open.MOF.BizTalk.Services.Proxy.ItineraryServices();
-                Open.MOF.BizTalk.Services.Proxy.ItineraryServicesService srv = new Open.MOF.BizTalk.Services.Proxy.ItineraryServicesService();
+                Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.ItineraryServices services = new Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.ItineraryServices();
+                Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.ItineraryServicesService srv = new Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.ItineraryServicesService();
                 srv.type = _constServiceType;
                 srv.name = serviceName;
                 srv.isRequestResponseSpecified = true;
@@ -67,7 +69,7 @@ namespace Open.MOF.BizTalk.Services
                 itinerary.beginTime = String.Empty;
                 itinerary.completeTime = String.Empty;
 
-                itinerary.ServiceInstance = new Open.MOF.BizTalk.Services.Proxy.ItineraryServiceInstance();
+                itinerary.ServiceInstance = new Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.ItineraryServiceInstance();
                 itinerary.ServiceInstance.name = serviceName;
                 itinerary.ServiceInstance.isRequestResponseSpecified = true;
                 itinerary.ServiceInstance.isRequestResponse = _constIsRequestResponse;
@@ -87,24 +89,19 @@ namespace Open.MOF.BizTalk.Services
             return base.ConvertFrom(context, culture, value);
         }
 
-        private string GetResolverString(Open.MOF.Messaging.MessagingEndpoint toEndpoint)
+        private string GetResolverString(Open.MOF.Messaging.FrameworkMessage message)
         {
             //string uddiServerUrl = ConfigurationManager.AppSettings["UddiServerUrl"];
             //if (String.IsNullOrEmpty(_uddiServerUrl))
             //    throw new ApplicationException("Uddi Server Url not properly configured in application settings.");
             //string uddiApplicationName = "SafetyKleen." + message.GetType().Namespace.Replace(".MessageContracts", "");
-
-            if ((toEndpoint == null) || (String.IsNullOrEmpty(toEndpoint.Uri)))
+            if ((message.To == null) || (String.IsNullOrEmpty(message.To.Uri)))
             {
-                // UDDI is no longer allowed in the solution
-                //// Use UDDI to determine recipient
-                //resolverInfo = new UddiResolverInfo(_uddiServerUrl, message.GetType().FullName, uddiApplicationName);
-                //MessageLogger.LogInformationMessage(String.Format("Sending message via UDDI: {0}", message.GetType().FullName));
-                throw new NotImplementedException("Attemp was made to send a message using UDDI.  UDDI is no longer allowed in the solution.");
+                return GetSelectorResolverString(message.MessageXmlType);
             }
             else
             {
-                return GetStaticResolverString(toEndpoint);
+                return GetStaticResolverString(message.To);
             }
         }
 
@@ -155,6 +152,26 @@ namespace Open.MOF.BizTalk.Services
 
             sb.Append("TransformType=");
             sb.Append(_constTransformType);
+            sb.Append(";");
+
+            sb.Append("]]>");
+
+            return sb.ToString();
+        }
+
+        private string GetSelectorResolverString(string messageXmlType)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<![CDATA[");
+            sb.Append("ITINERARY");
+            sb.Append(@":\\");
+
+            sb.Append("name=");
+            sb.Append("Zebra"); // (((!string.IsNullOrEmpty(messageXmlType)) ? messageXmlType : string.Empty));
+            sb.Append(";");
+
+            sb.Append("version=");
+            sb.Append(_constVersionNumber);
             sb.Append(";");
 
             sb.Append("]]>");

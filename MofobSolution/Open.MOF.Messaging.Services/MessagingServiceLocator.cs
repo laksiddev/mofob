@@ -118,6 +118,12 @@ namespace Open.MOF.Messaging.Services
 
         private static IMessagingService TryCreateInstance(ServiceConfigurationElement item)
         {
+            if (item.ServiceType == null)
+            {
+                EventLogUtility.LogWarningMessage(String.Format("WARNING:  There was a problem locating the type definition for the type with the name: {0}", item.ServiceTypeName));
+                return null;
+            }
+
             IMessagingService serviceInstance = null;
             if (typeof(IMessagingService).IsAssignableFrom(item.ServiceType))
             {
@@ -134,7 +140,7 @@ namespace Open.MOF.Messaging.Services
             }
 
             ServiceInterfaceType interfaceType = MessagingService.ServiceInterfaceLookup(item.ServiceInterfaceName);
-            if (!serviceInstance.CanSupportInterface(interfaceType))
+            if ((serviceInstance == null) || (!serviceInstance.CanSupportInterface(interfaceType)))
                 return null;
 
             return serviceInstance;

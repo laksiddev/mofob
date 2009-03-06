@@ -53,12 +53,23 @@
     <Compile Include="Services\Converters\ItineraryConverter.cs" />
     <Compile Include="Services\Converters\FaultMessageConverter.cs" />
     <Compile Include="Services\EsbExceptionService.cs" />
-    <Compile Include="Services\Proxy\BizTalkExceptionInstance.cs" />
-    <Compile Include="Services\Proxy\BizTalkServiceInstance.cs" />
-    <Compile Include="Services\Proxy\BizTalkSubscriptionManagementInstance.cs" />
-    <Compile Include="Services\Proxy\BizTalkTopicInstance.cs" />
+    <Compile Include="Services\MessageHandlers\ExceptionQueuedEsbMessageHandler.cs" />
+    <Compile Include="Services\MessageHandlers\ExceptionEsbMessageHandler.cs" />
+    <Compile Include="Services\MessageHandlers\EsbMessageHandlerFactory.cs" />
+    <Compile Include="Services\MessageHandlers\StaticItineraryQueuedEsbMessageHandler.cs" />
+    <Compile Include="Services\MessageHandlers\GenericItineraryQueuedEsbMessageHandler.cs" />
+    <Compile Include="Services\MessageHandlers\IEsbMessageHandler.cs" />
+    <Compile Include="Services\MessageHandlers\StaticItineraryEsbMessageHandler.cs" />
+    <Compile Include="Services\Proxy\EsbExceptionInstance.cs" />
+    <Compile Include="Services\Proxy\BizTalkTopicInstance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Proxy\ItineraryServicesStaticOneWay.cs" />
+    <Compile Include="Services\Proxy\EsbSubscriptionManagementInstance.cs" />
+    <Compile Include="Services\Proxy\ItineraryServicesGenericOneWay.cs" />
     <Compile Include="Services\PubSubMessagingService.cs" />
     <Compile Include="Services\EsbMessagingService.cs" />
+    <Compile Include="Services\MessageHandlers\GenericItineraryEsbMessageHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Open.MOF.Messaging.Services\Open.MOF.Messaging.Services.csproj">

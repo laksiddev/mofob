@@ -9,12 +9,12 @@
 //------------------------------------------------------------------------------
 
 
-namespace Open.MOF.BizTalk.Services.Proxy
+namespace Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay
 {
 
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://Microsoft.BizTalk.ESB/", ConfigurationName = "ProcessRequest")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://Microsoft.BizTalk.ESB/", ConfigurationName = "Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.ProcessRequest")]
     public interface ProcessRequest
     {
 
@@ -26,14 +26,14 @@ namespace Open.MOF.BizTalk.Services.Proxy
 
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://Microsoft.BizTalk.ESB/", ConfigurationName = "ProcessRequestOneWay")]
-    public interface ProcessRequestOneWay
+    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://Microsoft.BizTalk.ESB/", ConfigurationName = "Open.MOF.BizTalk.Services.Proxy.ItineraryServicesStaticOneWay.ProcessRequestQueued")]
+    public interface ProcessRequestQueued
     {
 
         // CODEGEN: Generating message contract since message SubmitRequest requires protection.
         [System.ServiceModel.OperationContractAttribute(Action = "SubmitRequest", IsOneWay = true)]
         [System.ServiceModel.XmlSerializerFormatAttribute()]
-        void SubmitRequest(SubmitRequestRequestOneWay request);
+        void SubmitRequest(SubmitRequestRequestQueued request);
     }
 
     //This is added from the two way service as the same schema is used....[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -878,7 +878,7 @@ namespace Open.MOF.BizTalk.Services.Proxy
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     //[System.ServiceModel.MessageContractAttribute(IsWrapped = false, ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped = false, ProtectionLevel = System.Net.Security.ProtectionLevel.None)]
-    public partial class SubmitRequestRequestOneWay
+    public partial class SubmitRequestRequestQueued
     {
 
         [System.ServiceModel.MessageHeaderAttribute(Namespace = "http://schemas.microsoft.biztalk.practices.esb.com/itinerary", ProtectionLevel = System.Net.Security.ProtectionLevel.None)]
@@ -888,11 +888,11 @@ namespace Open.MOF.BizTalk.Services.Proxy
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "", ProtectionLevel = System.Net.Security.ProtectionLevel.None, Order = 0)]
         public object part;
 
-        public SubmitRequestRequestOneWay()
+        public SubmitRequestRequestQueued()
         {
         }
 
-        public SubmitRequestRequestOneWay(Itinerary Itinerary, object part)
+        public SubmitRequestRequestQueued(Itinerary Itinerary, object part)
         {
             this.Itinerary = Itinerary;
             this.part = part;
@@ -965,54 +965,54 @@ namespace Open.MOF.BizTalk.Services.Proxy
 
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public interface ProcessRequestOneWayChannel : ProcessRequestOneWay, System.ServiceModel.IClientChannel
+    public interface ProcessRequestQueuedChannel : ProcessRequestQueued, System.ServiceModel.IClientChannel
     {
     }
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class ProcessRequestOneWayClient : System.ServiceModel.ClientBase<ProcessRequestOneWay>, ProcessRequestOneWay
+    public partial class ProcessRequestQueuedClient : System.ServiceModel.ClientBase<ProcessRequestQueued>, ProcessRequestQueued
     {
 
-        public ProcessRequestOneWayClient()
+        public ProcessRequestQueuedClient()
         {
         }
 
-        public ProcessRequestOneWayClient(string endpointConfigurationName)
+        public ProcessRequestQueuedClient(string endpointConfigurationName)
             :
                 base(endpointConfigurationName)
         {
         }
 
-        public ProcessRequestOneWayClient(string endpointConfigurationName, string remoteAddress)
+        public ProcessRequestQueuedClient(string endpointConfigurationName, string remoteAddress)
             :
                 base(endpointConfigurationName, remoteAddress)
         {
         }
 
-        public ProcessRequestOneWayClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress)
+        public ProcessRequestQueuedClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress)
             :
                 base(endpointConfigurationName, remoteAddress)
         {
         }
 
-        public ProcessRequestOneWayClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress)
+        public ProcessRequestQueuedClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress)
             :
                 base(binding, remoteAddress)
         {
         }
 
-        void ProcessRequestOneWay.SubmitRequest(SubmitRequestRequestOneWay request)
+        void ProcessRequestQueued.SubmitRequest(SubmitRequestRequestQueued request)
         {
             base.Channel.SubmitRequest(request);
         }
 
         public void SubmitRequest(Itinerary Itinerary, object part)
         {
-            SubmitRequestRequestOneWay inValue = new SubmitRequestRequestOneWay();
+            SubmitRequestRequestQueued inValue = new SubmitRequestRequestQueued();
             inValue.Itinerary = Itinerary;
             inValue.part = part;
-            ((ProcessRequestOneWay)(this)).SubmitRequest(inValue);
+            ((ProcessRequestQueued)(this)).SubmitRequest(inValue);
         }
     }
 

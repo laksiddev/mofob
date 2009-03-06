@@ -7,14 +7,14 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-namespace Open.MOF.BizTalk.Services.Proxy
+namespace Open.MOF.BizTalk.Services.Proxy.EsbSubscriptionManagementInstance
 {
 
 
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://safety-kleen.org/SubscriptionManagement/ServiceContracts/1/0/", ConfigurationName = "WcfService_OrchestrationProject")]
-    public interface WcfService_OrchestrationProject
+    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://safety-kleen.org/SubscriptionManagement/ServiceContracts/1/0/", ConfigurationName = "Open.MOF.BizTalk.Services.Proxy.EsbSubscriptionManagementInstance.SubscriptionManagement")]
+    public interface SubscriptionManagement
     {
 
         // CODEGEN: Generating message contract since the operation ProcessSubscribe is neither RPC nor document wrapped.
@@ -30,8 +30,8 @@ namespace Open.MOF.BizTalk.Services.Proxy
 
     // duplicated for queued messaging
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://safety-kleen.org/SubscriptionManagement/ServiceContracts/1/0/", ConfigurationName = "WcfService_OrchestrationProjectOneWay")]
-    public interface WcfService_OrchestrationProjectOneWay
+    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://safety-kleen.org/SubscriptionManagement/ServiceContracts/1/0/", ConfigurationName = "Open.MOF.BizTalk.Services.Proxy.EsbSubscriptionManagementInstance.SubscriptionManagementQueued")]
+    public interface SubscriptionManagementQueued
     {
 
         // CODEGEN: Generating message contract since the operation ProcessSubscribe is neither RPC nor document wrapped.
@@ -383,45 +383,45 @@ namespace Open.MOF.BizTalk.Services.Proxy
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public interface WcfService_OrchestrationProjectChannel : WcfService_OrchestrationProject, System.ServiceModel.IClientChannel
+    public interface SubscriptionManagementChannel : SubscriptionManagement, System.ServiceModel.IClientChannel
     {
     }
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class WcfService_OrchestrationProjectClient : System.ServiceModel.ClientBase<WcfService_OrchestrationProject>, WcfService_OrchestrationProject
+    public partial class SubscriptionManagementClient : System.ServiceModel.ClientBase<SubscriptionManagement>, SubscriptionManagement
     {
 
-        public WcfService_OrchestrationProjectClient()
+        public SubscriptionManagementClient()
         {
         }
 
-        public WcfService_OrchestrationProjectClient(string endpointConfigurationName)
+        public SubscriptionManagementClient(string endpointConfigurationName)
             :
                 base(endpointConfigurationName)
         {
         }
 
-        public WcfService_OrchestrationProjectClient(string endpointConfigurationName, string remoteAddress)
+        public SubscriptionManagementClient(string endpointConfigurationName, string remoteAddress)
             :
                 base(endpointConfigurationName, remoteAddress)
         {
         }
 
-        public WcfService_OrchestrationProjectClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress)
+        public SubscriptionManagementClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress)
             :
                 base(endpointConfigurationName, remoteAddress)
         {
         }
 
-        public WcfService_OrchestrationProjectClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress)
+        public SubscriptionManagementClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress)
             :
                 base(binding, remoteAddress)
         {
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ProcessSubscribeResponse WcfService_OrchestrationProject.ProcessSubscribe(ProcessSubscribeRequest request)
+        ProcessSubscribeResponse SubscriptionManagement.ProcessSubscribe(ProcessSubscribeRequest request)
         {
             return base.Channel.ProcessSubscribe(request);
         }
@@ -430,11 +430,11 @@ namespace Open.MOF.BizTalk.Services.Proxy
         {
             ProcessSubscribeRequest inValue = new ProcessSubscribeRequest();
             inValue.SubscribeRequestMessage = SubscribeRequestMessage;
-            ProcessSubscribeResponse retVal = ((WcfService_OrchestrationProject)(this)).ProcessSubscribe(inValue);
+            ProcessSubscribeResponse retVal = ((SubscriptionManagement)(this)).ProcessSubscribe(inValue);
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ProcessUnsubscribeResponse WcfService_OrchestrationProject.ProcessUnsubscribe(ProcessUnsubscribeRequest request)
+        ProcessUnsubscribeResponse SubscriptionManagement.ProcessUnsubscribe(ProcessUnsubscribeRequest request)
         {
             return base.Channel.ProcessUnsubscribe(request);
         }
@@ -443,45 +443,45 @@ namespace Open.MOF.BizTalk.Services.Proxy
         {
             ProcessUnsubscribeRequest inValue = new ProcessUnsubscribeRequest();
             inValue.UnsubscribeRequestMessage = UnsubscribeRequestMessage;
-            ProcessUnsubscribeResponse retVal = ((WcfService_OrchestrationProject)(this)).ProcessUnsubscribe(inValue);
+            ProcessUnsubscribeResponse retVal = ((SubscriptionManagement)(this)).ProcessUnsubscribe(inValue);
         }
     }
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class WcfService_OrchestrationProjectOneWayClient : System.ServiceModel.ClientBase<WcfService_OrchestrationProjectOneWay>, WcfService_OrchestrationProjectOneWay
+    public partial class SubscriptionManagementQueuedClient : System.ServiceModel.ClientBase<SubscriptionManagementQueued>, SubscriptionManagementQueued
     {
 
-        public WcfService_OrchestrationProjectOneWayClient()
+        public SubscriptionManagementQueuedClient()
         {
         }
 
-        public WcfService_OrchestrationProjectOneWayClient(string endpointConfigurationName)
+        public SubscriptionManagementQueuedClient(string endpointConfigurationName)
             :
                 base(endpointConfigurationName)
         {
         }
 
-        public WcfService_OrchestrationProjectOneWayClient(string endpointConfigurationName, string remoteAddress)
+        public SubscriptionManagementQueuedClient(string endpointConfigurationName, string remoteAddress)
             :
                 base(endpointConfigurationName, remoteAddress)
         {
         }
 
-        public WcfService_OrchestrationProjectOneWayClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress)
+        public SubscriptionManagementQueuedClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress)
             :
                 base(endpointConfigurationName, remoteAddress)
         {
         }
 
-        public WcfService_OrchestrationProjectOneWayClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress)
+        public SubscriptionManagementQueuedClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress)
             :
                 base(binding, remoteAddress)
         {
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        void WcfService_OrchestrationProjectOneWay.ProcessSubscribe(ProcessSubscribeRequest request)
+        void SubscriptionManagementQueued.ProcessSubscribe(ProcessSubscribeRequest request)
         {
             base.Channel.ProcessSubscribe(request);
         }
@@ -490,11 +490,11 @@ namespace Open.MOF.BizTalk.Services.Proxy
         {
             ProcessSubscribeRequest inValue = new ProcessSubscribeRequest();
             inValue.SubscribeRequestMessage = SubscribeRequestMessage;
-            ((WcfService_OrchestrationProjectOneWay)(this)).ProcessSubscribe(inValue);
+            ((SubscriptionManagementQueued)(this)).ProcessSubscribe(inValue);
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        void WcfService_OrchestrationProjectOneWay.ProcessUnsubscribe(ProcessUnsubscribeRequest request)
+        void SubscriptionManagementQueued.ProcessUnsubscribe(ProcessUnsubscribeRequest request)
         {
             base.Channel.ProcessUnsubscribe(request);
         }
@@ -503,7 +503,7 @@ namespace Open.MOF.BizTalk.Services.Proxy
         {
             ProcessUnsubscribeRequest inValue = new ProcessUnsubscribeRequest();
             inValue.UnsubscribeRequestMessage = UnsubscribeRequestMessage;
-            ((WcfService_OrchestrationProjectOneWay)(this)).ProcessUnsubscribe(inValue);
+            ((SubscriptionManagementQueued)(this)).ProcessUnsubscribe(inValue);
         }
     }
 

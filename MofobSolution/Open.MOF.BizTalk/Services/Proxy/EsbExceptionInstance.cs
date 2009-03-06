@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Open.MOF.BizTalk.Services.Proxy
+namespace Open.MOF.BizTalk.Services.Proxy.EsbExceptionInstance
 {
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://microsoft.biztalk.practices.esb.com/exceptionhandling/", ConfigurationName = "ExceptionHandling")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://microsoft.biztalk.practices.esb.com/exceptionhandling/", ConfigurationName = "Open.MOF.BizTalk.Services.Proxy.EsbExceptionInstance.ExceptionHandling")]
     public interface ExceptionHandling
     {
 
@@ -23,8 +23,8 @@ namespace Open.MOF.BizTalk.Services.Proxy
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://microsoft.biztalk.practices.esb.com/exceptionhandling/", ConfigurationName = "ExceptionHandlingOneWay")]
-    public interface ExceptionHandlingOneWay
+    [System.ServiceModel.ServiceContractAttribute(Namespace = "http://microsoft.biztalk.practices.esb.com/exceptionhandling/", ConfigurationName = "Open.MOF.BizTalk.Services.Proxy.EsbExceptionInstance.ExceptionHandlingQueued")]
+    public interface ExceptionHandlingQueued
     {
 
         // CODEGEN: Generating message contract since the operation SubmitFault is neither RPC nor document wrapped.
@@ -787,45 +787,45 @@ namespace Open.MOF.BizTalk.Services.Proxy
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public interface ExceptionHandlingOneWayChannel : ExceptionHandlingOneWay, System.ServiceModel.IClientChannel
+    public interface ExceptionHandlingQueuedChannel : ExceptionHandlingQueued, System.ServiceModel.IClientChannel
     {
     }
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class ExceptionHandlingOneWayClient : System.ServiceModel.ClientBase<ExceptionHandlingOneWay>, ExceptionHandlingOneWay
+    public partial class ExceptionHandlingQueuedClient : System.ServiceModel.ClientBase<ExceptionHandlingQueued>, ExceptionHandlingQueued
     {
 
-        public ExceptionHandlingOneWayClient()
+        public ExceptionHandlingQueuedClient()
         {
         }
 
-        public ExceptionHandlingOneWayClient(string endpointConfigurationName)
+        public ExceptionHandlingQueuedClient(string endpointConfigurationName)
             :
                 base(endpointConfigurationName)
         {
         }
 
-        public ExceptionHandlingOneWayClient(string endpointConfigurationName, string remoteAddress)
+        public ExceptionHandlingQueuedClient(string endpointConfigurationName, string remoteAddress)
             :
                 base(endpointConfigurationName, remoteAddress)
         {
         }
 
-        public ExceptionHandlingOneWayClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress)
+        public ExceptionHandlingQueuedClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress)
             :
                 base(endpointConfigurationName, remoteAddress)
         {
         }
 
-        public ExceptionHandlingOneWayClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress)
+        public ExceptionHandlingQueuedClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress)
             :
                 base(binding, remoteAddress)
         {
         }
 
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        void ExceptionHandlingOneWay.SubmitFault(SubmitFaultRequest request)
+        void ExceptionHandlingQueued.SubmitFault(SubmitFaultRequest request)
         {
             base.Channel.SubmitFault(request);
         }
@@ -834,7 +834,7 @@ namespace Open.MOF.BizTalk.Services.Proxy
         {
             SubmitFaultRequest inValue = new SubmitFaultRequest();
             inValue.FaultMessage = FaultMessage;
-            ((ExceptionHandlingOneWay)(this)).SubmitFault(inValue);
+            ((ExceptionHandlingQueued)(this)).SubmitFault(inValue);
         }
     }
 

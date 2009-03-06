@@ -127,7 +127,8 @@ namespace Open.MOF.BizTalk.Test
 
             Assert.IsNotNull(service, "No item was returned.");
             Assert.AreEqual(service.GetType(), typeof(EsbMessagingService), "An incorrect type was returned.");
-            Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "myTransactionServiceBinding", "An incorrect item was returned.");
+            string endpointName = ((MessagingService)service).ChannelEndpointName;
+            Assert.IsTrue(((endpointName == "WSHttpBinding_ITwoWayAsyncVoidTopic") || (endpointName == "WSHttpBinding_ITwoWayAsyncVoidAddressed")), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
@@ -176,7 +177,8 @@ namespace Open.MOF.BizTalk.Test
 
             Assert.IsNotNull(service, "No item was returned.");
             Assert.AreEqual(service.GetType(), typeof(EsbMessagingService), "An incorrect type was returned.");
-            Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "myTransactionServiceBinding", "An incorrect item was returned.");
+            string endpointName = ((MessagingService)service).ChannelEndpointName;
+            Assert.IsTrue(((endpointName == "WSHttpBinding_ITwoWayAsyncVoidTopic") || (endpointName == "WSHttpBinding_ITwoWayAsyncVoidAddressed")), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
@@ -212,6 +214,51 @@ namespace Open.MOF.BizTalk.Test
             Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
             Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
+        }
+
+        [TestMethod]
+        public void ServiceCanSupportMessageTest()
+        {
+            // Try a topic (not addressed) message first
+            TestTransactionRequestMessage message = new TestTransactionRequestMessage();
+
+            IMessagingService service = MessagingService.CreateInstance(message);
+
+            Assert.IsNotNull(service, "No item was returned.");
+            Assert.AreEqual(service.GetType(), typeof(EsbMessagingService), "An incorrect type was returned.");
+            Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "WSHttpBinding_ITwoWayAsyncVoidTopic", "An incorrect item was returned.");
+            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
+            Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
+            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
+            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
+
+            System.Reflection.MethodInfo method = service.GetType().GetMethod("CanSupportMessage", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.InvokeMethod, null, new Type[] { typeof(FrameworkMessage) }, null);
+
+            Assert.IsNotNull(method, "Method could not be found.");
+
+            bool canServiceSupportMessage = (bool)method.Invoke(service, new object[] { message });
+            Assert.IsTrue(canServiceSupportMessage, "Service is not properly configured.");
+
+            service.Dispose();
+
+            // Now try an addressed message 
+            message.To = new MessagingEndpoint("http://somewhere.com/SomeWebService", "http://somewhere.com/SomeWebServic/SomeMethodToCall/");
+            service = MessagingService.CreateInstance(message);
+
+            Assert.IsNotNull(service, "No item was returned.");
+            Assert.AreEqual(service.GetType(), typeof(EsbMessagingService), "An incorrect type was returned.");
+            Assert.AreEqual(((MessagingService)service).ChannelEndpointName, "WSHttpBinding_ITwoWayAsyncVoidAddressed", "An incorrect item was returned.");
+            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.DataService)), "An incorrect item was returned.");
+            Assert.IsTrue((service.CanSupportInterface(ServiceInterfaceType.TransactionService)), "An incorrect item was returned.");
+            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.ExceptionService)), "An incorrect item was returned.");
+            Assert.IsFalse((service.CanSupportInterface(ServiceInterfaceType.SubscriptionService)), "An incorrect item was returned.");
+
+            method = service.GetType().GetMethod("CanSupportMessage", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.InvokeMethod, null, new Type[] { typeof(FrameworkMessage) }, null);
+
+            Assert.IsNotNull(method, "Method could not be found.");
+
+            canServiceSupportMessage = (bool)method.Invoke(service, new object[] { message });
+            Assert.IsTrue(canServiceSupportMessage, "Service is not properly configured.");
         }
 
         #region Additional test attributes

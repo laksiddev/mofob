@@ -41,15 +41,15 @@ Global
 		SccProjectUniqueName4 = Open.MOF.BizTalk.Test\\Open.MOF.BizTalk.Test.csproj
 		SccProjectName4 = Open.MOF.BizTalk.Test
 		SccLocalPath4 = Open.MOF.BizTalk.Test
-		SccProjectUniqueName5 = Open.MOF.SchemaReferenceUtil\\Open.MOF.SchemaReferenceUtil.csproj
-		SccProjectName5 = Open.MOF.SchemaReferenceUtil
-		SccLocalPath5 = Open.MOF.SchemaReferenceUtil
-		SccProjectUniqueName6 = Open.MOF.Messaging.Configuration\\Open.MOF.Messaging.Configuration.csproj
-		SccProjectName6 = Open.MOF.Messaging.Configuration
-		SccLocalPath6 = Open.MOF.Messaging.Configuration
-		SccProjectUniqueName7 = Open.MOF.Messaging.Services\\Open.MOF.Messaging.Services.csproj
-		SccProjectName7 = Open.MOF.Messaging.Services
-		SccLocalPath7 = Open.MOF.Messaging.Services
+		SccProjectUniqueName5 = Open.MOF.Messaging.Configuration\\Open.MOF.Messaging.Configuration.csproj
+		SccProjectName5 = Open.MOF.Messaging.Configuration
+		SccLocalPath5 = Open.MOF.Messaging.Configuration
+		SccProjectUniqueName6 = Open.MOF.Messaging.Services\\Open.MOF.Messaging.Services.csproj
+		SccProjectName6 = Open.MOF.Messaging.Services
+		SccLocalPath6 = Open.MOF.Messaging.Services
+		SccProjectUniqueName7 = Open.MOF.SchemaReferenceUtil\\Open.MOF.SchemaReferenceUtil.csproj
+		SccProjectName7 = Open.MOF.SchemaReferenceUtil
+		SccLocalPath7 = Open.MOF.SchemaReferenceUtil
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = MofobSolution.vsmdi

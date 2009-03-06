@@ -20,10 +20,10 @@ namespace Open.MOF.BizTalk.Services
             {
                 Open.MOF.Messaging.FaultMessage localFaultMessage = (Open.MOF.Messaging.FaultMessage)value;
 
-                Open.MOF.BizTalk.Services.Proxy.FaultMessage proxyFaultMessage = new Open.MOF.BizTalk.Services.Proxy.FaultMessage();
+                Open.MOF.BizTalk.Services.Proxy.EsbExceptionInstance.FaultMessage proxyFaultMessage = new Open.MOF.BizTalk.Services.Proxy.EsbExceptionInstance.FaultMessage();
 
                 // Fault Message Header
-                proxyFaultMessage.Header = new Open.MOF.BizTalk.Services.Proxy.FaultMessageHeader();
+                proxyFaultMessage.Header = new Open.MOF.BizTalk.Services.Proxy.EsbExceptionInstance.FaultMessageHeader();
                 proxyFaultMessage.Header.FaultGenerator = "ESBExceptionService";
                 proxyFaultMessage.Header.FaultCode = "0";
                 proxyFaultMessage.Header.ErrorType = localFaultMessage.ExceptionDetail.ExceptionType;
@@ -40,7 +40,7 @@ namespace Open.MOF.BizTalk.Services
                 proxyFaultMessage.Header.Scope = "";
 
                 // Fault Message Exception Object
-                proxyFaultMessage.ExceptionObject = new Open.MOF.BizTalk.Services.Proxy.FaultMessageExceptionObject();
+                proxyFaultMessage.ExceptionObject = new Open.MOF.BizTalk.Services.Proxy.EsbExceptionInstance.FaultMessageExceptionObject();
                 proxyFaultMessage.ExceptionObject.Type = localFaultMessage.ExceptionDetail.ExceptionType;
                 proxyFaultMessage.ExceptionObject.Source = localFaultMessage.ExceptionDetail.Source;
                 proxyFaultMessage.ExceptionObject.TargetSite = localFaultMessage.ExceptionDetail.TargetSite;

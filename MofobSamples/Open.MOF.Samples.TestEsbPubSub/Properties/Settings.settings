@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Open.MOF.Samples.TestEsbPubSub.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ProcessMessageServiceUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://demobiztalk.demo.local:8001/MOF.TestDataService/TestDataService.svc</Value>
+    </Setting>
+    <Setting Name="ProcessMessageServiceAction" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://mof.open/Samples/ServiceContracts/1/0/ITestDataService/ProcessTestPubSubRequest</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

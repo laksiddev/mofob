@@ -1,0 +1,9 @@
+C:\JKita\Code\MofobSolution\Open.MOF.BizTalk.ItineraryLookupService\obj\Debug\ResolveAssemblyReference.cache
+C:\JKita\Code\MofobSolution\Open.MOF.BizTalk.ItineraryLookupService\obj\Debug\Open.MOF.BizTalk.ItineraryLookupService.dll
+C:\JKita\Code\MofobSolution\Open.MOF.BizTalk.ItineraryLookupService\obj\Debug\Open.MOF.BizTalk.ItineraryLookupService.pdb
+C:\JKita\Code\MofobSolution\Open.MOF.BizTalk.ItineraryLookupService\bin\Open.MOF.BizTalk.ItineraryLookupService.dll
+C:\JKita\Code\MofobSolution\Open.MOF.BizTalk.ItineraryLookupService\bin\Open.MOF.BizTalk.ItineraryLookupService.pdb
+C:\JKita\Code\MofobSolution\Open.MOF.BizTalk.ItineraryLookupService\bin\Open.MOF.BizTalk.dll
+C:\JKita\Code\MofobSolution\Open.MOF.BizTalk.ItineraryLookupService\bin\Open.MOF.Messaging.dll
+C:\JKita\Code\MofobSolution\Open.MOF.BizTalk.ItineraryLookupService\bin\Open.MOF.BizTalk.pdb
+C:\JKita\Code\MofobSolution\Open.MOF.BizTalk.ItineraryLookupService\bin\Open.MOF.Messaging.pdb

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<itineraryModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="b1bba5e5-1abd-4e43-94bd-dfcc613dfd32" objectExtenderContainer="&lt;?xml version=&quot;1.0&quot;?&gt;&#xD;&#xA;&lt;ObjectExtenderContainer xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;&#xD;&#xA;  &lt;ObjectExtenders xsi:type=&quot;XmlExporter&quot;&gt;&#xD;&#xA;    &lt;File&gt;C:\Users\localadmin\Documents\My Itineraries\Open.xml&lt;/File&gt;&#xD;&#xA;  &lt;/ObjectExtenders&gt;&#xD;&#xA;  &lt;ObjectExtenders xsi:type=&quot;DbExporter&quot;&gt;&#xD;&#xA;    &lt;Status&gt;Deployed&lt;/Status&gt;&#xD;&#xA;  &lt;/ObjectExtenders&gt;&#xD;&#xA;&lt;/ObjectExtenderContainer&gt;" name="TestTransactionSubmitMessageItinerary" isRequestResponse="false" exportMode="Strict" modelExporter="Exporter|Database Itinerary Exporter|{2ed729f7-1700-4755-a307-d83a358390fa}" encryptionCertificate="My;CurrentUser;" requireEncryptionCertificate="false" xmlns="http://schemas.microsoft.com/dsltools/ItineraryDsl">
+  <itineraryServices>
+    <itineraryModelHasItineraryServices Id="093814c1-6045-4853-8d4d-f9753a4ff89a">
+      <itineraryService Id="99f3879a-8533-4343-ad8b-d10623f7a38d" objectExtenderContainer="&lt;?xml version=&quot;1.0&quot;?&gt;&#xD;&#xA;&lt;ObjectExtenderContainer xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;&#xD;&#xA;  &lt;ObjectExtenders xsi:type=&quot;MessagingItineraryService&quot;&gt;&#xD;&#xA;    &lt;ServiceName&gt;Microsoft.Practices.ESB.Services.Routing&lt;/ServiceName&gt;&#xD;&#xA;    &lt;ServiceId&gt;6a594d80-91f7-4e10-a203-b3c999b0f55e&lt;/ServiceId&gt;&#xD;&#xA;    &lt;ServiceType&gt;Messaging&lt;/ServiceType&gt;&#xD;&#xA;    &lt;Container&gt;&#xD;&#xA;      &lt;Name&gt;OnRamp1&lt;/Name&gt;&#xD;&#xA;      &lt;Handler&gt;receiveInbound&lt;/Handler&gt;&#xD;&#xA;    &lt;/Container&gt;&#xD;&#xA;  &lt;/ObjectExtenders&gt;&#xD;&#xA;&lt;/ObjectExtenderContainer&gt;" name="Route" isRequestResponse="false" itineraryServiceExtender="Messaging|Messaging Extender|{a3c184e3-04b5-4aa0-bef4-a1b41f3d9e76}" isTrackingEnabled="false">
+        <resolvers>
+          <itineraryServiceHasResolvers Id="0af27c19-4237-40dd-99b8-e52a3f36ec56">
+            <resolver Id="bd15d7c6-1dfc-48fb-bdea-ba6abf2f5471" objectExtenderContainer="&lt;?xml version=&quot;1.0&quot;?&gt;&lt;ObjectExtenderContainer xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;&lt;ObjectExtenders xsi:type=&quot;StaticResolver&quot;&gt;&lt;TransportType&gt;WCF-WSHttp&lt;/TransportType&gt;&lt;TransportLocation&gt;http://jkita34943:8001/MOF.SampleService/TestDataService.svc&lt;/TransportLocation&gt;&lt;Action&gt;http://mof.open/Samples/ServiceContracts/1/0/ITestDataService/ProcessTestTransactionSubmit&lt;/Action&gt;&lt;EndpointConfig&gt;MessageEncoding=None&amp;amp;TransportProtectionLevel=None&amp;amp;SecurityMode=None&lt;/EndpointConfig&gt;&lt;JaxRpcResponse&gt;false&lt;/JaxRpcResponse&gt;&lt;MessageExchangePattern&gt;One-Way&lt;/MessageExchangePattern&gt;&lt;TargetNamespace&gt;http://mof.open/Samples/ServiceContracts/1/0/&lt;/TargetNamespace&gt;&lt;TransformType&gt;(None) &lt;/TransformType&gt;&lt;/ObjectExtenders&gt;&lt;/ObjectExtenderContainer&gt;" name="Static Resolver" resolverImplementation="STATIC|Static Resolver Extension|{5761a0bc-cbe3-47e0-adf7-bb10c4e226fe}" />
+          </itineraryServiceHasResolvers>
+        </resolvers>
+        <targetItineraryService>
+          <itineraryServiceReferencesTargetItineraryService Id="fcac82c3-a38e-4ab6-ac25-261919261c74">
+            <itineraryServiceMoniker Id="bbbf1437-2f76-48c1-abfe-7f64d17fe869" />
+          </itineraryServiceReferencesTargetItineraryService>
+        </targetItineraryService>
+      </itineraryService>
+    </itineraryModelHasItineraryServices>
+    <itineraryModelHasItineraryServices Id="d4d86ae1-4705-4ae5-af77-81887078fb70">
+      <itineraryService Id="bbbf1437-2f76-48c1-abfe-7f64d17fe869" objectExtenderContainer="&lt;?xml version=&quot;1.0&quot;?&gt;&#xD;&#xA;&lt;ObjectExtenderContainer xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;&#xD;&#xA;  &lt;ObjectExtenders xsi:type=&quot;OffRampItineraryService&quot;&gt;&#xD;&#xA;    &lt;OffRamp&gt;&#xD;&#xA;      &lt;Name&gt;KBI OneWay OffRamp&lt;/Name&gt;&#xD;&#xA;      &lt;Handler&gt;sendTransmit&lt;/Handler&gt;&#xD;&#xA;    &lt;/OffRamp&gt;&#xD;&#xA;    &lt;ServiceId&gt;03f3c0c5e08441f9bb62eaa1777fe76d&lt;/ServiceId&gt;&#xD;&#xA;    &lt;ServiceName&gt;KBIItineraryServices&lt;/ServiceName&gt;&#xD;&#xA;    &lt;ServiceType&gt;Messaging&lt;/ServiceType&gt;&#xD;&#xA;    &lt;BiztalkApplication&gt;KBI Integration Application&lt;/BiztalkApplication&gt;&#xD;&#xA;    &lt;SendPort&gt;KBIIntegrationDynamicSendPort&lt;/SendPort&gt;&#xD;&#xA;    &lt;SendPipeline&gt;Microsoft.Practices.ESB.Itinerary.Pipelines.ItinerarySendPassthrough, Microsoft.Practices.ESB.Itinerary.Pipelines, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35&lt;/SendPipeline&gt;&#xD;&#xA;    &lt;ServiceState&gt;pending&lt;/ServiceState&gt;&#xD;&#xA;    &lt;IsRequestResponse&gt;false&lt;/IsRequestResponse&gt;&#xD;&#xA;    &lt;IsTwoWay&gt;false&lt;/IsTwoWay&gt;&#xD;&#xA;  &lt;/ObjectExtenders&gt;&#xD;&#xA;&lt;/ObjectExtenderContainer&gt;" name="Invoke" isRequestResponse="false" itineraryServiceExtender="Off-Ramp|Off-Ramp Extender|{ca067e6f-6193-4add-9964-903575dedca9}" isTrackingEnabled="false">
+        <requestForOffRamp>
+          <requestReferencedByOffRamp Id="2b60a382-189d-4786-84d9-58cf9ee7b9b6">
+            <offRampMoniker Id="f78442ea-1a5b-4de5-8ce0-d36ac13fdc51" />
+          </requestReferencedByOffRamp>
+        </requestForOffRamp>
+      </itineraryService>
+    </itineraryModelHasItineraryServices>
+  </itineraryServices>
+  <offRamps>
+    <itineraryModelHasOffRamps Id="162a4681-b3e4-4405-b187-9cdc4a8e8c2e">
+      <offRamp Id="f78442ea-1a5b-4de5-8ce0-d36ac13fdc51" objectExtenderContainer="&lt;?xml version=&quot;1.0&quot;?&gt;&#xD;&#xA;&lt;ObjectExtenderContainer xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;&#xD;&#xA;  &lt;ObjectExtenders xsi:type=&quot;OffRampExtender&quot;&gt;&#xD;&#xA;    &lt;BiztalkApplication&gt;KBI Integration Application&lt;/BiztalkApplication&gt;&#xD;&#xA;    &lt;SendPort&gt;KBIIntegrationDynamicSendPort&lt;/SendPort&gt;&#xD;&#xA;    &lt;SendPipeline&gt;Microsoft.Practices.ESB.Itinerary.Pipelines.ItinerarySendPassthrough, Microsoft.Practices.ESB.Itinerary.Pipelines, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35&lt;/SendPipeline&gt;&#xD;&#xA;    &lt;ServiceType&gt;Messaging&lt;/ServiceType&gt;&#xD;&#xA;    &lt;ServiceName&gt;KBIItineraryServices&lt;/ServiceName&gt;&#xD;&#xA;    &lt;ServiceState&gt;pending&lt;/ServiceState&gt;&#xD;&#xA;    &lt;IsRequestResponse&gt;false&lt;/IsRequestResponse&gt;&#xD;&#xA;    &lt;ServiceId&gt;03f3c0c5e08441f9bb62eaa1777fe76d&lt;/ServiceId&gt;&#xD;&#xA;    &lt;IsTwoWay&gt;false&lt;/IsTwoWay&gt;&#xD;&#xA;  &lt;/ObjectExtenders&gt;&#xD;&#xA;&lt;/ObjectExtenderContainer&gt;" name="KBI OneWay OffRamp" extender="Off-Ramp|Off-Ramp ESB Extender|{2c831931-631e-4a3e-b0d9-59c53ec08348}" />
+    </itineraryModelHasOffRamps>
+  </offRamps>
+  <onRamp>
+    <itineraryModelHasOnRamp Id="d6836dc2-5129-4d17-8967-6bc1070d225c">
+      <onRamp Id="52a397be-256f-430e-a8cb-519fea047482" objectExtenderContainer="&lt;?xml version=&quot;1.0&quot;?&gt;&#xD;&#xA;&lt;ObjectExtenderContainer xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;&#xD;&#xA;  &lt;ObjectExtenders xsi:type=&quot;OnRampExtender&quot;&gt;&#xD;&#xA;    &lt;BiztalkApplication&gt;Microsoft.Practices.ESB&lt;/BiztalkApplication&gt;&#xD;&#xA;    &lt;ReceivePort&gt;OnRamp.Itinerary&lt;/ReceivePort&gt;&#xD;&#xA;    &lt;IsTwoWay&gt;false&lt;/IsTwoWay&gt;&#xD;&#xA;  &lt;/ObjectExtenders&gt;&#xD;&#xA;&lt;/ObjectExtenderContainer&gt;" name="KBI OneWay OnRamp" extender="On-Ramp|On-Ramp ESB Extender|{3d237d78-fd66-46cd-b892-5a6e1e8ea06d}">
+        <receiveHandlers>
+          <esbServiceReferencesReceiveHandlers Id="558e421e-3b7a-48c5-a3b8-c463dd2a662f">
+            <itineraryServiceMoniker Id="99f3879a-8533-4343-ad8b-d10623f7a38d" />
+          </esbServiceReferencesReceiveHandlers>
+        </receiveHandlers>
+        <request>
+          <onRampReferencesRequest Id="39008f77-fdff-49f5-819a-12f43e828f39">
+            <itineraryServiceMoniker Id="99f3879a-8533-4343-ad8b-d10623f7a38d" />
+          </onRampReferencesRequest>
+        </request>
+      </onRamp>
+    </itineraryModelHasOnRamp>
+  </onRamp>
+</itineraryModel>

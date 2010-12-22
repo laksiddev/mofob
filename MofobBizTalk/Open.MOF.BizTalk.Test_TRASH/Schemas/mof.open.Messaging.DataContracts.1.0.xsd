@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://mof.open/Messaging/DataContracts/1/0/" elementFormDefault="qualified" targetNamespace="http://mof.open/Messaging/DataContracts/1/0/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" schemaLocation="schemas.microsoft.com.2003.10.Serialization.xsd" />
+  <xs:element name="messageId" nillable="true" xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/" type="q1:guid" />
+  <xs:complexType name="MessageEndpoint">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="uri" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="action" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MessageEndpoint" nillable="true" type="tns:MessageEndpoint" />
+  <xs:element name="To" nillable="true" type="tns:MessageEndpoint" />
+  <xs:element name="From" nillable="true" type="tns:MessageEndpoint" />
+  <xs:element name="ReplyTo" nillable="true" type="tns:MessageEndpoint" />
+  <xs:element name="senderDescription" nillable="true" type="xs:string" />
+  <xs:element name="relatedMessageId" nillable="true" xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/" type="q2:guid" />
+</xs:schema>

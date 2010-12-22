@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://mof.open/MessagingTests/MessageContracts/1/0/" elementFormDefault="qualified" targetNamespace="http://mof.open/MessagingTests/MessageContracts/1/0/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://mof.open/Messaging/DataContracts/1/0/" schemaLocation="mof.open.Messaging.DataContracts.1.0.xsd" />
+  <xs:element name="TestDataRequestMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" xmlns:q1="http://mof.open/Messaging/DataContracts/1/0/" ref="q1:messageId" />
+        <xs:element minOccurs="0" xmlns:q2="http://mof.open/Messaging/DataContracts/1/0/" ref="q2:To" />
+        <xs:element minOccurs="0" xmlns:q3="http://mof.open/Messaging/DataContracts/1/0/" ref="q3:From" />
+        <xs:element minOccurs="0" xmlns:q4="http://mof.open/Messaging/DataContracts/1/0/" ref="q4:ReplyTo" />
+        <xs:element minOccurs="0" xmlns:q5="http://mof.open/Messaging/DataContracts/1/0/" ref="q5:senderDescription" />
+        <xs:element minOccurs="0" xmlns:q6="http://mof.open/Messaging/DataContracts/1/0/" ref="q6:relatedMessageId" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestDataResponseMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" xmlns:q7="http://mof.open/Messaging/DataContracts/1/0/" ref="q7:messageId" />
+        <xs:element minOccurs="0" xmlns:q8="http://mof.open/Messaging/DataContracts/1/0/" ref="q8:To" />
+        <xs:element minOccurs="0" xmlns:q9="http://mof.open/Messaging/DataContracts/1/0/" ref="q9:From" />
+        <xs:element minOccurs="0" xmlns:q10="http://mof.open/Messaging/DataContracts/1/0/" ref="q10:ReplyTo" />
+        <xs:element minOccurs="0" xmlns:q11="http://mof.open/Messaging/DataContracts/1/0/" ref="q11:senderDescription" />
+        <xs:element minOccurs="0" xmlns:q12="http://mof.open/Messaging/DataContracts/1/0/" ref="q12:relatedMessageId" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestTransactionRequestMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" xmlns:q13="http://mof.open/Messaging/DataContracts/1/0/" ref="q13:messageId" />
+        <xs:element minOccurs="0" xmlns:q14="http://mof.open/Messaging/DataContracts/1/0/" ref="q14:To" />
+        <xs:element minOccurs="0" xmlns:q15="http://mof.open/Messaging/DataContracts/1/0/" ref="q15:From" />
+        <xs:element minOccurs="0" xmlns:q16="http://mof.open/Messaging/DataContracts/1/0/" ref="q16:ReplyTo" />
+        <xs:element minOccurs="0" xmlns:q17="http://mof.open/Messaging/DataContracts/1/0/" ref="q17:senderDescription" />
+        <xs:element minOccurs="0" xmlns:q18="http://mof.open/Messaging/DataContracts/1/0/" ref="q18:relatedMessageId" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestTransactionResponseMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="context" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" xmlns:q19="http://mof.open/Messaging/DataContracts/1/0/" ref="q19:messageId" />
+        <xs:element minOccurs="0" xmlns:q20="http://mof.open/Messaging/DataContracts/1/0/" ref="q20:To" />
+        <xs:element minOccurs="0" xmlns:q21="http://mof.open/Messaging/DataContracts/1/0/" ref="q21:From" />
+        <xs:element minOccurs="0" xmlns:q22="http://mof.open/Messaging/DataContracts/1/0/" ref="q22:ReplyTo" />
+        <xs:element minOccurs="0" xmlns:q23="http://mof.open/Messaging/DataContracts/1/0/" ref="q23:senderDescription" />
+        <xs:element minOccurs="0" xmlns:q24="http://mof.open/Messaging/DataContracts/1/0/" ref="q24:relatedMessageId" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestTransactionSubmitMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" xmlns:q25="http://mof.open/Messaging/DataContracts/1/0/" ref="q25:messageId" />
+        <xs:element minOccurs="0" xmlns:q26="http://mof.open/Messaging/DataContracts/1/0/" ref="q26:To" />
+        <xs:element minOccurs="0" xmlns:q27="http://mof.open/Messaging/DataContracts/1/0/" ref="q27:From" />
+        <xs:element minOccurs="0" xmlns:q28="http://mof.open/Messaging/DataContracts/1/0/" ref="q28:ReplyTo" />
+        <xs:element minOccurs="0" xmlns:q29="http://mof.open/Messaging/DataContracts/1/0/" ref="q29:senderDescription" />
+        <xs:element minOccurs="0" xmlns:q30="http://mof.open/Messaging/DataContracts/1/0/" ref="q30:relatedMessageId" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestPubSubRequestMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" xmlns:q31="http://mof.open/Messaging/DataContracts/1/0/" ref="q31:messageId" />
+        <xs:element minOccurs="0" xmlns:q32="http://mof.open/Messaging/DataContracts/1/0/" ref="q32:To" />
+        <xs:element minOccurs="0" xmlns:q33="http://mof.open/Messaging/DataContracts/1/0/" ref="q33:From" />
+        <xs:element minOccurs="0" xmlns:q34="http://mof.open/Messaging/DataContracts/1/0/" ref="q34:ReplyTo" />
+        <xs:element minOccurs="0" xmlns:q35="http://mof.open/Messaging/DataContracts/1/0/" ref="q35:senderDescription" />
+        <xs:element minOccurs="0" xmlns:q36="http://mof.open/Messaging/DataContracts/1/0/" ref="q36:relatedMessageId" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

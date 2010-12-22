@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("jkitagr@hotmail.com")]
 [assembly: AssemblyProduct("Message Oriented Framework On BizTalk")]
-[assembly: AssemblyCopyright("Copyright © James Kita 2009")]
+[assembly: AssemblyCopyright("Copyright © James Kita 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,7 +32,8 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.6.0.0")]
-[assembly: AssemblyFileVersion("0.6.0.0")]
+[assembly: AssemblyVersion("0.7.0.0")]
+[assembly: AssemblyFileVersion("0.7.0.0")]
 
-[assembly: InternalsVisibleTo("Open.MOF.Messaging.Services")]
+[assembly: InternalsVisibleTo("Open.MOF.Messaging.Test")]
+[assembly: InternalsVisibleTo("Open.MOF.BizTalk.Test")]

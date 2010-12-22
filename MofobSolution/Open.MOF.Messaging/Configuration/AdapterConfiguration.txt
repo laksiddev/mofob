@@ -1,0 +1,14 @@
+﻿  <configSections>
+    <section name="messagingAdapterConfiguration" type="Open.MOF.Messaging.Configuration.AdapterConfigurationSettings, Open.MOF.Messaging, Version=0.6.0.0, Culture=neutral, PublicKeyToken=null" />
+    <section name="wcfEndpointConfiguration" type="Open.MOF.Messaging.Configuration.WcfEndpointConfigurationSettings, Open.MOF.Messaging, Version=0.6.0.0, Culture=neutral, PublicKeyToken=null" />
+  </configSections>
+  <messagingAdapterConfiguration>
+    <adapterConfigurationItems>
+      <add name="WcfClientMessagingServiceDefinition" adapterInterfaceName="DataService" adapterTypeName="Open.MOF.Messaging.Adapters.WcfClientMessagingAdapter, Open.MOF.Messaging, Version=0.6.0.0, Culture=neutral, PublicKeyToken=null" channelEndpointName="myTransactionAdapterBinding" preferenceNumber="1" />
+    </adapterConfigurationItems>
+  </messagingAdapterConfiguration>
+  <wcfEndpointConfiguration>
+    <wcfEndpointConfigurationItems>
+      <! -- <add bindingName="myTransactionAdapterBinding" endpointInterfaceName="Open.MOF.Messaging.Test.ITestService, Open.MOF.Messaging, Version=0.6.0.0, Culture=neutral, PublicKeyToken=null" /> -->
+    </wcfEndpointConfigurationItems>
+  </wcfEndpointConfiguration>

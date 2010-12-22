@@ -9,7 +9,7 @@ namespace Open.MOF.Messaging
         DataReporting,
         TransactionsSupported,
         TransactionsRequired,
-        FaultReporting,
-        SubscriptionControl
+        FaultReporting //,
+        //SubscriptionControl
     }
 }

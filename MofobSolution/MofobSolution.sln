@@ -19,15 +19,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.BizTalk.Test", "Op
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.SchemaReferenceUtil", "Open.MOF.SchemaReferenceUtil\Open.MOF.SchemaReferenceUtil.csproj", "{2C0C2DBC-52E1-472A-A426-E576F253DA23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging.Configuration", "Open.MOF.Messaging.Configuration\Open.MOF.Messaging.Configuration.csproj", "{2167C1EE-724A-4C33-A05B-F973624336AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.BizTalk.ItineraryLookupService", "Open.MOF.BizTalk.ItineraryLookupService\Open.MOF.BizTalk.ItineraryLookupService.csproj", "{9CF65904-E82C-48A4-880F-E471B3FDE66B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging.Services", "Open.MOF.Messaging.Services\Open.MOF.Messaging.Services.csproj", "{1C8118FB-D210-4528-B215-0A10AFAF4AF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging.Test.Messages", "Open.MOF.Messaging.Test.Messages\Open.MOF.Messaging.Test.Messages.csproj", "{44AE7EC8-A4BA-4D3A-A146-7DB6FE97BC03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging.ExceptionHandling", "Open.MOF.Messaging.ExceptionHandling\Open.MOF.Messaging.ExceptionHandling.csproj", "{0F5D3A30-0A94-4FA9-B493-3A1BB1335046}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs08.codeplex.com/
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/TFS08
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Open.MOF.Messaging\\Open.MOF.Messaging.csproj
 		SccProjectName1 = Open.MOF.Messaging
@@ -38,18 +40,21 @@ Global
 		SccProjectUniqueName3 = Open.MOF.Messaging.Test\\Open.MOF.Messaging.Test.csproj
 		SccProjectName3 = Open.MOF.Messaging.Test
 		SccLocalPath3 = Open.MOF.Messaging.Test
-		SccProjectUniqueName4 = Open.MOF.BizTalk.Test\\Open.MOF.BizTalk.Test.csproj
-		SccProjectName4 = Open.MOF.BizTalk.Test
-		SccLocalPath4 = Open.MOF.BizTalk.Test
-		SccProjectUniqueName5 = Open.MOF.Messaging.Configuration\\Open.MOF.Messaging.Configuration.csproj
-		SccProjectName5 = Open.MOF.Messaging.Configuration
-		SccLocalPath5 = Open.MOF.Messaging.Configuration
-		SccProjectUniqueName6 = Open.MOF.Messaging.Services\\Open.MOF.Messaging.Services.csproj
-		SccProjectName6 = Open.MOF.Messaging.Services
-		SccLocalPath6 = Open.MOF.Messaging.Services
-		SccProjectUniqueName7 = Open.MOF.SchemaReferenceUtil\\Open.MOF.SchemaReferenceUtil.csproj
-		SccProjectName7 = Open.MOF.SchemaReferenceUtil
-		SccLocalPath7 = Open.MOF.SchemaReferenceUtil
+		SccProjectUniqueName4 = Open.MOF.SchemaReferenceUtil\\Open.MOF.SchemaReferenceUtil.csproj
+		SccProjectName4 = Open.MOF.SchemaReferenceUtil
+		SccLocalPath4 = Open.MOF.SchemaReferenceUtil
+		SccProjectUniqueName5 = Open.MOF.BizTalk.ItineraryLookupService\\Open.MOF.BizTalk.ItineraryLookupService.csproj
+		SccProjectName5 = Open.MOF.BizTalk.ItineraryLookupService
+		SccLocalPath5 = Open.MOF.BizTalk.ItineraryLookupService
+		SccProjectUniqueName6 = Open.MOF.Messaging.Test.Messages\\Open.MOF.Messaging.Test.Messages.csproj
+		SccProjectName6 = Open.MOF.Messaging.Test.Messages
+		SccLocalPath6 = Open.MOF.Messaging.Test.Messages
+		SccProjectUniqueName7 = Open.MOF.Messaging.ExceptionHandling\\Open.MOF.Messaging.ExceptionHandling.csproj
+		SccProjectName7 = Open.MOF.Messaging.ExceptionHandling
+		SccLocalPath7 = Open.MOF.Messaging.ExceptionHandling
+		SccProjectUniqueName8 = Open.MOF.BizTalk.Test\\Open.MOF.BizTalk.Test.csproj
+		SccProjectName8 = Open.MOF.BizTalk.Test
+		SccLocalPath8 = Open.MOF.BizTalk.Test
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = MofobSolution.vsmdi
@@ -79,14 +84,18 @@ Global
 		{2C0C2DBC-52E1-472A-A426-E576F253DA23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C0C2DBC-52E1-472A-A426-E576F253DA23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C0C2DBC-52E1-472A-A426-E576F253DA23}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2167C1EE-724A-4C33-A05B-F973624336AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2167C1EE-724A-4C33-A05B-F973624336AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2167C1EE-724A-4C33-A05B-F973624336AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2167C1EE-724A-4C33-A05B-F973624336AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C8118FB-D210-4528-B215-0A10AFAF4AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C8118FB-D210-4528-B215-0A10AFAF4AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C8118FB-D210-4528-B215-0A10AFAF4AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C8118FB-D210-4528-B215-0A10AFAF4AF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CF65904-E82C-48A4-880F-E471B3FDE66B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CF65904-E82C-48A4-880F-E471B3FDE66B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CF65904-E82C-48A4-880F-E471B3FDE66B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CF65904-E82C-48A4-880F-E471B3FDE66B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44AE7EC8-A4BA-4D3A-A146-7DB6FE97BC03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44AE7EC8-A4BA-4D3A-A146-7DB6FE97BC03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44AE7EC8-A4BA-4D3A-A146-7DB6FE97BC03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44AE7EC8-A4BA-4D3A-A146-7DB6FE97BC03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F5D3A30-0A94-4FA9-B493-3A1BB1335046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F5D3A30-0A94-4FA9-B493-3A1BB1335046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F5D3A30-0A94-4FA9-B493-3A1BB1335046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F5D3A30-0A94-4FA9-B493-3A1BB1335046}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

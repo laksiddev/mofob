@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Open.MOF.Messaging
 {
-    [MessageContract(IsWrapped = true, WrapperName = "FaultMessage", WrapperNamespace = "http://mof.open/Messaging/ServiceContracts/1/0/")]
+    [MessageContract(IsWrapped = true, WrapperName = "FaultMessage", WrapperNamespace = "http://mof.open/Messaging/MessageContracts/1/0/")]
     public class FaultMessage : FrameworkMessage
     {
         public FaultMessage() : base()
@@ -32,7 +32,7 @@ namespace Open.MOF.Messaging
             _exceptionDetail = exceptionDetail;
         }
 
-        [MessageBodyMember(Name = "execeptionInstanceId", Order = 1, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "execeptionInstanceId", Order = 1, Namespace = "http://mof.open/Messaging/MessageContracts/1/0/")]
         private Guid? _execeptionInstanceId;
         public Guid? ExceptionInstanceId
         {
@@ -40,7 +40,7 @@ namespace Open.MOF.Messaging
             set { _execeptionInstanceId = value; }
         }
 
-        [MessageBodyMember(Name = "serviceName", Order = 2, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "serviceName", Order = 2, Namespace = "http://mof.open/Messaging/MessageContracts/1/0/")]
         private string _serviceName;
         public string ServiceName
         {
@@ -48,7 +48,7 @@ namespace Open.MOF.Messaging
             set { _serviceName = value; }
         }
 
-        [MessageBodyMember(Name = "applicationName", Order = 3, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "applicationName", Order = 3, Namespace = "http://mof.open/Messaging/MessageContracts/1/0/")]
         private string _applicationName;
         public string ApplicationName
         {
@@ -56,7 +56,7 @@ namespace Open.MOF.Messaging
             set { _applicationName = value; }
         }
 
-        [MessageBodyMember(Name = "ExceptionDetail", Order = 4, Namespace = "http://mof.open/Messaging/DataContracts/1/0/")]
+        [MessageBodyMember(Name = "ExceptionDetail", Order = 4, Namespace = "http://mof.open/Messaging/MessageContracts/1/0/")]
         private ExceptionDetail _exceptionDetail;
         public ExceptionDetail ExceptionDetail
         {

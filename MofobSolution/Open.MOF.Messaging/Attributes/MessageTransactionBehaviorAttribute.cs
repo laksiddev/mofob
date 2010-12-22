@@ -7,24 +7,34 @@ namespace Open.MOF.Messaging
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class MessageTransactionBehaviorAttribute : Attribute
     {
-        public MessageTransactionBehaviorAttribute(bool supportsTransactions, bool requiresTransactions)
+        public MessageTransactionBehaviorAttribute()
         {
-            _supportsTransactions = supportsTransactions;
-            _requiresTransactions = requiresTransactions;
+            _supportsTransactions = true;
+            _requiresTransactions = false;
         }
 
         protected bool _supportsTransactions;
         public bool SupportsTransactions
         {
             get { return _supportsTransactions; }
-            set { _supportsTransactions = value; }
+            set 
+            { 
+                _supportsTransactions = value;
+                if (_supportsTransactions == false)
+                    _requiresTransactions = false;
+            }
         }
 
         protected bool _requiresTransactions;
         public bool RequiresTransactions
         {
             get { return _requiresTransactions; }
-            set { _requiresTransactions = value; }
+            set 
+            { 
+                _requiresTransactions = value;
+                if (_requiresTransactions == true)
+                    _supportsTransactions = true;
+            }
         }
 
         public MessageBehavior Behavior

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using Open.MOF.Messaging.Test.Messages;
+
 namespace Open.MOF.Messaging.Test
 {
     /// <summary>
@@ -109,57 +111,57 @@ namespace Open.MOF.Messaging.Test
             Assert.AreEqual(message.From.Action, testMessage.From.Action, "An unexpected value was returned.");
         }
 
-        [TestMethod]
-        public void SubscribeRequestMessageSerializationTest()
-        {
-            SubscribeRequestMessage message = new SubscribeRequestMessage();
-            message.EndpointUri = "http://endpointuri/";
-            message.Action = "messageaction";
-            message.SubscriptionMessageXmlType = FrameworkMessage.GetMessageXmlType(typeof(TestDataRequestMessage));
-            Assert.IsTrue((!String.IsNullOrEmpty(message.SubscriptionMessageXmlType)), "No message xml information was available.");
-            message.MessageId = Guid.NewGuid();
-            message.From = new MessagingEndpoint("http://me/", "myaction");
-            string messageText = message.ToXmlString();
+        //[TestMethod]
+        //public void SubscribeRequestMessageSerializationTest()
+        //{
+        //    SubscribeRequestMessage message = new SubscribeRequestMessage();
+        //    message.EndpointUri = "http://endpointuri/";
+        //    message.Action = "messageaction";
+        //    message.SubscriptionMessageXmlType = FrameworkMessage.GetMessageXmlType(typeof(TestDataRequestMessage));
+        //    Assert.IsTrue((!String.IsNullOrEmpty(message.SubscriptionMessageXmlType)), "No message xml information was available.");
+        //    message.MessageId = Guid.NewGuid();
+        //    message.From = new MessagingEndpoint("http://me/", "myaction");
+        //    string messageText = message.ToXmlString();
 
-            Assert.IsNotNull(messageText);
+        //    Assert.IsNotNull(messageText);
 
-            SubscribeRequestMessage testMessage = SubscribeRequestMessage.FromXmlString<SubscribeRequestMessage>(messageText);
+        //    SubscribeRequestMessage testMessage = SubscribeRequestMessage.FromXmlString<SubscribeRequestMessage>(messageText);
 
-            Assert.IsNotNull(testMessage);
-            Assert.AreEqual(message.EndpointUri, testMessage.EndpointUri, "An unexpected value was returned.");
-            Assert.AreEqual(message.Action, testMessage.Action, "An unexpected value was returned.");
-            Assert.AreEqual(message.SubscriptionMessageXmlType, testMessage.SubscriptionMessageXmlType, "An unexpected value was returned.");
-            Assert.AreEqual(message.MessageId, testMessage.MessageId, "An unexpected value was returned.");
-            Assert.IsNotNull(testMessage.From);
-            Assert.AreEqual(message.From.Uri, testMessage.From.Uri, "An unexpected value was returned.");
-            Assert.AreEqual(message.From.Action, testMessage.From.Action, "An unexpected value was returned.");
-        }
+        //    Assert.IsNotNull(testMessage);
+        //    Assert.AreEqual(message.EndpointUri, testMessage.EndpointUri, "An unexpected value was returned.");
+        //    Assert.AreEqual(message.Action, testMessage.Action, "An unexpected value was returned.");
+        //    Assert.AreEqual(message.SubscriptionMessageXmlType, testMessage.SubscriptionMessageXmlType, "An unexpected value was returned.");
+        //    Assert.AreEqual(message.MessageId, testMessage.MessageId, "An unexpected value was returned.");
+        //    Assert.IsNotNull(testMessage.From);
+        //    Assert.AreEqual(message.From.Uri, testMessage.From.Uri, "An unexpected value was returned.");
+        //    Assert.AreEqual(message.From.Action, testMessage.From.Action, "An unexpected value was returned.");
+        //}
 
-        [TestMethod]
-        public void UnsubscribeRequestMessageSerializationTest()
-        {
-            UnsubscribeRequestMessage message = new UnsubscribeRequestMessage();
-            message.EndpointUri = "http://endpointuri/";
-            message.Action = "messageaction";
-            message.SubscriptionMessageXmlType = FrameworkMessage.GetMessageXmlType(typeof(TestDataRequestMessage));
-            Assert.IsTrue((!String.IsNullOrEmpty(message.SubscriptionMessageXmlType)), "No message xml information was available.");
-            message.MessageId = Guid.NewGuid();
-            message.From = new MessagingEndpoint("http://me/", "myaction");
-            string messageText = message.ToXmlString();
+        //[TestMethod]
+        //public void UnsubscribeRequestMessageSerializationTest()
+        //{
+        //    UnsubscribeRequestMessage message = new UnsubscribeRequestMessage();
+        //    message.EndpointUri = "http://endpointuri/";
+        //    message.Action = "messageaction";
+        //    message.SubscriptionMessageXmlType = FrameworkMessage.GetMessageXmlType(typeof(TestDataRequestMessage));
+        //    Assert.IsTrue((!String.IsNullOrEmpty(message.SubscriptionMessageXmlType)), "No message xml information was available.");
+        //    message.MessageId = Guid.NewGuid();
+        //    message.From = new MessagingEndpoint("http://me/", "myaction");
+        //    string messageText = message.ToXmlString();
 
-            Assert.IsNotNull(messageText);
+        //    Assert.IsNotNull(messageText);
 
-            UnsubscribeRequestMessage testMessage = UnsubscribeRequestMessage.FromXmlString<UnsubscribeRequestMessage>(messageText);
+        //    UnsubscribeRequestMessage testMessage = UnsubscribeRequestMessage.FromXmlString<UnsubscribeRequestMessage>(messageText);
 
-            Assert.IsNotNull(testMessage);
-            Assert.AreEqual(message.EndpointUri, testMessage.EndpointUri, "An unexpected value was returned.");
-            Assert.AreEqual(message.Action, testMessage.Action, "An unexpected value was returned.");
-            Assert.AreEqual(message.SubscriptionMessageXmlType, testMessage.SubscriptionMessageXmlType, "An unexpected value was returned.");
-            Assert.AreEqual(message.MessageId, testMessage.MessageId, "An unexpected value was returned.");
-            Assert.IsNotNull(testMessage.From);
-            Assert.AreEqual(message.From.Uri, testMessage.From.Uri, "An unexpected value was returned.");
-            Assert.AreEqual(message.From.Action, testMessage.From.Action, "An unexpected value was returned.");
-        }
+        //    Assert.IsNotNull(testMessage);
+        //    Assert.AreEqual(message.EndpointUri, testMessage.EndpointUri, "An unexpected value was returned.");
+        //    Assert.AreEqual(message.Action, testMessage.Action, "An unexpected value was returned.");
+        //    Assert.AreEqual(message.SubscriptionMessageXmlType, testMessage.SubscriptionMessageXmlType, "An unexpected value was returned.");
+        //    Assert.AreEqual(message.MessageId, testMessage.MessageId, "An unexpected value was returned.");
+        //    Assert.IsNotNull(testMessage.From);
+        //    Assert.AreEqual(message.From.Uri, testMessage.From.Uri, "An unexpected value was returned.");
+        //    Assert.AreEqual(message.From.Action, testMessage.From.Action, "An unexpected value was returned.");
+        //}
 
         #region Additional test attributes
         //

@@ -5,7 +5,7 @@ using System.Text;
 namespace Open.MOF.Messaging
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public class ResponseMessageTypeAttribute : Attribute
+    public abstract class ResponseMessageTypeAttribute : Attribute
     {
         public ResponseMessageTypeAttribute(Type responseMessageType)
         {
@@ -13,6 +13,18 @@ namespace Open.MOF.Messaging
                 throw new ArgumentException("ResponseMessageType is a required paramter.", "ResponseMessageType");
 
             _responseMessageType = responseMessageType;
+            _isResponseRequired = true;
+            _isResponseTwoWay = false;
+        }
+
+        protected ResponseMessageTypeAttribute(Type responseMessageType, bool isResponseRequired, bool isResponseTwoWay)
+        {
+            if (responseMessageType == null)
+                throw new ArgumentException("ResponseMessageType is a required paramter.", "ResponseMessageType");
+
+            _responseMessageType = responseMessageType;
+            _isResponseRequired = isResponseRequired;
+            _isResponseTwoWay = isResponseTwoWay;
         }
 
         protected Type _responseMessageType;
@@ -23,10 +35,17 @@ namespace Open.MOF.Messaging
         }
 
         protected bool _isResponseRequired;
-        public bool IsResponseRequired
+        protected internal bool IsResponseRequired
         {
             get { return _isResponseRequired; }
             set { _isResponseRequired = value; }
+        }
+
+        protected bool _isResponseTwoWay;
+        protected internal bool IsResponseTwoWay
+        {
+            get { return _isResponseTwoWay; }
+            set { _isResponseTwoWay = value; }
         }
     }
 }

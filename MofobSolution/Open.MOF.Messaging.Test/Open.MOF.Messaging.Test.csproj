@@ -51,13 +51,8 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BogusMessage.cs" />
-    <Compile Include="TestDataResultMessage.cs" />
     <Compile Include="MessageSerializationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MessagingServiceInstantiationTests.cs" />
-    <Compile Include="TestDataRequestMessage.cs" />
-    <Compile Include="TestTransactionRequestMessage.cs" />
     <Compile Include="WcfClientMessagingTests.cs" />
     <Compile Include="WcfService\ProxyInterface.cs" />
     <Compile Include="WcfService\ITestDataService.cs" />
@@ -67,9 +62,9 @@
     <Content Include="AuthoringTests.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Open.MOF.Messaging.Services\Open.MOF.Messaging.Services.csproj">
-      <Project>{1C8118FB-D210-4528-B215-0A10AFAF4AF6}</Project>
-      <Name>Open.MOF.Messaging.Services</Name>
+    <ProjectReference Include="..\Open.MOF.Messaging.Test.Messages\Open.MOF.Messaging.Test.Messages.csproj">
+      <Project>{44AE7EC8-A4BA-4D3A-A146-7DB6FE97BC03}</Project>
+      <Name>Open.MOF.Messaging.Test.Messages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Open.MOF.Messaging\Open.MOF.Messaging.csproj">
       <Project>{9750443B-DDB6-4A67-9470-37109B5C47D6}</Project>
@@ -78,10 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Properties\DataSources\Open.MOF.Messaging.MessagingEndpoint.datasource" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

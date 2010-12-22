@@ -37,6 +37,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -55,20 +61,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\AdapterInterfaceType.cs" />
+    <Compile Include="Adapters\ExceptionAdapter.cs" />
+    <Compile Include="Adapters\ILocatorExtender.cs" />
+    <Compile Include="Adapters\IMessagingAdapter.cs" />
+    <Compile Include="Adapters\IMessagingResolver.cs" />
+    <Compile Include="Adapters\MessagingAdapter.cs" />
+    <Compile Include="Adapters\MessagingAdapterLocator.cs" />
+    <Compile Include="Adapters\MessagingAdapterLocatorExtender.cs" />
+    <Compile Include="Adapters\MessagingResolver.cs" />
+    <Compile Include="Adapters\WcfClientMessagingAdapter.cs" />
+    <Compile Include="Adapters\WcfEndpointDetails.cs" />
+    <Compile Include="Async\AsyncResult.cs" />
+    <Compile Include="Async\AsyncResultNoResult.cs" />
     <Compile Include="Attributes\MessageBehavior.cs" />
+    <Compile Include="Attributes\MessageDescriptorAttribute.cs" />
     <Compile Include="Attributes\MessageTransactionBehaviorAttribute.cs" />
     <Compile Include="Attributes\MessageContractAssemblyAttribute.cs" />
+    <Compile Include="Attributes\PubSubResponseMessageTypeAttribute.cs" />
     <Compile Include="Attributes\ResponseMessageTypeAttribute.cs" />
+    <Compile Include="Attributes\TwoWayResponseMessageTypeAttribute.cs" />
+    <Compile Include="Callback\CallbackLocatorExtender.cs" />
+    <Compile Include="Callback\ICallbackHost.cs" />
+    <Compile Include="Callback\IPubSubCallbackAdapter.cs" />
+    <Compile Include="Callback\WcfCallbackHost.cs" />
+    <Compile Include="Callback\WcfPubSubCallbackAdapter.cs" />
+    <Compile Include="Callback\WcfService\IMessagingCallback.cs" />
+    <Compile Include="Callback\WcfService\WcfMessagingCallbackService.cs" />
     <Compile Include="Common\EventLogUtility.cs" />
+    <Compile Include="Common\WcfUtility.cs" />
+    <Compile Include="Configuration\AdapterConfigurationCollection.cs" />
+    <Compile Include="Configuration\AdapterConfigurationElement.cs" />
+    <Compile Include="Configuration\AdapterConfigurationSettings.cs" />
+    <Compile Include="Configuration\ServiceConfigurationCollection.cs" />
+    <Compile Include="Configuration\ServiceConfigurationElement.cs" />
+    <Compile Include="Configuration\ServiceConfigurationSettings.cs" />
     <Compile Include="Converters\ExceptionDetailConverter.cs" />
     <Compile Include="FaultResponse.cs" />
+    <Compile Include="MessageHandlingSummary.cs" />
     <Compile Include="MessageSubmittedResponse.cs" />
     <Compile Include="ExceptionDetail.cs" />
     <Compile Include="Exceptions\MessagingConfigurationException.cs" />
     <Compile Include="Exceptions\MessagingException.cs" />
-    <Compile Include="MessagingResult.cs" />
-    <Compile Include="SubscribeRequestMessage.cs" />
-    <Compile Include="UnsubscribeRequestMessage.cs" />
     <Compile Include="EventArgs\MessagingEventArgs.cs" />
     <Compile Include="EventArgs\MessageDeliveredEventArgs.cs" />
     <Compile Include="EventArgs\MessageReceivedEventArgs.cs" />
@@ -76,11 +110,16 @@
     <Compile Include="FaultMessage.cs" />
     <Compile Include="FrameworkMessage.cs" />
     <Compile Include="MessagingEndpoint.cs" />
+    <Compile Include="MessagingState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResponseTypeDescription.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Messaging.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\AdapterConfiguration.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -90,4 +129,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY /Y $(TargetDir)$(TargetName).* $(SolutionDir)Published\*.*</PostBuildEvent>
+  </PropertyGroup>
 </Project>

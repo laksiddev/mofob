@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
-using Open.MOF.Messaging.Test;
+using Open.MOF.Messaging.Test.Messages;
 
 namespace Open.MOF.Messaging.Test.WcfService
 {

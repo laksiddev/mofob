@@ -241,7 +241,7 @@ namespace Open.MOF.BizTalk.Test
             Assert.IsNotNull(responseMessage);
             Assert.IsInstanceOfType(responseMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
             Assert.AreEqual(message.MessageId, responseMessage.RelatedMessageId);
-            Assert.AreEqual("this.is.the.twoway.itinerary.name", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
+            Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
         }
 
         [TestMethod]
@@ -283,13 +283,13 @@ namespace Open.MOF.BizTalk.Test
             Assert.IsNotNull(responseMessage);
             Assert.IsInstanceOfType(responseMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
             Assert.AreEqual(message.MessageId, responseMessage.RelatedMessageId);
-            Assert.AreEqual("this.is.the.twoway.itinerary.name", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
+            Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
 
             // The _messageReceivedCallbackMessage should have been set in the callback method
             Assert.IsNotNull(_messageReceivedCallbackMessage);
             Assert.IsInstanceOfType(_messageReceivedCallbackMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
             Assert.AreEqual(message.MessageId, _messageReceivedCallbackMessage.RelatedMessageId);
-            Assert.AreEqual("this.is.the.twoway.itinerary.name", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)_messageReceivedCallbackMessage).Context);
+            Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)_messageReceivedCallbackMessage).Context);
         }
 
         [TestMethod]
@@ -331,7 +331,7 @@ namespace Open.MOF.BizTalk.Test
             Assert.IsNotNull(responseMessage);
             Assert.IsInstanceOfType(responseMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
             Assert.AreEqual(message.MessageId, responseMessage.RelatedMessageId);
-            Assert.AreEqual("this.is.the.twoway.itinerary.name", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
+            Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
         }
 
         [TestMethod]
@@ -376,13 +376,13 @@ namespace Open.MOF.BizTalk.Test
             Assert.IsNotNull(responseMessage);
             Assert.IsInstanceOfType(responseMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
             Assert.AreEqual(message.MessageId, responseMessage.RelatedMessageId);
-            Assert.AreEqual("this.is.the.twoway.itinerary.name", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
+            Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
 
             // The _messageReceivedCallbackMessage should have been set in the callback method
             Assert.IsNotNull(_messageReceivedCallbackMessage);
             Assert.IsInstanceOfType(_messageReceivedCallbackMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
             Assert.AreEqual(message.MessageId, _messageReceivedCallbackMessage.RelatedMessageId);
-            Assert.AreEqual("this.is.the.twoway.itinerary.name", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)_messageReceivedCallbackMessage).Context);
+            Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)_messageReceivedCallbackMessage).Context);
         }
 
         [TestMethod]

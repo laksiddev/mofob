@@ -85,6 +85,11 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
                 messageXml = root.InnerText;
                 responseMessage = FrameworkMessage.FromXmlString(messageXml);
             }
+            else if (itineraryResponse.part is string)
+            {
+                messageXml = (string)itineraryResponse.part;
+                responseMessage = FrameworkMessage.FromXmlString(messageXml);
+            }
 
             if (responseMessage == null)
             {
@@ -117,6 +122,11 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
                 }
 
                 messageXml = root.InnerText;
+                responseMessage = FrameworkMessage.FromXmlString(messageXml);
+            }
+            else if (itineraryResponse.part is string)
+            {
+                messageXml = (string)itineraryResponse.part;
                 responseMessage = FrameworkMessage.FromXmlString(messageXml);
             }
 

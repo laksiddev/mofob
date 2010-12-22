@@ -116,7 +116,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Messaging.cd" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configuration\AdapterConfiguration.txt" />

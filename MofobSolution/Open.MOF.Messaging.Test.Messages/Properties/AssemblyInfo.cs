@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Open.MOF.BizTalk")]
-[assembly: AssemblyDescription("Message Oriented Framework - BizTalk")]
+[assembly: AssemblyTitle("Open.MOF.SchemaReferenceUtil")]
+[assembly: AssemblyDescription("Message Oriented Framework - Messaging / Test Messages")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("jkitagr@hotmail.com")]
 [assembly: AssemblyProduct("Message Oriented Framework On BizTalk")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("fde5a72e-39c2-495c-8f0f-aa6b93a133a4")]
+[assembly: Guid("a5580b69-7492-4407-88db-0783726d01ec")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -34,5 +34,3 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.7.0.0")]
 [assembly: AssemblyFileVersion("0.7.0.0")]
-
-[assembly: InternalsVisibleTo("Open.MOF.BizTalk.Test")]

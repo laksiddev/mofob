@@ -37,11 +37,11 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             }
         }
 
-        public override bool CanSupportMessage(FrameworkMessage message)
+        public override bool CanSupportMessage(SimpleMessage message)
         {
             IMessageItineraryMapper mapper = ServiceLocator.Current.GetInstance<IMessageItineraryMapper>();
             _cachedItineraryDescription = mapper.MapMessageToItinerary(message);
-            List<Type> responseTypes = message.ResponseTypes;
+            List<Type> responseTypes = ((message is FrameworkMessage) ? ((FrameworkMessage)message).ResponseTypes : new List<Type>());
 
             bool messageHasItinerary = (_cachedItineraryDescription != null);
             // Open question: Should a two way interface be used if no response type has been defined?
@@ -64,7 +64,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return channel.BeginSubmitRequestResponse(itineraryRequest, messageDeliveredCallback, messagingState);
         }
 
-        protected override FrameworkMessage InvokeChannelEndAsync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.ProcessRequestResponseChannel channel,
+        protected override SimpleMessage InvokeChannelEndAsync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.ProcessRequestResponseChannel channel,
             IAsyncResult ar)
         {
             Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.SubmitRequestResponseResponse itineraryResponse
@@ -100,8 +100,8 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return responseMessage;
         }
 
-        protected override FrameworkMessage InvokeChannelSync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.ProcessRequestResponseChannel channel,
-            FrameworkMessage requestMessage)
+        protected override SimpleMessage InvokeChannelSync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.ProcessRequestResponseChannel channel,
+            SimpleMessage requestMessage)
         {
             Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.SubmitRequestResponseRequest itineraryRequest =
                 MapMessageToItineraryRequest(requestMessage);
@@ -139,7 +139,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return responseMessage;
         }
 
-        private Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.SubmitRequestResponseRequest MapMessageToItineraryRequest(FrameworkMessage requestMessage)
+        private Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.SubmitRequestResponseRequest MapMessageToItineraryRequest(SimpleMessage requestMessage)
         {
             _cachedItineraryDescription = MapMessageToItinerary(requestMessage);
 

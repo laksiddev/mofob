@@ -15,29 +15,29 @@ namespace Open.MOF.Messaging
             MessageResponseCallback = null;
         }
 
-        public MessagingState(FrameworkMessage requestMessage) 
+        public MessagingState(SimpleMessage requestMessage) 
             : base()
         {
             RequestMessage = requestMessage;
         }
 
-        public MessagingState(FrameworkMessage requestMessage, EventHandler<MessageReceivedEventArgs> messageResponseCallback)
+        public MessagingState(SimpleMessage requestMessage, EventHandler<MessageReceivedEventArgs> messageResponseCallback)
             : base()
         {
             RequestMessage = requestMessage;
             MessageResponseCallback = messageResponseCallback;
         }
 
-        public MessagingState(FrameworkMessage requestMessage, MessageHandlingSummary handlingSummary, FrameworkMessage responseMessage)
+        public MessagingState(SimpleMessage requestMessage, MessageHandlingSummary handlingSummary, SimpleMessage responseMessage)
         {
             RequestMessage = requestMessage;
             HandlingSummary = handlingSummary;
             ResponseMessage = responseMessage;
         }
 
-        public FrameworkMessage RequestMessage { get; set; }
+        public SimpleMessage RequestMessage { get; set; }
         public MessageHandlingSummary HandlingSummary { get; set; }
-        public FrameworkMessage ResponseMessage { get; set; }
+        public SimpleMessage ResponseMessage { get; set; }
         public EventHandler<MessageReceivedEventArgs> MessageResponseCallback { get; set; }
     }
 }

@@ -7,9 +7,9 @@ using System.Xml;
 namespace Open.MOF.Messaging
 {
     [MessageContract(IsWrapped = true, WrapperName = "FrameworkMessage")]
-    public abstract class FrameworkMessage
+    public abstract class FrameworkMessage : SimpleMessage
     {
-        protected static Dictionary<Type, MessageTransactionBehaviorAttribute> _transactionMessageAttributeLookup;
+        //protected static Dictionary<Type, MessageTransactionBehaviorAttribute> _transactionMessageAttributeLookup;
 
         public FrameworkMessage()
         {
@@ -69,29 +69,47 @@ namespace Open.MOF.Messaging
             set { _relatedMessageId = value; }
         }
 
-        public string MessageDescriptor
+        //public string MessageDescriptor
+        //{
+        //    get
+        //    {
+        //        return FrameworkMessage.GetMessageDescriptor(this.GetType());
+        //    }
+        //}
+
+        //public string MessageXmlType
+        //{
+        //    get
+        //    {
+        //        return FrameworkMessage.GetMessageXmlType(this.GetType());
+        //    }
+        //}
+
+        public override void LoadContent(string xmlContent)
         {
-            get
-            {
-                return FrameworkMessage.GetMessageDescriptor(this.GetType());
-            }
+            throw new NotSupportedException("The LoadContent() method is only supported for SimpleMessage types rather than complex message types. It is suggested that you use the FromXmlString() static method.");
         }
 
-        public string MessageXmlType
+        public override void LoadContent(XmlDocument xmlDocument)
         {
-            get
-            {
-                return FrameworkMessage.GetMessageXmlType(this.GetType());
-            }
+            throw new NotSupportedException("The LoadContent() method is only supported for SimpleMessage types rather than complex message types. It is suggested that you use the FromXmlString() static method.");
         }
 
-        public string ToXmlString()
+        public override string ToXmlString()
         {
             DataContractFormatAttribute att = new DataContractFormatAttribute();
             System.ServiceModel.Description.TypedMessageConverter messageConverter = System.ServiceModel.Description.TypedMessageConverter.Create(this.GetType(), "action");
             System.ServiceModel.Channels.Message message = messageConverter.ToMessage(this);
 
             return message.GetReaderAtBodyContents().ReadOuterXml();
+        }
+
+        public override XmlDocument ToXmlDocument()
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(this.ToXmlString());
+
+            return doc;
         }
 
         public static T FromXmlString<T>(string xml) where T : FrameworkMessage
@@ -138,31 +156,31 @@ namespace Open.MOF.Messaging
             return (FrameworkMessage)messageConverter.FromMessage(message);
         }
 
-        public static string GetMessageDescriptor(System.Type messageType)
-        {
-            // First try to find a message descriptor for the message type
-            if ((typeof(FrameworkMessage).IsAssignableFrom(messageType)) && (!messageType.IsAbstract))
-            {
-                MessageDescriptorAttribute[] descriptorAttributes =
-                    (MessageDescriptorAttribute[])messageType.GetCustomAttributes(typeof(MessageDescriptorAttribute), false);
+        //public static string GetMessageDescriptor(System.Type messageType)
+        //{
+        //    // First try to find a message descriptor for the message type
+        //    if ((typeof(FrameworkMessage).IsAssignableFrom(messageType)) && (!messageType.IsAbstract))
+        //    {
+        //        MessageDescriptorAttribute[] descriptorAttributes =
+        //            (MessageDescriptorAttribute[])messageType.GetCustomAttributes(typeof(MessageDescriptorAttribute), false);
 
-                if (descriptorAttributes.Length == 1)
-                {
-                    return descriptorAttributes[0].MessageDescriptor;
-                }
+        //        if (descriptorAttributes.Length == 1)
+        //        {
+        //            return descriptorAttributes[0].MessageDescriptor;
+        //        }
 
-                // Otherwise return Message XML Type
-                return GetMessageXmlType(messageType);
-            }
+        //        // Otherwise return Message XML Type
+        //        return GetMessageXmlType(messageType);
+        //    }
 
-            return String.Empty;
-        }
+        //    return String.Empty;
+        //}
 
         public static string GetMessageXmlType(System.Type messageType)
         {
             if ((typeof(FrameworkMessage).IsAssignableFrom(messageType)) && (!messageType.IsAbstract))
             {
-                System.ServiceModel.MessageContractAttribute[] contractAttributes = 
+                System.ServiceModel.MessageContractAttribute[] contractAttributes =
                     (System.ServiceModel.MessageContractAttribute[])messageType.GetCustomAttributes(typeof(System.ServiceModel.MessageContractAttribute), false);
 
                 if (contractAttributes.Length == 1)
@@ -175,61 +193,61 @@ namespace Open.MOF.Messaging
             return String.Empty;
         }
 
-        public MessageBehavior GetMessageBehavior()
-        {
-            return FrameworkMessage.GetMessageBehavior(this);
-        }
+        //public override MessageBehavior GetMessageBehavior()
+        //{
+        //    return FrameworkMessage.GetMessageBehavior(this);
+        //}
 
-        public static MessageBehavior GetMessageBehavior(FrameworkMessage message)
-        {
-            return GetMessageBehavior(message.GetType());
-        }
+        //public static MessageBehavior GetMessageBehavior(FrameworkMessage message)
+        //{
+        //    return GetMessageBehavior(message.GetType());
+        //}
 
-        public static MessageBehavior GetMessageBehavior<T>() where T : FrameworkMessage
-        {
-            return GetMessageBehavior(typeof(T));
-        }
+        //public static MessageBehavior GetMessageBehavior<T>() where T : FrameworkMessage
+        //{
+        //    return GetMessageBehavior(typeof(T));
+        //}
 
-        public static MessageBehavior GetMessageBehavior(Type messageType)
-        {
-            if (!typeof(FrameworkMessage).IsAssignableFrom(messageType))
-                throw new MessagingException("The message type being processed is not defined correctly.  All messages must extend from MessageBase.");
+        //public static MessageBehavior GetMessageBehavior(Type messageType)
+        //{
+        //    if (!typeof(FrameworkMessage).IsAssignableFrom(messageType))
+        //        throw new MessagingException("The message type being processed is not defined correctly.  All messages must extend from MessageBase.");
 
-            System.Reflection.PropertyInfo behaviorProperty = messageType.GetProperty("Behavior", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.FlattenHierarchy);
-            if (behaviorProperty != null)
-            {
-                return (MessageBehavior)behaviorProperty.GetValue(null, null);
-            }
+        //    System.Reflection.PropertyInfo behaviorProperty = messageType.GetProperty("Behavior", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.FlattenHierarchy);
+        //    if (behaviorProperty != null)
+        //    {
+        //        return (MessageBehavior)behaviorProperty.GetValue(null, null);
+        //    }
 
-            if (_transactionMessageAttributeLookup == null)
-                _transactionMessageAttributeLookup = new Dictionary<Type, MessageTransactionBehaviorAttribute>();
+        //    if (_transactionMessageAttributeLookup == null)
+        //        _transactionMessageAttributeLookup = new Dictionary<Type, MessageTransactionBehaviorAttribute>();
 
-            MessageTransactionBehaviorAttribute transactionMessageAttribute;
-            if (_transactionMessageAttributeLookup.ContainsKey(messageType))
-            {
-                transactionMessageAttribute = _transactionMessageAttributeLookup[messageType];
-            }
-            else
-            {
-                MessageTransactionBehaviorAttribute[] attributes = (MessageTransactionBehaviorAttribute[])messageType.GetCustomAttributes(typeof(MessageTransactionBehaviorAttribute), false);
-                if ((attributes != null) && (attributes.Length > 0))
-                {
-                    transactionMessageAttribute = attributes[0];
-                }
-                else
-                {
-                    transactionMessageAttribute = new MessageTransactionBehaviorAttribute();
-                    transactionMessageAttribute.SupportsTransactions = true;
-                    transactionMessageAttribute.RequiresTransactions = false;
-                }
-                _transactionMessageAttributeLookup.Add(messageType, transactionMessageAttribute);
-            }
+        //    MessageTransactionBehaviorAttribute transactionMessageAttribute;
+        //    if (_transactionMessageAttributeLookup.ContainsKey(messageType))
+        //    {
+        //        transactionMessageAttribute = _transactionMessageAttributeLookup[messageType];
+        //    }
+        //    else
+        //    {
+        //        MessageTransactionBehaviorAttribute[] attributes = (MessageTransactionBehaviorAttribute[])messageType.GetCustomAttributes(typeof(MessageTransactionBehaviorAttribute), false);
+        //        if ((attributes != null) && (attributes.Length > 0))
+        //        {
+        //            transactionMessageAttribute = attributes[0];
+        //        }
+        //        else
+        //        {
+        //            transactionMessageAttribute = new MessageTransactionBehaviorAttribute();
+        //            transactionMessageAttribute.SupportsTransactions = true;
+        //            transactionMessageAttribute.RequiresTransactions = false;
+        //        }
+        //        _transactionMessageAttributeLookup.Add(messageType, transactionMessageAttribute);
+        //    }
 
-            return transactionMessageAttribute.Behavior;
+        //    return transactionMessageAttribute.Behavior;
 
-        }
+        //}
 
-        public bool RequiresTwoWay
+        public override bool RequiresTwoWay
         {
             get
             {

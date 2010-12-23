@@ -34,7 +34,7 @@ namespace Open.MOF.BizTalk.Adapters
             }
         }
 
-        protected override MessagingState PerformSubmitMessage(FrameworkMessage message)
+        protected override MessagingState PerformSubmitMessage(SimpleMessage message)
         {
             IEsbMessageHandler handler = EsbMessageHandlerFactory.GetHandlerInstance(_channelEndpointName);
 
@@ -126,7 +126,7 @@ namespace Open.MOF.BizTalk.Adapters
             get { return (Open.MOF.Messaging.Adapters.AdapterInterfaceType.ExceptionService); }
         }
 
-        protected override bool CanSupportMessage(FrameworkMessage message)
+        protected override bool CanSupportMessage(SimpleMessage message)
         {
             MessageBehavior behavior = message.GetMessageBehavior();
             bool messageHasValidBehavior = (behavior == MessageBehavior.FaultReporting);

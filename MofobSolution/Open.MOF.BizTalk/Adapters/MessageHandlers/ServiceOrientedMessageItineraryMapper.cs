@@ -16,7 +16,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             _messageItineraryMapCache = new Dictionary<string, ItineraryDescription>();
         }
 
-        public ItineraryDescription MapMessageToItinerary(FrameworkMessage message)
+        public ItineraryDescription MapMessageToItinerary(SimpleMessage message)
         {
             if (message is Open.MOF.BizTalk.Messages.MessageItineraryMappingRequestMessage)
             {

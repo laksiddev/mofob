@@ -63,7 +63,10 @@ namespace Open.MOF.BizTalk.Test
             {
                 Assert.IsNotNull(adapter);
                 Assert.IsInstanceOfType(adapter, typeof(Open.MOF.BizTalk.Adapters.EsbMessagingAdapter));
-                responseMessage = adapter.SubmitMessage(message);
+
+                SimpleMessage simpleMessage = adapter.SubmitMessage(message);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
@@ -108,7 +111,9 @@ namespace Open.MOF.BizTalk.Test
                 _waitHandle = new System.Threading.AutoResetEvent(false);
                 _waitHandle.WaitOne();
 
-                responseMessage = adapter.EndSubmitMessage(asyncResult);
+                SimpleMessage simpleMessage = adapter.EndSubmitMessage(asyncResult);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
@@ -143,7 +148,10 @@ namespace Open.MOF.BizTalk.Test
             {
                 Assert.IsNotNull(adapter);
                 Assert.IsInstanceOfType(adapter, typeof(Open.MOF.BizTalk.Adapters.EsbExceptionAdapter));
-                responseMessage = adapter.SubmitMessage(fault);
+
+                SimpleMessage simpleMessage = adapter.SubmitMessage(fault);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
@@ -189,7 +197,9 @@ namespace Open.MOF.BizTalk.Test
                 _waitHandle = new System.Threading.AutoResetEvent(false);
                 _waitHandle.WaitOne();
 
-                responseMessage = adapter.EndSubmitMessage(asyncResult);
+                SimpleMessage simpleMessage = adapter.EndSubmitMessage(asyncResult);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);

@@ -9,6 +9,6 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
 {
     internal interface IMessageItineraryMapper 
     {
-        ItineraryDescription MapMessageToItinerary(FrameworkMessage message);
+        ItineraryDescription MapMessageToItinerary(SimpleMessage message);
     }
 }

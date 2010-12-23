@@ -14,14 +14,14 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
     {
         protected string _channelEndpointName;
         protected ChannelFactory<T> _channelFactory = null;
-        protected Dictionary<FrameworkMessage, T> _asyncChannelCache;
+        protected Dictionary<SimpleMessage, T> _asyncChannelCache;
         internal ItineraryDescription _cachedItineraryDescription;
  
         public EsbMessageHandler()
         {
             _channelEndpointName = null;
             _channelFactory = new ChannelFactory<T>();
-            _asyncChannelCache = new Dictionary<FrameworkMessage, T>();
+            _asyncChannelCache = new Dictionary<SimpleMessage, T>();
             _cachedItineraryDescription = null;
         }
 
@@ -29,7 +29,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
         {
             _channelEndpointName = channelEndpointName;
             _channelFactory = new ChannelFactory<T>(_channelEndpointName);
-            _asyncChannelCache = new Dictionary<FrameworkMessage, T>();
+            _asyncChannelCache = new Dictionary<SimpleMessage, T>();
             _cachedItineraryDescription = null;
         }
 
@@ -79,11 +79,11 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
         public MessagingState EndSubmitMessage(IAsyncResult ar)
         {
             MessagingState messagingState = (MessagingState)ar.AsyncState;
-            FrameworkMessage requestMessage = messagingState.RequestMessage;
+            SimpleMessage requestMessage = messagingState.RequestMessage;
             if (!_asyncChannelCache.ContainsKey(requestMessage))
                 throw new ApplicationException("Invalid condition detected.  Communication channel was not found in the cache.");
 
-            FrameworkMessage responseMessage = null;
+            SimpleMessage responseMessage = null;
             lock (_asyncChannelCache)
             {
                 T channel = _asyncChannelCache[requestMessage];
@@ -116,16 +116,19 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             bool processedAsync = true;
             MessageHandlingSummary handlingSummary = new MessageHandlingSummary(wasDelivered, responseReceived, processedAsync);
 
-            responseMessage.RelatedMessageId = requestMessage.MessageId;
+            if ((requestMessage is FrameworkMessage) && (responseMessage is FrameworkMessage))
+            {
+                ((FrameworkMessage)responseMessage).RelatedMessageId = ((FrameworkMessage)requestMessage).MessageId;
+            }
             messagingState.ResponseMessage = responseMessage;
             messagingState.HandlingSummary = handlingSummary;
 
             return messagingState;
         }
 
-        public MessagingState PerformSubmitMessage(FrameworkMessage requestMessage)
+        public MessagingState PerformSubmitMessage(SimpleMessage requestMessage)
         {
-            FrameworkMessage responseMessage = null;
+            SimpleMessage responseMessage = null;
             lock (_channelFactory)
             {
                 if (_channelFactory.State != CommunicationState.Opened)
@@ -163,12 +166,15 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             bool processedAsync = false;
             MessageHandlingSummary handlingSummary = new MessageHandlingSummary(wasDelivered, responseReceived, processedAsync);
 
-            responseMessage.RelatedMessageId = requestMessage.MessageId;
+            if ((requestMessage is FrameworkMessage) && (responseMessage is FrameworkMessage))
+            {
+                ((FrameworkMessage)responseMessage).RelatedMessageId = ((FrameworkMessage)requestMessage).MessageId;
+            }
 
             return new MessagingState(requestMessage, handlingSummary, responseMessage);
         }
 
-        public abstract bool CanSupportMessage(FrameworkMessage message);
+        public abstract bool CanSupportMessage(SimpleMessage message);
 
         public void Dispose()
         {
@@ -183,11 +189,11 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
 
         protected abstract IAsyncResult InvokeChannelBeginAync(T channel, MessagingState messagingState, AsyncCallback messageDeliveredCallback);
 
-        protected abstract FrameworkMessage InvokeChannelEndAsync(T channel, IAsyncResult ar);
+        protected abstract SimpleMessage InvokeChannelEndAsync(T channel, IAsyncResult ar);
 
-        protected abstract FrameworkMessage InvokeChannelSync(T channel, FrameworkMessage requestMessage);
+        protected abstract SimpleMessage InvokeChannelSync(T channel, SimpleMessage requestMessage);
 
-        internal ItineraryDescription MapMessageToItinerary(FrameworkMessage message)
+        internal ItineraryDescription MapMessageToItinerary(SimpleMessage message)
         {
             IMessageItineraryMapper mapper = ServiceLocator.Current.GetInstance<IMessageItineraryMapper>();
             ItineraryDescription itineraryDescription = mapper.MapMessageToItinerary(message);

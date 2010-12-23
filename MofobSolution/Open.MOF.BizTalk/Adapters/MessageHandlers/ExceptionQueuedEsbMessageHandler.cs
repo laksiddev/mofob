@@ -32,7 +32,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             }
         }
 
-        public override bool CanSupportMessage(FrameworkMessage message)
+        public override bool CanSupportMessage(SimpleMessage message)
         {
             bool isFaultMessage = (message is Open.MOF.Messaging.FaultMessage);
             bool isMessageSupported = (isFaultMessage);
@@ -51,7 +51,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return channel.BeginSubmitFault(faultRequest, messageDeliveredCallback, messagingState);
         }
 
-        protected override FrameworkMessage InvokeChannelEndAsync(Open.MOF.BizTalk.Adapters.Proxy.Queued.EsbExceptionServiceInstance.ExceptionHandlingChannel channel, 
+        protected override SimpleMessage InvokeChannelEndAsync(Open.MOF.BizTalk.Adapters.Proxy.Queued.EsbExceptionServiceInstance.ExceptionHandlingChannel channel, 
             IAsyncResult ar)
         {
             channel.EndSubmitFault(ar);
@@ -61,8 +61,8 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return responseMessage;
         }
 
-        protected override FrameworkMessage InvokeChannelSync(Open.MOF.BizTalk.Adapters.Proxy.Queued.EsbExceptionServiceInstance.ExceptionHandlingChannel channel, 
-            FrameworkMessage requestMessage)
+        protected override SimpleMessage InvokeChannelSync(Open.MOF.BizTalk.Adapters.Proxy.Queued.EsbExceptionServiceInstance.ExceptionHandlingChannel channel, 
+            SimpleMessage requestMessage)
         {
             Open.MOF.BizTalk.Adapters.Proxy.Queued.EsbExceptionServiceInstance.SubmitFaultRequest faultRequest =
                 MapMessageToFaultRequest(requestMessage);
@@ -74,7 +74,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return responseMessage;
         }
 
-        private Open.MOF.BizTalk.Adapters.Proxy.Queued.EsbExceptionServiceInstance.SubmitFaultRequest MapMessageToFaultRequest(FrameworkMessage requestMessage)
+        private Open.MOF.BizTalk.Adapters.Proxy.Queued.EsbExceptionServiceInstance.SubmitFaultRequest MapMessageToFaultRequest(SimpleMessage requestMessage)
         {
             Open.MOF.Messaging.FaultMessage localFaultMessage = (Open.MOF.Messaging.FaultMessage)requestMessage;
             QueuedFaultMessageConverter converter = new QueuedFaultMessageConverter();

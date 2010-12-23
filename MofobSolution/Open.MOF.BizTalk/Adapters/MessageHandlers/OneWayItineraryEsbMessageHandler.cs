@@ -36,7 +36,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             }
         }
 
-        public override bool CanSupportMessage(FrameworkMessage message)
+        public override bool CanSupportMessage(SimpleMessage message)
         {
             IMessageItineraryMapper mapper = ServiceLocator.Current.GetInstance<IMessageItineraryMapper>();
             _cachedItineraryDescription = mapper.MapMessageToItinerary(message);
@@ -59,7 +59,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return channel.BeginSubmitRequest(itineraryRequest, messageDeliveredCallback, messagingState);
         }
 
-        protected override FrameworkMessage InvokeChannelEndAsync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.ProcessRequestChannel channel,
+        protected override SimpleMessage InvokeChannelEndAsync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.ProcessRequestChannel channel,
             IAsyncResult ar)
         {
             Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestResponse response =
@@ -70,8 +70,8 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return responseMessage;
         }
 
-        protected override FrameworkMessage InvokeChannelSync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.ProcessRequestChannel channel,
-            FrameworkMessage requestMessage)
+        protected override SimpleMessage InvokeChannelSync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.ProcessRequestChannel channel,
+            SimpleMessage requestMessage)
         {
             Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestRequest itineraryRequest =
                 MapMessageToItineraryRequest(requestMessage);
@@ -84,7 +84,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return responseMessage;
         }
 
-        private Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestRequest MapMessageToItineraryRequest(FrameworkMessage requestMessage)
+        private Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestRequest MapMessageToItineraryRequest(SimpleMessage requestMessage)
         {
             _cachedItineraryDescription = MapMessageToItinerary(requestMessage);
 

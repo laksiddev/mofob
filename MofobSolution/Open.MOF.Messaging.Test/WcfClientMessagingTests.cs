@@ -59,7 +59,9 @@ namespace Open.MOF.Messaging.Test
                 Assert.IsFalse((adapter.CanSupportInterface(AdapterInterfaceType.ExceptionService)), "An incorrect item was returned.");
                 //Assert.IsFalse((adapter.CanSupportInterface(AdapterInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
-                FrameworkMessage responseMessage = adapter.SubmitMessage(testMessage);
+                SimpleMessage simpleMessage = adapter.SubmitMessage(testMessage);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                FrameworkMessage responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(responseMessage, "No item was returned.");
                 Assert.AreEqual(typeof(TestDataResponseMessage), responseMessage.GetType(), "An incorrect type was returned.");
@@ -97,7 +99,9 @@ namespace Open.MOF.Messaging.Test
                 FrameworkMessage responseMessage = null;
                 if (_asyncResult != null)
                 {
-                    responseMessage = adapter.EndSubmitMessage(_asyncResult);
+                    SimpleMessage simpleMessage = adapter.EndSubmitMessage(_asyncResult);
+                    Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                    responseMessage = (FrameworkMessage)simpleMessage;
                 }
 
                 Assert.IsNotNull(responseMessage, "No item was returned.");
@@ -128,7 +132,9 @@ namespace Open.MOF.Messaging.Test
                 Assert.IsFalse((adapter.CanSupportInterface(AdapterInterfaceType.ExceptionService)), "An incorrect item was returned.");
                 //Assert.IsFalse((adapter.CanSupportInterface(AdapterInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
-                FrameworkMessage responseMessage = adapter.SubmitMessage(testMessage);
+                SimpleMessage simpleMessage = adapter.SubmitMessage(testMessage);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                FrameworkMessage responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(responseMessage, "No item was returned.");
                 Assert.AreEqual(typeof(Open.MOF.Messaging.Test.WcfServiceProxyReference.TestDataResponseMessage), responseMessage.GetType(), "An incorrect type was returned.");
@@ -157,7 +163,9 @@ namespace Open.MOF.Messaging.Test
                 Assert.IsFalse((adapter.CanSupportInterface(AdapterInterfaceType.ExceptionService)), "An incorrect item was returned.");
                 //Assert.IsFalse((adapter.CanSupportInterface(AdapterInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
-                FrameworkMessage responseMessage1 = adapter.SubmitMessage(testMessage);
+                SimpleMessage simpleMessage = adapter.SubmitMessage(testMessage);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                FrameworkMessage responseMessage1 = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(responseMessage1, "No item was returned.");
                 Assert.AreEqual(typeof(TestDataResponseMessage), responseMessage1.GetType(), "An incorrect type was returned.");
@@ -170,7 +178,9 @@ namespace Open.MOF.Messaging.Test
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ProcessedAsync);
 
-                FrameworkMessage responseMessage2 = adapter.SubmitMessage(testMessage);
+                simpleMessage = adapter.SubmitMessage(testMessage);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                FrameworkMessage responseMessage2 = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(responseMessage2, "No item was returned.");
                 Assert.AreEqual(typeof(TestDataResponseMessage), responseMessage2.GetType(), "An incorrect type was returned.");
@@ -184,7 +194,9 @@ namespace Open.MOF.Messaging.Test
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ProcessedAsync);
 
-                FrameworkMessage responseMessage3 = adapter.SubmitMessage(testMessage);
+                simpleMessage = adapter.SubmitMessage(testMessage);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                FrameworkMessage responseMessage3 = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(responseMessage3, "No item was returned.");
                 Assert.AreEqual(typeof(TestDataResponseMessage), responseMessage3.GetType(), "An incorrect type was returned.");
@@ -199,7 +211,9 @@ namespace Open.MOF.Messaging.Test
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ProcessedAsync);
 
-                FrameworkMessage responseMessage4 = adapter.SubmitMessage(testMessage);
+                simpleMessage = adapter.SubmitMessage(testMessage);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                FrameworkMessage responseMessage4 = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(responseMessage4, "No item was returned.");
                 Assert.AreEqual(typeof(TestDataResponseMessage), responseMessage4.GetType(), "An incorrect type was returned.");
@@ -215,7 +229,9 @@ namespace Open.MOF.Messaging.Test
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ProcessedAsync);
 
-                FrameworkMessage responseMessage5 = adapter.SubmitMessage(testMessage);
+                simpleMessage = adapter.SubmitMessage(testMessage);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                FrameworkMessage responseMessage5 = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(responseMessage5, "No item was returned.");
                 Assert.AreEqual(typeof(TestDataResponseMessage), responseMessage5.GetType(), "An incorrect type was returned.");
@@ -249,7 +265,9 @@ namespace Open.MOF.Messaging.Test
                 Assert.IsFalse((adapter.CanSupportInterface(AdapterInterfaceType.ExceptionService)), "An incorrect item was returned.");
                 //Assert.IsFalse((adapter.CanSupportInterface(AdapterInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
-                FrameworkMessage responseMessage = adapter.SubmitMessage(testMessage);
+                SimpleMessage simpleMessage = adapter.SubmitMessage(testMessage);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                FrameworkMessage responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(responseMessage, "No item was returned.");
                 Assert.AreEqual(typeof(TestDataResponseMessage), responseMessage.GetType(), "An incorrect type was returned.");
@@ -279,7 +297,9 @@ namespace Open.MOF.Messaging.Test
                 Assert.IsFalse((adapter.CanSupportInterface(AdapterInterfaceType.ExceptionService)), "An incorrect item was returned.");
                 //Assert.IsFalse((adapter.CanSupportInterface(AdapterInterfaceType.SubscriptionService)), "An incorrect item was returned.");
 
-                FrameworkMessage responseMessage = adapter.SubmitMessage(testMessage);
+                SimpleMessage simpleMessage = adapter.SubmitMessage(testMessage);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                FrameworkMessage responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(responseMessage, "No item was returned.");
                 Assert.AreEqual(typeof(TestDataResponseMessage), responseMessage.GetType(), "An incorrect type was returned.");

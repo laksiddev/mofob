@@ -36,9 +36,13 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             }
         }
 
-        public override bool CanSupportMessage(FrameworkMessage message)
+        public override bool CanSupportMessage(SimpleMessage message)
         {
-            bool messageHasSendToAddress = ((message.To != null) && (message.To.IsValid()));
+            bool messageHasSendToAddress = false;
+            if (message is FrameworkMessage)
+            {
+                messageHasSendToAddress = ((((FrameworkMessage)message).To != null) && (((FrameworkMessage)message).To.IsValid()));
+            }
             bool messageSupportsOneWay = !message.RequiresTwoWay;
             bool isMessageSupported = (messageHasSendToAddress && messageSupportsOneWay);
 
@@ -56,7 +60,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return channel.BeginSubmitRequest(itineraryRequest, messageDeliveredCallback, messagingState);
         }
 
-        protected override FrameworkMessage InvokeChannelEndAsync(Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.ProcessRequestChannel channel, 
+        protected override SimpleMessage InvokeChannelEndAsync(Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.ProcessRequestChannel channel, 
             IAsyncResult ar)
         {
             Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.SubmitRequestResponse response =
@@ -67,8 +71,8 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return responseMessage;
         }
 
-        protected override FrameworkMessage InvokeChannelSync(Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.ProcessRequestChannel channel, 
-            FrameworkMessage requestMessage)
+        protected override SimpleMessage InvokeChannelSync(Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.ProcessRequestChannel channel, 
+            SimpleMessage requestMessage)
         {
             Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.SubmitRequestRequest itineraryRequest =
                 MapMessageToItineraryRequest(requestMessage);
@@ -81,7 +85,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return responseMessage;
         }
 
-        private Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.SubmitRequestRequest MapMessageToItineraryRequest(FrameworkMessage requestMessage)
+        private Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.SubmitRequestRequest MapMessageToItineraryRequest(SimpleMessage requestMessage)
         {
             System.ComponentModel.TypeConverter converter = new OneWayQueuedItineraryConverter();
             Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.Itinerary itinerary =

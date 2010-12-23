@@ -19,8 +19,8 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
 
         MessagingState EndSubmitMessage(IAsyncResult ar);
 
-        MessagingState PerformSubmitMessage(FrameworkMessage requestMessage);
+        MessagingState PerformSubmitMessage(SimpleMessage requestMessage);
 
-        bool CanSupportMessage(FrameworkMessage message);
+        bool CanSupportMessage(SimpleMessage message);
     }
 }

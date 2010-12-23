@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Open.MOF.Messaging
 {
-    public class MessageReceivedEventArgs : MessagingEventArgs
+    public class TwoWayMessage : SimpleMessage
     {
-        public MessageReceivedEventArgs(SimpleMessage message) : base(message)
+        public override bool RequiresTwoWay
         {
+            get { return true; }
         }
     }
 }

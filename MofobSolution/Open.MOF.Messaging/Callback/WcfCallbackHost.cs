@@ -12,7 +12,7 @@ namespace Open.MOF.Messaging.Callback
     public class WcfCallbackHost : ICallbackHost
     {
         private HandleCallbackDelegate _hadleCallbackDelegate;
-        private bool _isServiceConfigured;
+        //private bool _isServiceConfigured;
         private bool _isServiceRunning;
         private bool _isServiceStarting;
         private AutoResetEvent _startFlag;
@@ -24,7 +24,7 @@ namespace Open.MOF.Messaging.Callback
         public WcfCallbackHost()
         {
             _hadleCallbackDelegate = null;
-            _isServiceConfigured = false;
+            //_isServiceConfigured = false;
             _isServiceRunning = false;
             _endpointUri = null;
         }
@@ -56,8 +56,8 @@ namespace Open.MOF.Messaging.Callback
 
         private void MessageReceivedHandler(object sender, MessageReceivedEventArgs args)
         {
-            if (_hadleCallbackDelegate != null)
-                _hadleCallbackDelegate(sender, args.Message);
+            if ((_hadleCallbackDelegate != null) && (typeof(FrameworkMessage).IsAssignableFrom(args.Message.GetType())))
+                _hadleCallbackDelegate(sender, (FrameworkMessage)args.Message);
         }
 
         private void Start()

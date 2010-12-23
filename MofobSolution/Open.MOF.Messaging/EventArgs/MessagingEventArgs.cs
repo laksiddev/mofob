@@ -6,14 +6,14 @@ namespace Open.MOF.Messaging
 {
     public class MessagingEventArgs : EventArgs
     {
-        private FrameworkMessage _message;
+        private SimpleMessage _message;
 
-        public MessagingEventArgs(FrameworkMessage message) : base()
+        public MessagingEventArgs(SimpleMessage message) : base()
         {
             _message = message;
         }
 
-        public FrameworkMessage Message
+        public SimpleMessage Message
         {
             get { return _message; }
         }

@@ -68,7 +68,9 @@ namespace Open.MOF.BizTalk.Test
                 message.To = new MessagingEndpoint("http://someendpoint/", "someAction");
                 Assert.IsTrue(((Open.MOF.Messaging.Adapters.MessagingAdapter)adapter).CanSupportMessage(message));
 
-                responseMessage = adapter.SubmitMessage(message);
+                SimpleMessage simpleMessage = adapter.SubmitMessage(message);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
@@ -112,7 +114,9 @@ namespace Open.MOF.BizTalk.Test
                 _waitHandle = new System.Threading.AutoResetEvent(false);
                 _waitHandle.WaitOne();
 
-                responseMessage = adapter.EndSubmitMessage(asyncResult);
+                SimpleMessage simpleMessage = adapter.EndSubmitMessage(asyncResult);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
@@ -152,7 +156,9 @@ namespace Open.MOF.BizTalk.Test
                 message.To = new MessagingEndpoint("http://someendpoint/", "someAction");
                 Assert.IsTrue(((Open.MOF.Messaging.Adapters.MessagingAdapter)adapter).CanSupportMessage(message));
                 
-                responseMessage = adapter.SubmitMessage(message);
+                SimpleMessage simpleMessage = adapter.SubmitMessage(message);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
@@ -196,7 +202,9 @@ namespace Open.MOF.BizTalk.Test
                 _waitHandle = new System.Threading.AutoResetEvent(false);
                 _waitHandle.WaitOne();
 
-                responseMessage = adapter.EndSubmitMessage(asyncResult);
+                SimpleMessage simpleMessage = adapter.EndSubmitMessage(asyncResult);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);

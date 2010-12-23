@@ -37,11 +37,15 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             }
         }
 
-        public override bool CanSupportMessage(FrameworkMessage message)
+        public override bool CanSupportMessage(SimpleMessage message)
         {
-            List<Type> responseTypes = message.ResponseTypes;
+            List<Type> responseTypes = ((message is FrameworkMessage) ? ((FrameworkMessage)message).ResponseTypes : new List<Type>());
 
-            bool messageHasSendToAddress = ((message.To != null) && (message.To.IsValid()));
+            bool messageHasSendToAddress = false;
+            if (message is FrameworkMessage)
+            {
+                messageHasSendToAddress = ((((FrameworkMessage)message).To != null) && (((FrameworkMessage)message).To.IsValid()));
+            }
             // Open question: Should a two way interface be used if no response type has been defined?
             //bool messageSupportsTwoWay = ((responseTypes != null) && (responseTypes.Count > 0));
             // Until all use cases are determined, if a message does not require two-way, it should not be processed as two-way
@@ -62,13 +66,13 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return channel.BeginSubmitRequestResponse(itineraryRequest, messageDeliveredCallback, messagingState);
         }
 
-        protected override FrameworkMessage InvokeChannelEndAsync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayBundledServiceInstance.ProcessRequestResponseChannel channel, 
+        protected override SimpleMessage InvokeChannelEndAsync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayBundledServiceInstance.ProcessRequestResponseChannel channel, 
             IAsyncResult ar)
         {
             Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayBundledServiceInstance.SubmitRequestResponseResponse itineraryResponse
                 = channel.EndSubmitRequestResponse(ar);
 
-            FrameworkMessage responseMessage = null;
+            SimpleMessage responseMessage = null;
             string messageXml = null;
             // HACK The data coming back from BizTalk is in an odd format.  It needs to be parsed as follows.
             if (itineraryResponse.part is XmlNode[])
@@ -98,8 +102,8 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return responseMessage;
         }
 
-        protected override FrameworkMessage InvokeChannelSync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayBundledServiceInstance.ProcessRequestResponseChannel channel, 
-            FrameworkMessage requestMessage)
+        protected override SimpleMessage InvokeChannelSync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayBundledServiceInstance.ProcessRequestResponseChannel channel, 
+            SimpleMessage requestMessage)
         {
             Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayBundledServiceInstance.SubmitRequestResponseRequest itineraryRequest =
                 MapMessageToItineraryRequest(requestMessage);
@@ -137,7 +141,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return responseMessage;
         }
 
-        private Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayBundledServiceInstance.SubmitRequestResponseRequest MapMessageToItineraryRequest(FrameworkMessage requestMessage)
+        private Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayBundledServiceInstance.SubmitRequestResponseRequest MapMessageToItineraryRequest(SimpleMessage requestMessage)
         {
             // TODO need to change to static itinerary
             IMessageItineraryMapper mapper = ServiceLocator.Current.GetInstance<IMessageItineraryMapper>();

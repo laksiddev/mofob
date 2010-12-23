@@ -10,13 +10,13 @@ namespace Open.MOF.Messaging.Adapters
     {
         MessageHandlingSummary MessageHandlingSummary { get; }
 
-        FrameworkMessage SubmitMessage(FrameworkMessage message);
+        SimpleMessage SubmitMessage(SimpleMessage message);
 
-        FrameworkMessage SubmitMessage(FrameworkMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback);
+        SimpleMessage SubmitMessage(SimpleMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback);
 
-        IAsyncResult BeginSubmitMessage(FrameworkMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback);
+        IAsyncResult BeginSubmitMessage(SimpleMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback);
 
-        FrameworkMessage EndSubmitMessage(IAsyncResult ar);
+        SimpleMessage EndSubmitMessage(IAsyncResult ar);
 
         bool CanSupportInterface(AdapterInterfaceType interfaceType);
     }

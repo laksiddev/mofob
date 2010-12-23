@@ -87,8 +87,12 @@
     <Compile Include="Adapters\MessageHandlers\ExceptionQueuedEsbMessageHandler.cs" />
     <Compile Include="Adapters\MessageHandlers\IEsbMessageHandler.cs" />
     <Compile Include="Adapters\MessageHandlers\IItineraryLookupService.cs" />
-    <Compile Include="Adapters\MessageHandlers\IMessageItineraryMapper.cs" />
-    <Compile Include="Adapters\MessageHandlers\ItineraryDescription.cs" />
+    <Compile Include="Adapters\MessageHandlers\IMessageItineraryMapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Adapters\MessageHandlers\ItineraryDescription.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Adapters\MessageHandlers\MessageHandlerLocatorExtender.cs" />
     <Compile Include="Adapters\MessageHandlers\OneWayBundledItineraryEsbMessageHandler.cs" />
     <Compile Include="Adapters\MessageHandlers\OneWayBundledItineraryQueuedEsbMessageHandler.cs" />

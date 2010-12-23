@@ -39,33 +39,37 @@ namespace Open.MOF.Messaging.Adapters
             get { return _channelEndpointName; }
         }
 
-        public FrameworkMessage SubmitMessage(FrameworkMessage message)
+        public SimpleMessage SubmitMessage(SimpleMessage message)
         {
             return SubmitMessage(message, null);
         }
 
-        public FrameworkMessage SubmitMessage(FrameworkMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback)
+        public SimpleMessage SubmitMessage(SimpleMessage message, EventHandler<MessageReceivedEventArgs> messageResponseCallback)
         {
             IAsyncResult ar = BeginSubmitMessage(message, messageResponseCallback, null);
             return EndSubmitMessage(ar); 
         }
 
-        public IAsyncResult BeginSubmitMessage(FrameworkMessage requestMessage, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback)
+        public IAsyncResult BeginSubmitMessage(SimpleMessage requestMessage, EventHandler<MessageReceivedEventArgs> messageResponseCallback, AsyncCallback messageDeliveredCallback)
         {
             _messageHandlingSummary = null;
             MessagingState messagingState = new MessagingState(requestMessage, messageResponseCallback);
             AsyncResult<MessagingState> asyncResult = new AsyncResult<MessagingState>(messageDeliveredCallback, messagingState);
 
-            // For a Pub Sub type message expecting a non-TwoWay response, use a PubSub callback adapter
-            if ((requestMessage.ResponseTypes != null) &&
-                (requestMessage.ResponseTypes.Count > 0) &&
-                (!requestMessage.RequiresTwoWay) &&
-                (requestMessage.MessageId.HasValue))
+            if (requestMessage is FrameworkMessage)
             {
-                if (messageResponseCallback != null)
+                FrameworkMessage framewordRequestMessage = (FrameworkMessage)requestMessage;
+                // For a Pub Sub type message expecting a non-TwoWay response, use a PubSub callback adapter
+                if ((framewordRequestMessage.ResponseTypes != null) &&
+                    (framewordRequestMessage.ResponseTypes.Count > 0) &&
+                    (!framewordRequestMessage.RequiresTwoWay) &&
+                    (framewordRequestMessage.MessageId.HasValue))
                 {
-                    IPubSubCallbackAdapter callbackAdapter = ServiceLocator.Current.GetInstance<IPubSubCallbackAdapter>();
-                    callbackAdapter.RegisterCallbackHandler(requestMessage, messageResponseCallback);
+                    if (messageResponseCallback != null)
+                    {
+                        IPubSubCallbackAdapter callbackAdapter = ServiceLocator.Current.GetInstance<IPubSubCallbackAdapter>();
+                        callbackAdapter.RegisterCallbackHandler(framewordRequestMessage, messageResponseCallback);
+                    }
                 }
             }
 
@@ -101,7 +105,7 @@ namespace Open.MOF.Messaging.Adapters
         {
             AsyncResult<MessagingState> asyncResult = (AsyncResult<MessagingState>)state;
             MessagingState messagingState = (MessagingState)asyncResult.AsyncState;
-            FrameworkMessage requestMessage = messagingState.RequestMessage;
+            SimpleMessage requestMessage = messagingState.RequestMessage;
 
             try
             {
@@ -127,9 +131,9 @@ namespace Open.MOF.Messaging.Adapters
             }
         }
 
-        protected abstract MessagingState PerformSubmitMessage(FrameworkMessage message);
+        protected abstract MessagingState PerformSubmitMessage(SimpleMessage message);
 
-        public FrameworkMessage EndSubmitMessage(IAsyncResult ar)
+        public SimpleMessage EndSubmitMessage(IAsyncResult ar)
         {
             MessagingState messagingState = ((AsyncResult<MessagingState>)ar).EndInvoke();
             _messageHandlingSummary = messagingState.HandlingSummary;
@@ -139,7 +143,7 @@ namespace Open.MOF.Messaging.Adapters
 
         protected abstract AdapterInterfaceType SuportedAdapterInterfaces { get; }
 
-        protected internal abstract bool CanSupportMessage(FrameworkMessage message);
+        protected internal abstract bool CanSupportMessage(SimpleMessage message);
 
         public bool CanSupportInterface(AdapterInterfaceType interfaceType)
         {
@@ -148,7 +152,7 @@ namespace Open.MOF.Messaging.Adapters
 
         public abstract void Dispose();
 
-        public static IMessagingAdapter CreateInstance(FrameworkMessage message)
+        public static IMessagingAdapter CreateInstance(SimpleMessage message)
         {
             int preferenceOffset = 0;
             bool areServiceInstancesAvailable = true;
@@ -185,7 +189,7 @@ namespace Open.MOF.Messaging.Adapters
 
         protected internal static IMessagingAdapter CreateInstance(System.Type messageType, int preferenceOffset)
         {
-            MessageBehavior messageBehavior = FrameworkMessage.GetMessageBehavior(messageType);
+            MessageBehavior messageBehavior = SimpleMessage.GetMessageBehavior(messageType);
             if (messageBehavior == MessageBehavior.TransactionsRequired)
             {
                 return CreateInstance(AdapterInterfaceType.TransactionService, preferenceOffset);

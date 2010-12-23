@@ -76,9 +76,12 @@
     <Compile Include="MessageSerializationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WcfClientMessagingTests.cs" />
+    <Compile Include="WcfService\ISimpleService.cs" />
     <Compile Include="WcfService\ProxyInterface.cs" />
     <Compile Include="WcfService\ITestDataService.cs" />
+    <Compile Include="WcfService\SimpleService.cs" />
     <Compile Include="WcfService\TestDataService.cs" />
+    <Compile Include="WcfSimpleMessagingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />

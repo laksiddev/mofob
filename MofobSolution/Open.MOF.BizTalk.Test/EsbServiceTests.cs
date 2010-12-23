@@ -25,7 +25,7 @@ namespace Open.MOF.BizTalk.Test
         private static Type _messageType;
         private static string _methodName;
 
-        private FrameworkMessage _messageReceivedCallbackMessage;
+        private SimpleMessage _messageReceivedCallbackMessage;
         
         public EsbServiceTests()
         {
@@ -67,7 +67,9 @@ namespace Open.MOF.BizTalk.Test
             {
                 Assert.IsNotNull(adapter);
                 Assert.IsInstanceOfType(adapter, typeof(Open.MOF.BizTalk.Adapters.EsbExceptionAdapter));
-                responseMessage = adapter.SubmitMessage(fault);
+                SimpleMessage simpleMessage = adapter.SubmitMessage(fault);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
@@ -108,7 +110,9 @@ namespace Open.MOF.BizTalk.Test
                 _asyncWaitHandle = new System.Threading.AutoResetEvent(false);
                 _asyncWaitHandle.WaitOne();
 
-                responseMessage = adapter.EndSubmitMessage(asyncResult);
+                SimpleMessage simpleMessage = adapter.EndSubmitMessage(asyncResult);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
@@ -143,7 +147,10 @@ namespace Open.MOF.BizTalk.Test
             {
                 Assert.IsNotNull(adapter);
                 Assert.IsInstanceOfType(adapter, typeof(Open.MOF.BizTalk.Adapters.EsbMessagingAdapter));
-                responseMessage = adapter.SubmitMessage(message);
+
+                SimpleMessage simpleMessage = adapter.SubmitMessage(message);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.OneWayItineraryEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
@@ -185,7 +192,9 @@ namespace Open.MOF.BizTalk.Test
                 _asyncWaitHandle = new System.Threading.AutoResetEvent(false);
                 _asyncWaitHandle.WaitOne();
 
-                responseMessage = adapter.EndSubmitMessage(asyncResult);
+                SimpleMessage simpleMessage = adapter.EndSubmitMessage(asyncResult);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.OneWayItineraryEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
@@ -221,7 +230,10 @@ namespace Open.MOF.BizTalk.Test
             {
                 Assert.IsNotNull(adapter);
                 Assert.IsInstanceOfType(adapter, typeof(Open.MOF.BizTalk.Adapters.EsbMessagingAdapter));
-                responseMessage = adapter.SubmitMessage(message);
+
+                SimpleMessage simpleMessage = adapter.SubmitMessage(message);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.TwoWayItineraryEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
@@ -261,7 +273,10 @@ namespace Open.MOF.BizTalk.Test
 
                 Assert.IsNotNull(adapter);
                 Assert.IsInstanceOfType(adapter, typeof(Open.MOF.BizTalk.Adapters.EsbMessagingAdapter));
-                responseMessage = adapter.SubmitMessage(message, new EventHandler<MessageReceivedEventArgs>(CallbackMessageReceivedHandler));
+
+                SimpleMessage simpleMessage = adapter.SubmitMessage(message, new EventHandler<MessageReceivedEventArgs>(CallbackMessageReceivedHandler));
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 _receivedWaitHandle.WaitOne();
 
@@ -288,7 +303,8 @@ namespace Open.MOF.BizTalk.Test
             // The _messageReceivedCallbackMessage should have been set in the callback method
             Assert.IsNotNull(_messageReceivedCallbackMessage);
             Assert.IsInstanceOfType(_messageReceivedCallbackMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
-            Assert.AreEqual(message.MessageId, _messageReceivedCallbackMessage.RelatedMessageId);
+            Assert.IsInstanceOfType(_messageReceivedCallbackMessage, typeof(FrameworkMessage));
+            Assert.AreEqual(message.MessageId, ((FrameworkMessage)_messageReceivedCallbackMessage).RelatedMessageId);
             Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)_messageReceivedCallbackMessage).Context);
         }
 
@@ -311,7 +327,9 @@ namespace Open.MOF.BizTalk.Test
                 _asyncWaitHandle = new System.Threading.AutoResetEvent(false);
                 _asyncWaitHandle.WaitOne();
 
-                responseMessage = adapter.EndSubmitMessage(asyncResult);
+                SimpleMessage simpleMessage = adapter.EndSubmitMessage(asyncResult);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.TwoWayItineraryEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
@@ -356,7 +374,9 @@ namespace Open.MOF.BizTalk.Test
                 _asyncWaitHandle.WaitOne();
                 _receivedWaitHandle.WaitOne();
 
-                responseMessage = adapter.EndSubmitMessage(asyncResult);
+                SimpleMessage simpleMessage = adapter.EndSubmitMessage(asyncResult);
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
                 Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.TwoWayItineraryEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
@@ -381,7 +401,8 @@ namespace Open.MOF.BizTalk.Test
             // The _messageReceivedCallbackMessage should have been set in the callback method
             Assert.IsNotNull(_messageReceivedCallbackMessage);
             Assert.IsInstanceOfType(_messageReceivedCallbackMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
-            Assert.AreEqual(message.MessageId, _messageReceivedCallbackMessage.RelatedMessageId);
+            Assert.IsInstanceOfType(_messageReceivedCallbackMessage, typeof(FrameworkMessage));
+            Assert.AreEqual(message.MessageId, ((FrameworkMessage)_messageReceivedCallbackMessage).RelatedMessageId);
             Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)_messageReceivedCallbackMessage).Context);
         }
 
@@ -401,7 +422,10 @@ namespace Open.MOF.BizTalk.Test
 
                 Assert.IsNotNull(adapter);
                 Assert.IsInstanceOfType(adapter, typeof(Open.MOF.BizTalk.Adapters.EsbMessagingAdapter));
-                responseMessage = adapter.SubmitMessage(message, new EventHandler<MessageReceivedEventArgs>(CallbackMessageReceivedHandler));
+
+                SimpleMessage simpleMessage = adapter.SubmitMessage(message, new EventHandler<MessageReceivedEventArgs>(CallbackMessageReceivedHandler));
+                Assert.IsInstanceOfType(simpleMessage, typeof(FrameworkMessage));
+                responseMessage = (FrameworkMessage)simpleMessage;
 
                 _receivedWaitHandle.WaitOne();
 

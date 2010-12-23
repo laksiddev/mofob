@@ -47,7 +47,7 @@ namespace Open.MOF.BizTalk.Adapters
             {
                 _senderAsyncResult = (AsyncResult<MessagingState>)state;
                 MessagingState messagingState = (MessagingState)_senderAsyncResult.AsyncState;
-                FrameworkMessage requestMessage = messagingState.RequestMessage;
+                SimpleMessage requestMessage = messagingState.RequestMessage;
 
                 if (!CanSupportMessage(requestMessage))
                     throw new MessagingException("ESB Framework is attempting to deliver a message using an invalid endpoint.");
@@ -60,7 +60,7 @@ namespace Open.MOF.BizTalk.Adapters
             }
         }
 
-        protected override MessagingState PerformSubmitMessage(FrameworkMessage requestMessage)
+        protected override MessagingState PerformSubmitMessage(SimpleMessage requestMessage)
         {
             IEsbMessageHandler handler = EsbMessageHandlerFactory.GetHandlerInstance(_channelEndpointName);
 
@@ -219,7 +219,7 @@ namespace Open.MOF.BizTalk.Adapters
             }
         }
 
-        protected override bool CanSupportMessage(FrameworkMessage message)
+        protected override bool CanSupportMessage(SimpleMessage message)
         {
             MessageBehavior behavior = message.GetMessageBehavior();
             bool messageHasValidBehavior = ((behavior == MessageBehavior.TransactionsRequired) || (behavior == MessageBehavior.TransactionsSupported));

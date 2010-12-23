@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Open.MOF.Messaging
 {
-    internal class TwoWayResponseMessage : SimpleMessage
+    public class TwoWayResponseMessage : SimpleMessage
     {
         public override bool RequiresTwoWay
         {

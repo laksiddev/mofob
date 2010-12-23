@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BizTalkTests.cs" />
     <Compile Include="EsbBundledServiceTests.cs">
       <SubType>Code</SubType>
     </Compile>

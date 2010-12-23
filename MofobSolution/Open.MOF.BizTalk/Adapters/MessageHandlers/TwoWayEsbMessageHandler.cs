@@ -75,7 +75,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.SubmitRequestResponseResponse itineraryResponse
                 = channel.EndSubmitRequestResponse(ar);
 
-            FrameworkMessage responseMessage = null;
+            SimpleMessage responseMessage = null;
             string messageXml = null;
             // HACK The data coming back from BizTalk is in an odd format.  It needs to be parsed as follows.
             if (itineraryResponse.part is XmlNode[])
@@ -98,8 +98,8 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
 
             if (responseMessage == null)
             {
-                EventLogUtility.LogWarningMessage(String.Format("Message could not be decoded: {0}", messageXml));
-                responseMessage = new MessageSubmittedResponse();
+                responseMessage = new Open.MOF.Messaging.TwoWayResponseMessage();
+                responseMessage.LoadContent(messageXml);
             }
 
             return responseMessage;
@@ -114,7 +114,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.SubmitRequestResponseResponse itineraryResponse =
                 channel.SubmitRequestResponse(itineraryRequest);
 
-            FrameworkMessage responseMessage = null;
+            SimpleMessage responseMessage = null;
             string messageXml = null;
             // HACK The data coming back from BizTalk is in an odd format.  It needs to be parsed as follows.
             if (itineraryResponse.part is XmlNode[])
@@ -137,8 +137,8 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
 
             if (responseMessage == null)
             {
-                EventLogUtility.LogWarningMessage(String.Format("Message could not be decoded: {0}", messageXml));
-                responseMessage = new MessageSubmittedResponse();
+                responseMessage = new Open.MOF.Messaging.TwoWayResponseMessage();
+                responseMessage.LoadContent(messageXml);
             }
 
             return responseMessage;

@@ -23,10 +23,10 @@ namespace Open.MOF.BizTalk.Adapters
             {
                 return true;
             }
-            else if (sourceType == typeof(Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription))
-            {
-                return true;
-            }
+            //else if (sourceType == typeof(Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription))
+            //{
+            //    return true;
+            //}
 
             return base.CanConvertFrom(context, sourceType);
         }
@@ -38,39 +38,39 @@ namespace Open.MOF.BizTalk.Adapters
                 Open.MOF.Messaging.FrameworkMessage message = (Open.MOF.Messaging.FrameworkMessage)value;
 
                 string resolverString = GetStaticResolverString(message.To);
-                Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.Itinerary itinerary = BuildItinerary(resolverString);
+                Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.Itinerary itinerary = BuildItinerary(resolverString);
 
                 return itinerary;
             }
-            else if (value is Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription)
-            {
-                Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription itineraryDescription = (Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription)value;
+            //else if (value is Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription)
+            //{
+            //    Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription itineraryDescription = (Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription)value;
 
-                string resolverString = GetSelectorResolverString(itineraryDescription);
-                Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.Itinerary itinerary = BuildItinerary(resolverString);
+            //    string resolverString = GetSelectorResolverString(itineraryDescription);
+            //    Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.Itinerary itinerary = BuildItinerary(resolverString);
 
-                return itinerary;
-            }
+            //    return itinerary;
+            //}
 
             return base.ConvertFrom(context, culture, value);
         }
 
-        private Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.Itinerary BuildItinerary(string resolverString)
+        private Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.Itinerary BuildItinerary(string resolverString)
         {
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.Itinerary itinerary = new Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.Itinerary();
+            Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.Itinerary itinerary = new Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.Itinerary();
             string itineraryUUID = Guid.NewGuid().ToString();
             string serviceName = (((ConfigurationManager.AppSettings["EsbServiceName"] != null) && (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["EsbServiceName"]))) ? ConfigurationManager.AppSettings["EsbServiceName"] : _constDefaultServiceName);
 
-            List<Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.ItineraryServices> wcfItineraryServices = new List<Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.ItineraryServices>();
-            List<Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.ItineraryResolvers> wcfItineraryResolvers = new List<Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.ItineraryResolvers>();
+            List<Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.ItineraryServices> wcfItineraryServices = new List<Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.ItineraryServices>();
+            List<Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.ItineraryResolvers> wcfItineraryResolvers = new List<Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.ItineraryResolvers>();
 
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.ItineraryResolvers itinResolvers = new Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.ItineraryResolvers();
+            Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.ItineraryResolvers itinResolvers = new Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.ItineraryResolvers();
             itinResolvers.serviceId = serviceName + "0";
             itinResolvers.Value = resolverString; //GetResolverString(message);
             wcfItineraryResolvers.Add(itinResolvers);
 
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.ItineraryServices services = new Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.ItineraryServices();
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.ItineraryServicesService srv = new Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.ItineraryServicesService();
+            Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.ItineraryServices services = new Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.ItineraryServices();
+            Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.ItineraryServicesService srv = new Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.ItineraryServicesService();
             srv.type = _constServiceType;
             srv.name = serviceName;
             srv.isRequestResponseSpecified = true;
@@ -94,7 +94,7 @@ namespace Open.MOF.BizTalk.Adapters
             itinerary.beginTime = String.Empty;
             itinerary.completeTime = String.Empty;
 
-            itinerary.ServiceInstance = new Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayBundledServiceInstance.ItineraryServiceInstance();
+            itinerary.ServiceInstance = new Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayAddressedServiceInstance.ItineraryServiceInstance();
             itinerary.ServiceInstance.name = serviceName;
             itinerary.ServiceInstance.isRequestResponseSpecified = true;
             itinerary.ServiceInstance.isRequestResponse = _constIsRequestResponse;
@@ -179,24 +179,24 @@ namespace Open.MOF.BizTalk.Adapters
             return sb.ToString();
         }
 
-        private string GetSelectorResolverString(Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription itineraryDescription)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("<![CDATA[");
-            sb.Append("ITINERARY");
-            sb.Append(@":\\");
+        //private string GetSelectorResolverString(Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription itineraryDescription)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.Append("<![CDATA[");
+        //    sb.Append("ITINERARY");
+        //    sb.Append(@":\\");
 
-            sb.Append("name=");
-            sb.Append(((!string.IsNullOrEmpty(itineraryDescription.ItineraryName)) ? itineraryDescription.ItineraryName : string.Empty));
-            sb.Append(";");
+        //    sb.Append("name=");
+        //    sb.Append(((!string.IsNullOrEmpty(itineraryDescription.ItineraryName)) ? itineraryDescription.ItineraryName : string.Empty));
+        //    sb.Append(";");
 
-            sb.Append("version=");
-            sb.Append(((!string.IsNullOrEmpty(itineraryDescription.ItineraryVersion)) ? itineraryDescription.ItineraryVersion : string.Empty));
-            sb.Append(";");
+        //    sb.Append("version=");
+        //    sb.Append(((!string.IsNullOrEmpty(itineraryDescription.ItineraryVersion)) ? itineraryDescription.ItineraryVersion : string.Empty));
+        //    sb.Append(";");
 
-            sb.Append("]]>");
+        //    sb.Append("]]>");
 
-            return sb.ToString();
-        } 
+        //    return sb.ToString();
+        //} 
     }
 }

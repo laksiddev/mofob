@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance
+namespace Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance
 {
     
     
@@ -21,12 +21,12 @@ namespace Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance
         // CODEGEN: Generating message contract since message SubmitRequest requires protection.
         [System.ServiceModel.OperationContractAttribute(Action="SubmitRequest", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute()]
-        Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestResponse SubmitRequest(Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestRequest request);
+        Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestResponse SubmitRequest(Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestRequest request);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="SubmitRequest", ReplyAction="*")]
-        System.IAsyncResult BeginSubmitRequest(Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestRequest request, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginSubmitRequest(Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestRequest request, System.AsyncCallback callback, object asyncState);
         
-        Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestResponse EndSubmitRequest(System.IAsyncResult result);
+        Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestResponse EndSubmitRequest(System.IAsyncResult result);
     }
     
     /// <remarks/>
@@ -95,7 +95,7 @@ namespace Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance
     {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.microsoft.biztalk.practices.esb.com/itinerary", ProtectionLevel=System.Net.Security.ProtectionLevel.None)]
-        public Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.ItineraryDescription ItineraryDescription;
+        public Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.ItineraryDescription ItineraryDescription;
         
         //[System.ServiceModel.MessageBodyMemberAttribute(Namespace="", ProtectionLevel=System.Net.Security.ProtectionLevel.EncryptAndSign, Order=0)]
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "", ProtectionLevel = System.Net.Security.ProtectionLevel.None, Order = 0)]
@@ -105,7 +105,7 @@ namespace Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance
         {
         }
         
-        public SubmitRequestRequest(Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.ItineraryDescription ItineraryDescription, object part)
+        public SubmitRequestRequest(Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.ItineraryDescription ItineraryDescription, object part)
         {
             this.ItineraryDescription = ItineraryDescription;
             this.part = part;
@@ -125,13 +125,13 @@ namespace Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    internal interface ProcessRequestChannel : Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.IProcessRequest, System.ServiceModel.IClientChannel
+    internal interface ProcessRequestChannel : Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.IProcessRequest, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    internal partial class ProcessRequestClient : System.ServiceModel.ClientBase<Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.IProcessRequest>, Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.IProcessRequest
+    internal partial class ProcessRequestClient : System.ServiceModel.ClientBase<Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.IProcessRequest>, Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.IProcessRequest
     {
         
         private BeginOperationDelegate onBeginSubmitRequestDelegate;
@@ -167,36 +167,36 @@ namespace Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SubmitRequestCompleted;
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestResponse Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.IProcessRequest.SubmitRequest(Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestRequest request)
+        Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestResponse Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.IProcessRequest.SubmitRequest(Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestRequest request)
         {
             return base.Channel.SubmitRequest(request);
         }
         
-        public void SubmitRequest(Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.ItineraryDescription ItineraryDescription, object part)
+        public void SubmitRequest(Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.ItineraryDescription ItineraryDescription, object part)
         {
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestRequest inValue = new Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestRequest();
+            Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestRequest inValue = new Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestRequest();
             inValue.ItineraryDescription = ItineraryDescription;
             inValue.part = part;
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestResponse retVal = ((Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.IProcessRequest)(this)).SubmitRequest(inValue);
+            Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestResponse retVal = ((Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.IProcessRequest)(this)).SubmitRequest(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.IProcessRequest.BeginSubmitRequest(Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestRequest request, System.AsyncCallback callback, object asyncState)
+        System.IAsyncResult Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.IProcessRequest.BeginSubmitRequest(Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestRequest request, System.AsyncCallback callback, object asyncState)
         {
             return base.Channel.BeginSubmitRequest(request, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginSubmitRequest(Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.ItineraryDescription ItineraryDescription, object part, System.AsyncCallback callback, object asyncState)
+        public System.IAsyncResult BeginSubmitRequest(Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.ItineraryDescription ItineraryDescription, object part, System.AsyncCallback callback, object asyncState)
         {
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestRequest inValue = new Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestRequest();
+            Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestRequest inValue = new Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestRequest();
             inValue.ItineraryDescription = ItineraryDescription;
             inValue.part = part;
-            return ((Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.IProcessRequest)(this)).BeginSubmitRequest(inValue, callback, asyncState);
+            return ((Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.IProcessRequest)(this)).BeginSubmitRequest(inValue, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestResponse Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.IProcessRequest.EndSubmitRequest(System.IAsyncResult result)
+        Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestResponse Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.IProcessRequest.EndSubmitRequest(System.IAsyncResult result)
         {
             return base.Channel.EndSubmitRequest(result);
         }
@@ -204,12 +204,12 @@ namespace Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public void EndSubmitRequest(System.IAsyncResult result)
         {
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.SubmitRequestResponse retVal = ((Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.IProcessRequest)(this)).EndSubmitRequest(result);
+            Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.SubmitRequestResponse retVal = ((Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.IProcessRequest)(this)).EndSubmitRequest(result);
         }
         
         private System.IAsyncResult OnBeginSubmitRequest(object[] inValues, System.AsyncCallback callback, object asyncState)
         {
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.ItineraryDescription ItineraryDescription = ((Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.ItineraryDescription)(inValues[0]));
+            Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.ItineraryDescription ItineraryDescription = ((Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.ItineraryDescription)(inValues[0]));
             object part = ((object)(inValues[1]));
             return this.BeginSubmitRequest(ItineraryDescription, part, callback, asyncState);
         }
@@ -229,12 +229,12 @@ namespace Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance
             }
         }
         
-        public void SubmitRequestAsync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.ItineraryDescription ItineraryDescription, object part)
+        public void SubmitRequestAsync(Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.ItineraryDescription ItineraryDescription, object part)
         {
             this.SubmitRequestAsync(ItineraryDescription, part, null);
         }
         
-        public void SubmitRequestAsync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryOneWayServiceInstance.ItineraryDescription ItineraryDescription, object part, object userState)
+        public void SubmitRequestAsync(Open.MOF.BizTalk.Adapters.Proxy.EsbOneWayServiceInstance.ItineraryDescription ItineraryDescription, object part, object userState)
         {
             if ((this.onBeginSubmitRequestDelegate == null))
             {

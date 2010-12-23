@@ -11,14 +11,14 @@ using Open.MOF.Messaging;
 
 namespace Open.MOF.BizTalk.Adapters.MessageHandlers
 {
-    internal class TwoWayItineraryEsbMessageHandler: EsbMessageHandler<Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.ProcessRequestResponseChannel>
+    internal class TwoWayEsbMessageHandler: EsbMessageHandler<Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.ProcessRequestResponseChannel>
     {
-        public TwoWayItineraryEsbMessageHandler()
+        public TwoWayEsbMessageHandler()
             : base()
         {
         }
 
-        public TwoWayItineraryEsbMessageHandler(string channelEndpointName)
+        public TwoWayEsbMessageHandler(string channelEndpointName)
             : base(channelEndpointName)
         {
         }
@@ -30,44 +30,49 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             get
             {
                 string handlerType = this.GetType().AssemblyQualifiedName;
-                string itineraryName = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.ItineraryName != null)) ? _cachedItineraryDescription.ItineraryName : String.Empty);
-                string itineraryVersion = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.ItineraryVersion != null)) ? _cachedItineraryDescription.ItineraryVersion : String.Empty);
-                string itineraryLocation = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.WasItineraryInCache.HasValue)) ? ((_cachedItineraryDescription.WasItineraryInCache.Value) ? "incache" : "lookup") : "notfound");
-                return String.Format("<Handler type=\"{0}\"><Channel endpoint=\"{1}\" /><RecentItinerary name=\"{2}\" version=\"{3}\" location=\"{4}\" /></Handler>", handlerType, _channelEndpointName, itineraryName, itineraryVersion, itineraryLocation);
+                //string itineraryName = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.ItineraryName != null)) ? _cachedItineraryDescription.ItineraryName : String.Empty);
+                //string itineraryVersion = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.ItineraryVersion != null)) ? _cachedItineraryDescription.ItineraryVersion : String.Empty);
+                //string itineraryLocation = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.WasItineraryInCache.HasValue)) ? ((_cachedItineraryDescription.WasItineraryInCache.Value) ? "incache" : "lookup") : "notfound");
+                return String.Format("<Handler type=\"{0}\"><Channel endpoint=\"{1}\" /></Handler>", handlerType, _channelEndpointName);
             }
         }
 
         public override bool CanSupportMessage(SimpleMessage message)
         {
-            IMessageItineraryMapper mapper = ServiceLocator.Current.GetInstance<IMessageItineraryMapper>();
-            _cachedItineraryDescription = mapper.MapMessageToItinerary(message);
+            //IMessageItineraryMapper mapper = ServiceLocator.Current.GetInstance<IMessageItineraryMapper>();
+            //_cachedItineraryDescription = mapper.MapMessageToItinerary(message);
             List<Type> responseTypes = ((message is FrameworkMessage) ? ((FrameworkMessage)message).ResponseTypes : new List<Type>());
 
-            bool messageHasItinerary = (_cachedItineraryDescription != null);
+            bool messageHasSendToAddress = false;
+            if (message is FrameworkMessage)
+            {
+                messageHasSendToAddress = ((((FrameworkMessage)message).To != null) && (((FrameworkMessage)message).To.IsValid()));
+            }
+            //bool messageHasItinerary = (_cachedItineraryDescription != null);
             // Open question: Should a two way interface be used if no response type has been defined?
             //bool messageSupportsTwoWay = ((responseTypes != null) && (responseTypes.Count > 0));
             // Until all use cases are determined, if a message does not require two-way, it should not be processed as two-way
             bool messageSupportsTwoWay = message.RequiresTwoWay;
-            bool isMessageSupported = (messageHasItinerary && messageSupportsTwoWay);
+            bool isMessageSupported = (!messageHasSendToAddress && messageSupportsTwoWay);    // (messageHasItinerary && messageSupportsTwoWay);
 
             return (isMessageSupported);
         }
 
         #endregion
 
-        protected override IAsyncResult InvokeChannelBeginAync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.ProcessRequestResponseChannel channel,
+        protected override IAsyncResult InvokeChannelBeginAync(Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.ProcessRequestResponseChannel channel,
             MessagingState messagingState, AsyncCallback messageDeliveredCallback)
         {
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.SubmitRequestResponseRequest itineraryRequest =
-                MapMessageToItineraryRequest(messagingState.RequestMessage);
+            Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.SubmitRequestResponseRequest itineraryRequest =
+                MapMessageToEsbRequest(messagingState.RequestMessage);
 
             return channel.BeginSubmitRequestResponse(itineraryRequest, messageDeliveredCallback, messagingState);
         }
 
-        protected override SimpleMessage InvokeChannelEndAsync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.ProcessRequestResponseChannel channel,
+        protected override SimpleMessage InvokeChannelEndAsync(Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.ProcessRequestResponseChannel channel,
             IAsyncResult ar)
         {
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.SubmitRequestResponseResponse itineraryResponse
+            Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.SubmitRequestResponseResponse itineraryResponse
                 = channel.EndSubmitRequestResponse(ar);
 
             FrameworkMessage responseMessage = null;
@@ -100,13 +105,13 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return responseMessage;
         }
 
-        protected override SimpleMessage InvokeChannelSync(Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.ProcessRequestResponseChannel channel,
+        protected override SimpleMessage InvokeChannelSync(Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.ProcessRequestResponseChannel channel,
             SimpleMessage requestMessage)
         {
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.SubmitRequestResponseRequest itineraryRequest =
-                MapMessageToItineraryRequest(requestMessage);
+            Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.SubmitRequestResponseRequest itineraryRequest =
+                MapMessageToEsbRequest(requestMessage);
 
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.SubmitRequestResponseResponse itineraryResponse =
+            Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.SubmitRequestResponseResponse itineraryResponse =
                 channel.SubmitRequestResponse(itineraryRequest);
 
             FrameworkMessage responseMessage = null;
@@ -139,16 +144,16 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return responseMessage;
         }
 
-        private Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.SubmitRequestResponseRequest MapMessageToItineraryRequest(SimpleMessage requestMessage)
+        private Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.SubmitRequestResponseRequest MapMessageToEsbRequest(SimpleMessage requestMessage)
         {
-            _cachedItineraryDescription = MapMessageToItinerary(requestMessage);
+            //_cachedItineraryDescription = MapMessageToItinerary(requestMessage);
 
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.ItineraryDescription itineraryDescription = new Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.ItineraryDescription();
-            itineraryDescription.Name = _cachedItineraryDescription.ItineraryName;
-            if (_cachedItineraryDescription.ItineraryVersion != null)
-                itineraryDescription.Version = _cachedItineraryDescription.ItineraryVersion;
+            Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.ItineraryDescription itineraryDescription = null;    // new Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.ItineraryDescription();
+            //itineraryDescription.Name = _cachedItineraryDescription.ItineraryName;
+            //if (_cachedItineraryDescription.ItineraryVersion != null)
+            //    itineraryDescription.Version = _cachedItineraryDescription.ItineraryVersion;
 
-            Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.SubmitRequestResponseRequest itineraryRequest = new Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.SubmitRequestResponseRequest(itineraryDescription, requestMessage.ToXmlString());
+            Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.SubmitRequestResponseRequest itineraryRequest = new Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.SubmitRequestResponseRequest(itineraryDescription, requestMessage.ToXmlString());
 
             return itineraryRequest;
         }

@@ -86,31 +86,20 @@
     <Compile Include="Adapters\MessageHandlers\ExceptionEsbMessageHandler.cs" />
     <Compile Include="Adapters\MessageHandlers\ExceptionQueuedEsbMessageHandler.cs" />
     <Compile Include="Adapters\MessageHandlers\IEsbMessageHandler.cs" />
-    <Compile Include="Adapters\MessageHandlers\IItineraryLookupService.cs" />
-    <Compile Include="Adapters\MessageHandlers\IMessageItineraryMapper.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Adapters\MessageHandlers\ItineraryDescription.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Adapters\MessageHandlers\MessageHandlerLocatorExtender.cs" />
-    <Compile Include="Adapters\MessageHandlers\OneWayBundledItineraryEsbMessageHandler.cs" />
-    <Compile Include="Adapters\MessageHandlers\OneWayBundledItineraryQueuedEsbMessageHandler.cs" />
-    <Compile Include="Adapters\MessageHandlers\OneWayItineraryEsbMessageHandler.cs" />
-    <Compile Include="Adapters\MessageHandlers\OneWayItineraryQueuedEsbMessageHandler.cs" />
-    <Compile Include="Adapters\MessageHandlers\ServiceOrientedMessageItineraryMapper.cs" />
-    <Compile Include="Adapters\MessageHandlers\TwoWayBundledItineraryEsbMessageHandler.cs" />
-    <Compile Include="Adapters\MessageHandlers\TwoWayItineraryEsbMessageHandler.cs" />
+    <Compile Include="Adapters\MessageHandlers\OneWayAddressedEsbMessageHandler.cs" />
+    <Compile Include="Adapters\MessageHandlers\OneWayAddressedQueuedEsbMessageHandler.cs" />
+    <Compile Include="Adapters\MessageHandlers\OneWayEsbMessageHandler.cs" />
+    <Compile Include="Adapters\MessageHandlers\OneWayQueuedEsbMessageHandler.cs" />
+    <Compile Include="Adapters\MessageHandlers\TwoWayAddressedEsbMessageHandler.cs" />
+    <Compile Include="Adapters\MessageHandlers\TwoWayEsbMessageHandler.cs" />
     <Compile Include="Adapters\Proxy\EsbExceptionServiceInstance.cs" />
-    <Compile Include="Adapters\Proxy\ItineraryOneWayBundledServiceInstance.cs" />
-    <Compile Include="Adapters\Proxy\ItineraryOneWayServiceInstance.cs" />
-    <Compile Include="Adapters\Proxy\ItineraryTwoWayBundledServiceInstance.cs" />
-    <Compile Include="Adapters\Proxy\ItineraryTwoWayServiceInstance.cs" />
+    <Compile Include="Adapters\Proxy\EsbOneWayAddressedServiceInstance.cs" />
+    <Compile Include="Adapters\Proxy\EsbOneWayServiceInstance.cs" />
+    <Compile Include="Adapters\Proxy\EsbTwoWayAddressedServiceInstance.cs" />
+    <Compile Include="Adapters\Proxy\EsbTwoWayServiceInstance.cs" />
     <Compile Include="Adapters\Proxy\Queued\EsbExceptionServiceInstance.cs" />
     <Compile Include="Adapters\Proxy\Queued\ItineraryOneWayBundledServiceInstance.cs" />
     <Compile Include="Adapters\Proxy\Queued\ItineraryOneWayServiceInstance.cs" />
-    <Compile Include="Messages\MessageItineraryMappingRequestMessage.cs" />
-    <Compile Include="Messages\MessageItineraryMappingResponseMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +125,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

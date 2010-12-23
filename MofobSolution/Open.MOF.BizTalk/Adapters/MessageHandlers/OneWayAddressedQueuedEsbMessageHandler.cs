@@ -10,14 +10,14 @@ using Open.MOF.Messaging;
 
 namespace Open.MOF.BizTalk.Adapters.MessageHandlers
 {
-    internal class OneWayBundledItineraryQueuedEsbMessageHandler : EsbMessageHandler<Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.ProcessRequestChannel>
+    internal class OneWayAddressedQueuedEsbMessageHandler : EsbMessageHandler<Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.ProcessRequestChannel>
     {
-        public OneWayBundledItineraryQueuedEsbMessageHandler()
+        public OneWayAddressedQueuedEsbMessageHandler()
             : base()
         {
         }
 
-        public OneWayBundledItineraryQueuedEsbMessageHandler(string channelEndpointName)
+        public OneWayAddressedQueuedEsbMessageHandler(string channelEndpointName)
             : base()
         {
         }
@@ -29,10 +29,10 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             get
             {
                 string handlerType = this.GetType().AssemblyQualifiedName;
-                string itineraryName = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.ItineraryName != null)) ? _cachedItineraryDescription.ItineraryName : String.Empty);
-                string itineraryVersion = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.ItineraryVersion != null)) ? _cachedItineraryDescription.ItineraryVersion : String.Empty);
-                string itineraryLocation = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.WasItineraryInCache.HasValue)) ? ((_cachedItineraryDescription.WasItineraryInCache.Value) ? "incache" : "lookup") : "notfound");
-                return String.Format("<Handler type=\"{0}\"><Channel endpoint=\"{1}\" /><RecentItinerary name=\"{2}\" version=\"{3}\" location=\"{4}\" /></Handler>", handlerType, _channelEndpointName, itineraryName, itineraryVersion, itineraryLocation);
+                //string itineraryName = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.ItineraryName != null)) ? _cachedItineraryDescription.ItineraryName : String.Empty);
+                //string itineraryVersion = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.ItineraryVersion != null)) ? _cachedItineraryDescription.ItineraryVersion : String.Empty);
+                //string itineraryLocation = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.WasItineraryInCache.HasValue)) ? ((_cachedItineraryDescription.WasItineraryInCache.Value) ? "incache" : "lookup") : "notfound");
+                return String.Format("<Handler type=\"{0}\"><Channel endpoint=\"{1}\" /></Handler>", handlerType, _channelEndpointName);
             }
         }
 
@@ -55,7 +55,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             MessagingState messagingState, AsyncCallback messageDeliveredCallback)
         {
             Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.SubmitRequestRequest itineraryRequest =
-                MapMessageToItineraryRequest(messagingState.RequestMessage);
+                MapMessageToEsbRequest(messagingState.RequestMessage);
 
             return channel.BeginSubmitRequest(itineraryRequest, messageDeliveredCallback, messagingState);
         }
@@ -75,7 +75,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             SimpleMessage requestMessage)
         {
             Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.SubmitRequestRequest itineraryRequest =
-                MapMessageToItineraryRequest(requestMessage);
+                MapMessageToEsbRequest(requestMessage);
 
             Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.SubmitRequestResponse response =
                 channel.SubmitRequest(itineraryRequest);
@@ -85,7 +85,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             return responseMessage;
         }
 
-        private Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.SubmitRequestRequest MapMessageToItineraryRequest(SimpleMessage requestMessage)
+        private Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.SubmitRequestRequest MapMessageToEsbRequest(SimpleMessage requestMessage)
         {
             System.ComponentModel.TypeConverter converter = new OneWayQueuedItineraryConverter();
             Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.Itinerary itinerary =

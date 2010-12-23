@@ -183,7 +183,7 @@ namespace Open.MOF.Messaging.Adapters
             {
                 if (invokeResult is string)
                 {
-                    responseMessage = new TwoWayMessage();
+                    responseMessage = new TwoWayResponseMessage();
                     responseMessage.LoadContent((string)invokeResult);
                     handlingSummary.ResponseReceived = true;
                 }
@@ -193,7 +193,7 @@ namespace Open.MOF.Messaging.Adapters
                     XmlDocument requestBody = new XmlDocument();
                     requestBody.Load(reader);
 
-                    responseMessage = new TwoWayMessage();
+                    responseMessage = new TwoWayResponseMessage();
                     responseMessage.LoadContent(requestBody);
                     handlingSummary.ResponseReceived = true;
                 }

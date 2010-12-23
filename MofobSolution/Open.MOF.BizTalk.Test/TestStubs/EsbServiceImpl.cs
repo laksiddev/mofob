@@ -25,7 +25,18 @@ namespace Open.MOF.BizTalk.Test.TestStubs
                 RequestMessageReceived(this, new RequestMessageReceivedEventArgs(request, "ProcessRequestResponse.SubmitRequestResponse", request.part.ToString()));
             
             Open.MOF.Messaging.Test.Messages.TestTransactionRequestMessage requestMessage = Open.MOF.Messaging.FrameworkMessage.FromXmlString(request.part.ToString()) as Open.MOF.Messaging.Test.Messages.TestTransactionRequestMessage;
-            Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage response = new Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage(request.part.ToString(), request.ItineraryDescription.Name + ((request.ItineraryDescription.Version != null) ? ":" + request.ItineraryDescription.Version : ""));
+            string context;
+            if (request.ItineraryDescription != null)
+            {
+                context = request.ItineraryDescription.Name;
+                if (request.ItineraryDescription.Version != null)
+                    context += request.ItineraryDescription.Version;
+            }
+            else
+            {
+                context = "No Itinerary";
+            }
+            Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage response = new Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage(request.part.ToString(), context);
             if (requestMessage != null) 
                 response.RelatedMessageId = requestMessage.MessageId;
 
@@ -53,7 +64,18 @@ namespace Open.MOF.BizTalk.Test.TestStubs
                     Open.MOF.Messaging.Test.Messages.TestPubSubRequestMessage pubsubMessage = (Open.MOF.Messaging.Test.Messages.TestPubSubRequestMessage)message;
                     if ((pubsubMessage.ReplyTo != null) && (pubsubMessage.ReplyTo.IsValid()))
                     {
-                        Open.MOF.Messaging.Test.Messages.TestPubSubResponseMessage responseMessage = new Open.MOF.Messaging.Test.Messages.TestPubSubResponseMessage(request.part.ToString(), request.ItineraryDescription.Name + ((request.ItineraryDescription.Version != null) ? ":" + request.ItineraryDescription.Version : ""));
+                        string context;
+                        if (request.ItineraryDescription != null)
+                        {
+                            context = request.ItineraryDescription.Name;
+                            if (request.ItineraryDescription.Version != null)
+                                context += request.ItineraryDescription.Version;
+                        }
+                        else
+                        {
+                            context = "No Itinerary";
+                        }
+                        Open.MOF.Messaging.Test.Messages.TestPubSubResponseMessage responseMessage = new Open.MOF.Messaging.Test.Messages.TestPubSubResponseMessage(request.part.ToString(), context);
                         responseMessage.RelatedMessageId = pubsubMessage.MessageId;
                         SubmitResponseMessage(responseMessage);
                     }

@@ -117,6 +117,7 @@
     <Compile Include="Configuration\ServiceConfigurationElement.cs" />
     <Compile Include="Configuration\ServiceConfigurationSettings.cs" />
     <Compile Include="Converters\ExceptionDetailConverter.cs" />
+    <Compile Include="TwoWayResponseMessage.cs" />
     <Compile Include="OneWayMessage.cs" />
     <Compile Include="SimpleMessage.cs" />
     <Compile Include="FaultResponse.cs" />

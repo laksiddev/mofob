@@ -153,7 +153,7 @@ namespace Open.MOF.BizTalk.Test
                 responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
-                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.OneWayItineraryEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
+                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.OneWayEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ProcessedAsync);
@@ -197,7 +197,7 @@ namespace Open.MOF.BizTalk.Test
                 responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
-                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.OneWayItineraryEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
+                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.OneWayEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ProcessedAsync);
@@ -236,7 +236,7 @@ namespace Open.MOF.BizTalk.Test
                 responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
-                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.TwoWayItineraryEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
+                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.TwoWayEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ProcessedAsync);
@@ -253,7 +253,8 @@ namespace Open.MOF.BizTalk.Test
             Assert.IsNotNull(responseMessage);
             Assert.IsInstanceOfType(responseMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
             Assert.AreEqual(message.MessageId, responseMessage.RelatedMessageId);
-            Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
+            //Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
+            Assert.AreEqual("No Itinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
         }
 
         [TestMethod]
@@ -281,7 +282,7 @@ namespace Open.MOF.BizTalk.Test
                 _receivedWaitHandle.WaitOne();
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
-                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.TwoWayItineraryEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
+                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.TwoWayEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ProcessedAsync);
@@ -298,14 +299,16 @@ namespace Open.MOF.BizTalk.Test
             Assert.IsNotNull(responseMessage);
             Assert.IsInstanceOfType(responseMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
             Assert.AreEqual(message.MessageId, responseMessage.RelatedMessageId);
-            Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
+            //Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
+            Assert.AreEqual("No Itinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
 
             // The _messageReceivedCallbackMessage should have been set in the callback method
             Assert.IsNotNull(_messageReceivedCallbackMessage);
             Assert.IsInstanceOfType(_messageReceivedCallbackMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
             Assert.IsInstanceOfType(_messageReceivedCallbackMessage, typeof(FrameworkMessage));
             Assert.AreEqual(message.MessageId, ((FrameworkMessage)_messageReceivedCallbackMessage).RelatedMessageId);
-            Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)_messageReceivedCallbackMessage).Context);
+            //Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)_messageReceivedCallbackMessage).Context);
+            Assert.AreEqual("No Itinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)_messageReceivedCallbackMessage).Context);
         }
 
         [TestMethod]
@@ -332,7 +335,7 @@ namespace Open.MOF.BizTalk.Test
                 responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
-                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.TwoWayItineraryEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
+                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.TwoWayEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ProcessedAsync);
@@ -349,7 +352,8 @@ namespace Open.MOF.BizTalk.Test
             Assert.IsNotNull(responseMessage);
             Assert.IsInstanceOfType(responseMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
             Assert.AreEqual(message.MessageId, responseMessage.RelatedMessageId);
-            Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
+            //Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
+            Assert.AreEqual("No Itinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
         }
 
         [TestMethod]
@@ -379,7 +383,7 @@ namespace Open.MOF.BizTalk.Test
                 responseMessage = (FrameworkMessage)simpleMessage;
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
-                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.TwoWayItineraryEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
+                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.TwoWayEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ProcessedAsync);
@@ -396,14 +400,16 @@ namespace Open.MOF.BizTalk.Test
             Assert.IsNotNull(responseMessage);
             Assert.IsInstanceOfType(responseMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
             Assert.AreEqual(message.MessageId, responseMessage.RelatedMessageId);
-            Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
+            //Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
+            Assert.AreEqual("No Itinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)responseMessage).Context);
 
             // The _messageReceivedCallbackMessage should have been set in the callback method
             Assert.IsNotNull(_messageReceivedCallbackMessage);
             Assert.IsInstanceOfType(_messageReceivedCallbackMessage, typeof(Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage));
             Assert.IsInstanceOfType(_messageReceivedCallbackMessage, typeof(FrameworkMessage));
             Assert.AreEqual(message.MessageId, ((FrameworkMessage)_messageReceivedCallbackMessage).RelatedMessageId);
-            Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)_messageReceivedCallbackMessage).Context);
+            //Assert.AreEqual("TestTransactionRequestMessageItinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)_messageReceivedCallbackMessage).Context);
+            Assert.AreEqual("No Itinerary", ((Open.MOF.Messaging.Test.Messages.TestTransactionResponseMessage)_messageReceivedCallbackMessage).Context);
         }
 
         [TestMethod]
@@ -430,7 +436,7 @@ namespace Open.MOF.BizTalk.Test
                 _receivedWaitHandle.WaitOne();
 
                 Assert.IsNotNull(adapter.MessageHandlingSummary);
-                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.OneWayItineraryEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
+                Assert.IsTrue(adapter.MessageHandlingSummary.AdapterContext.IndexOf("Open.MOF.BizTalk.Adapters.MessageHandlers.OneWayEsbMessageHandler", StringComparison.CurrentCulture) >= 0);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ProcessedAsync);

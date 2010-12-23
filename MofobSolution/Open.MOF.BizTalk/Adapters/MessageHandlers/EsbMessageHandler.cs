@@ -15,14 +15,14 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
         protected string _channelEndpointName;
         protected ChannelFactory<T> _channelFactory = null;
         protected Dictionary<SimpleMessage, T> _asyncChannelCache;
-        internal ItineraryDescription _cachedItineraryDescription;
+        //internal ItineraryDescription _cachedItineraryDescription;
  
         public EsbMessageHandler()
         {
             _channelEndpointName = null;
             _channelFactory = new ChannelFactory<T>();
             _asyncChannelCache = new Dictionary<SimpleMessage, T>();
-            _cachedItineraryDescription = null;
+            //_cachedItineraryDescription = null;
         }
 
         public EsbMessageHandler(string channelEndpointName)
@@ -30,7 +30,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             _channelEndpointName = channelEndpointName;
             _channelFactory = new ChannelFactory<T>(_channelEndpointName);
             _asyncChannelCache = new Dictionary<SimpleMessage, T>();
-            _cachedItineraryDescription = null;
+            //_cachedItineraryDescription = null;
         }
 
         #region IESBMessageHandler Members
@@ -193,14 +193,14 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
 
         protected abstract SimpleMessage InvokeChannelSync(T channel, SimpleMessage requestMessage);
 
-        internal ItineraryDescription MapMessageToItinerary(SimpleMessage message)
-        {
-            IMessageItineraryMapper mapper = ServiceLocator.Current.GetInstance<IMessageItineraryMapper>();
-            ItineraryDescription itineraryDescription = mapper.MapMessageToItinerary(message);
-            if (itineraryDescription == null)
-                throw new MessagingException("An ESB Itinerary was not found for this message when attempting to send a message.  This indicates an error in the framework since the framework should not attempt to send the message without an Itinerary.");
+        //internal ItineraryDescription MapMessageToItinerary(SimpleMessage message)
+        //{
+        //    IMessageItineraryMapper mapper = ServiceLocator.Current.GetInstance<IMessageItineraryMapper>();
+        //    ItineraryDescription itineraryDescription = mapper.MapMessageToItinerary(message);
+        //    if (itineraryDescription == null)
+        //        throw new MessagingException("An ESB Itinerary was not found for this message when attempting to send a message.  This indicates an error in the framework since the framework should not attempt to send the message without an Itinerary.");
 
-            return itineraryDescription;
-        }
+        //    return itineraryDescription;
+        //}
     }
 }

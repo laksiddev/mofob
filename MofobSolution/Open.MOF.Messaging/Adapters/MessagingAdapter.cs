@@ -241,7 +241,7 @@ namespace Open.MOF.Messaging.Adapters
             return adapter;
         }
 
-        protected internal static IMessagingAdapter CreateInstance(string instanceName)
+        public static IMessagingAdapter CreateInstance(string instanceName)
         {
             IServiceLocator locator = MessagingAdapterLocator.GetLocatorInstance();
             IMessagingAdapter adapter = null;

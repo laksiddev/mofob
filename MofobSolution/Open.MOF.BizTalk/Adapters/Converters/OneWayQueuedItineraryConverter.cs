@@ -23,10 +23,10 @@ namespace Open.MOF.BizTalk.Adapters
             {
                 return true;
             }
-            else if (sourceType == typeof(Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription))
-            {
-                return true;
-            }
+            //else if (sourceType == typeof(Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription))
+            //{
+            //    return true;
+            //}
 
             return base.CanConvertFrom(context, sourceType);
         }
@@ -42,15 +42,15 @@ namespace Open.MOF.BizTalk.Adapters
 
                 return itinerary;
             }
-            else if (value is Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription)
-            {
-                Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription itineraryDescription = (Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription)value;
+            //else if (value is Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription)
+            //{
+            //    Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription itineraryDescription = (Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription)value;
 
-                string resolverString = GetSelectorResolverString(itineraryDescription);
-                Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.Itinerary itinerary = BuildItinerary(resolverString);
+            //    string resolverString = GetSelectorResolverString(itineraryDescription);
+            //    Open.MOF.BizTalk.Adapters.Proxy.Queued.ItineraryOneWayBundledServiceInstance.Itinerary itinerary = BuildItinerary(resolverString);
 
-                return itinerary;
-            }
+            //    return itinerary;
+            //}
 
             return base.ConvertFrom(context, culture, value);
         }
@@ -179,24 +179,24 @@ namespace Open.MOF.BizTalk.Adapters
             return sb.ToString();
         }
 
-        private string GetSelectorResolverString(Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription itineraryDescription)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("<![CDATA[");
-            sb.Append("ITINERARY");
-            sb.Append(@":\\");
+        //private string GetSelectorResolverString(Open.MOF.BizTalk.Adapters.MessageHandlers.ItineraryDescription itineraryDescription)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.Append("<![CDATA[");
+        //    sb.Append("ITINERARY");
+        //    sb.Append(@":\\");
 
-            sb.Append("name=");
-            sb.Append(((!string.IsNullOrEmpty(itineraryDescription.ItineraryName)) ? itineraryDescription.ItineraryName : string.Empty));
-            sb.Append(";");
+        //    sb.Append("name=");
+        //    sb.Append(((!string.IsNullOrEmpty(itineraryDescription.ItineraryName)) ? itineraryDescription.ItineraryName : string.Empty));
+        //    sb.Append(";");
 
-            sb.Append("version=");
-            sb.Append(((!string.IsNullOrEmpty(itineraryDescription.ItineraryVersion)) ? itineraryDescription.ItineraryVersion : string.Empty));
-            sb.Append(";");
+        //    sb.Append("version=");
+        //    sb.Append(((!string.IsNullOrEmpty(itineraryDescription.ItineraryVersion)) ? itineraryDescription.ItineraryVersion : string.Empty));
+        //    sb.Append(";");
 
-            sb.Append("]]>");
+        //    sb.Append("]]>");
 
-            return sb.ToString();
-        }
+        //    return sb.ToString();
+        //}
     }
 }

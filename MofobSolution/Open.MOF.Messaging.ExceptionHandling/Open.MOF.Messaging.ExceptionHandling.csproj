@@ -11,8 +11,7 @@
     <RootNamespace>Open.MOF.Messaging.ExceptionHandling</RootNamespace>
     <AssemblyName>Open.MOF.Messaging.ExceptionHandling</AssemblyName>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>mofob.snk</AssemblyOriginatorKeyFile>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -112,6 +111,9 @@
       <Project>{9750443B-DDB6-4A67-9470-37109B5C47D6}</Project>
       <Name>Open.MOF.Messaging</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mofob.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

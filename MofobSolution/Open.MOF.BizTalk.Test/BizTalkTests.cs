@@ -57,10 +57,38 @@ namespace Open.MOF.BizTalk.Test
 
             string methodResult;
             using (IMessagingAdapter adapter = MessagingAdapter.CreateInstance("BizTalkTwoWayMessagingAdapterDefinition"))
+            //using (IMessagingAdapter adapter = MessagingAdapter.CreateInstance("BizTalkTwoWaySoapMessagingAdapterDefinition"))
             {
                 SimpleMessage responseMessage = adapter.SubmitMessage(requestMessage);
                 methodResult = responseMessage.ToXmlString();
             }
+
+            Assert.IsNotNull(methodResult);
+            Assert.IsFalse(String.IsNullOrEmpty(methodResult));
+        }
+
+        [TestMethod]
+        public void BizTalkVehicleSoapTest()
+        {
+            //
+            // TODO: Add test logic here
+            //
+            SimpleMessage requestMessage = new TwoWayMessage();
+            XmlDocument messageBody = new XmlDocument();
+            messageBody.LoadXml(__sampleVehicleQueryMessageContent);
+
+            requestMessage.LoadContent(messageBody);
+
+            string methodResult;
+            //using (IMessagingAdapter adapter = MessagingAdapter.CreateInstance("BizTalkTwoWayMessagingAdapterDefinition"))
+            using (IMessagingAdapter adapter = MessagingAdapter.CreateInstance("BizTalkTwoWaySoapMessagingAdapterDefinition"))
+            {
+                SimpleMessage responseMessage = adapter.SubmitMessage(requestMessage);
+                methodResult = responseMessage.ToXmlString();
+            }
+
+            Assert.IsNotNull(methodResult);
+            Assert.IsFalse(String.IsNullOrEmpty(methodResult));
         }
 
         #region Additional test attributes

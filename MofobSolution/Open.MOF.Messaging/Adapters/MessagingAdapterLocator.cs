@@ -38,56 +38,63 @@ namespace Open.MOF.Messaging.Adapters
         {
             _container = new UnityContainer();
 
-            // look through alreay loaded assemblies
-            Assembly[] loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (Assembly assembly in loadedAssemblies)
-            {
-                BrowseAssembly(assembly, _container);
-            }
+            ILocatorExtender extender = new MessagingAdapterLocatorExtender();
+            extender.InitializeLocatorExtender(_container);
 
-            // look through assemblies in the application directory but not yet loaded
-            string path = System.IO.Path.GetDirectoryName(Assembly.GetAssembly(typeof(MessagingAdapter)).CodeBase).Replace(@"file:\", "");
-            string[] dllFiles = Directory.GetFiles(path, "*.dll");
+            extender = new Callback.CallbackLocatorExtender();
+            extender.InitializeLocatorExtender(_container);
 
-            foreach (string dllFile in dllFiles)
-            {
-                bool isDllLoaded = false;
-                foreach (Assembly assembly in loadedAssemblies)
-                {
-                    FileInfo assemblyFileInfo = new FileInfo(assembly.Location);
-                    if (String.Compare(assemblyFileInfo.FullName, dllFile, StringComparison.CurrentCultureIgnoreCase) == 0)
-                    {
-                        isDllLoaded = true;
-                        break;
-                    }
-                }
+            // The rest of this discovery process broke in SharePoint
+            //// look through alreay loaded assemblies
+            //Assembly[] loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+            //foreach (Assembly assembly in loadedAssemblies)
+            //{
+            //    BrowseAssembly(assembly, _container);
+            //}
 
-                if (!isDllLoaded)
-                {
-                    Assembly newAssembly = Assembly.LoadFile(dllFile);
-                    BrowseAssembly(newAssembly, _container);
-                }
-            }
+            //// look through assemblies in the application directory but not yet loaded
+            //string path = System.IO.Path.GetDirectoryName(Assembly.GetAssembly(typeof(MessagingAdapter)).CodeBase).Replace(@"file:\", "");
+            //string[] dllFiles = Directory.GetFiles(path, "*.dll");
+
+            //foreach (string dllFile in dllFiles)
+            //{
+            //    bool isDllLoaded = false;
+            //    foreach (Assembly assembly in loadedAssemblies)
+            //    {
+            //        FileInfo assemblyFileInfo = new FileInfo(assembly.Location);
+            //        if (String.Compare(assemblyFileInfo.FullName, dllFile, StringComparison.CurrentCultureIgnoreCase) == 0)
+            //        {
+            //            isDllLoaded = true;
+            //            break;
+            //        }
+            //    }
+
+            //    if (!isDllLoaded)
+            //    {
+            //        Assembly newAssembly = Assembly.LoadFile(dllFile);
+            //        BrowseAssembly(newAssembly, _container);
+            //    }
+            //}
 
             ServiceLocator.SetLocatorProvider(new ServiceLocatorProvider(MessagingAdapterLocator.GetLocatorInstance));
         }
 
-        private void BrowseAssembly(Assembly assembly, IUnityContainer container)
-        {
-            Type[] assemblyTypes = assembly.GetTypes();
-            foreach (Type type in assemblyTypes)
-            {
-                if (typeof(ILocatorExtender).IsAssignableFrom(type))
-                {
-                    ConstructorInfo constructor = type.GetConstructor(new Type[0]);
-                    if (constructor != null)
-                    {
-                        ILocatorExtender locatorExtender = (ILocatorExtender)constructor.Invoke(new object[0]);
-                        locatorExtender.InitializeLocatorExtender(container);
-                    }
-                }
-            }
-        }
+        //private void BrowseAssembly(Assembly assembly, IUnityContainer container)
+        //{
+        //    Type[] assemblyTypes = assembly.GetTypes();
+        //    foreach (Type type in assemblyTypes)
+        //    {
+        //        if (typeof(ILocatorExtender).IsAssignableFrom(type))
+        //        {
+        //            ConstructorInfo constructor = type.GetConstructor(new Type[0]);
+        //            if (constructor != null)
+        //            {
+        //                ILocatorExtender locatorExtender = (ILocatorExtender)constructor.Invoke(new object[0]);
+        //                locatorExtender.InitializeLocatorExtender(container);
+        //            }
+        //        }
+        //    }
+        //}
         
         /// <summary>
         ///             When implemented by inheriting classes, this method will do the actual work of resolving

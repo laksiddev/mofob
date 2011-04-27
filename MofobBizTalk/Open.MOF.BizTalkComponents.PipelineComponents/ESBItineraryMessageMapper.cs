@@ -8,7 +8,7 @@ namespace Open.MOF.BizTalkComponents.PipelineComponents
     using System.Resources;
     using System.Reflection;
     using System.Diagnostics;
-    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using Microsoft.BizTalk.Message.Interop;
     using Microsoft.BizTalk.Component.Interop;
@@ -218,8 +218,19 @@ namespace Open.MOF.BizTalkComponents.PipelineComponents
         }
         #endregion
 
+        private static Dictionary<string, string[]> _itineraryCatalog = null;
         private void ReadItineraryForMessage(string messageType, out string itineraryName, out string itineraryVersion)
         {
+            if (_itineraryCatalog == null)
+                _itineraryCatalog = new Dictionary<string, string[]>();
+
+            if (_itineraryCatalog.ContainsKey(messageType))
+            {
+                itineraryName = _itineraryCatalog[messageType][0];
+                itineraryVersion = _itineraryCatalog[messageType][1];
+                return;
+            }
+
             itineraryName = null;
             itineraryVersion = null;
 
@@ -244,6 +255,15 @@ namespace Open.MOF.BizTalkComponents.PipelineComponents
                     }
                 }
             }
+
+            if (itineraryName != null)
+            {
+                string[] itineraryDescriptors = new string[2];
+                itineraryDescriptors[0] = itineraryName;
+                itineraryDescriptors[1] = itineraryVersion;
+
+                _itineraryCatalog.Add(messageType, itineraryDescriptors);
+            }
         }
 
         private string GetItineraryDescriptionXml(string itineraryName, string itineraryVersion)
@@ -265,40 +285,42 @@ namespace Open.MOF.BizTalkComponents.PipelineComponents
             return doc.OuterXml;
         }
 
+        private static string _itineraryConnectionString = null;
         private string GetEsbItineraryConnectionString()
         {
-            string itineraryConnectionString = null;
-
-            // HACK Replace with code to find esb config file dynamically
-            string esbInstallPath = __esbInstallPath32bit;
-            if (!System.IO.File.Exists(esbInstallPath))
+            if (_itineraryConnectionString == null)
             {
-                esbInstallPath = __esbInstallPath64bit;
+                // HACK Replace with code to find esb config file dynamically
+                string esbInstallPath = __esbInstallPath32bit;
                 if (!System.IO.File.Exists(esbInstallPath))
                 {
-                    throw new ApplicationException("Could not locate the ESB Toolkit configuration file.");
+                    esbInstallPath = __esbInstallPath64bit;
+                    if (!System.IO.File.Exists(esbInstallPath))
+                    {
+                        throw new ApplicationException("Could not locate the ESB Toolkit configuration file.");
+                    }
                 }
-            }
 
-            System.Configuration.Configuration config = System.Configuration.ConfigurationManager.OpenMappedMachineConfiguration(new System.Configuration.ConfigurationFileMap(esbInstallPath));
-            if ((config != null) && (config.Sections["connectionStrings"] != null))
-            {
-                System.Configuration.DefaultSection section = (System.Configuration.DefaultSection)config.Sections["connectionStrings"];
-
-                XmlDocument configDoc = new XmlDocument();
-                configDoc.LoadXml(section.SectionInformation.GetRawXml());
-                XmlNode node = configDoc.SelectSingleNode(@"/connectionStrings/add[@name='ItineraryDb']/@connectionString");
-                if ((node != null) && (node is XmlAttribute))
+                System.Configuration.Configuration config = System.Configuration.ConfigurationManager.OpenMappedMachineConfiguration(new System.Configuration.ConfigurationFileMap(esbInstallPath));
+                if ((config != null) && (config.Sections["connectionStrings"] != null))
                 {
-                    itineraryConnectionString = ((XmlAttribute)node).Value;
+                    System.Configuration.DefaultSection section = (System.Configuration.DefaultSection)config.Sections["connectionStrings"];
+
+                    XmlDocument configDoc = new XmlDocument();
+                    configDoc.LoadXml(section.SectionInformation.GetRawXml());
+                    XmlNode node = configDoc.SelectSingleNode(@"/connectionStrings/add[@name='ItineraryDb']/@connectionString");
+                    if ((node != null) && (node is XmlAttribute))
+                    {
+                        _itineraryConnectionString = ((XmlAttribute)node).Value;
+                    }
+                }
+                if (String.IsNullOrEmpty(_itineraryConnectionString))
+                {
+                    throw new ApplicationException("Could not locate the ESB itinerary connection string.");
                 }
             }
-            if (String.IsNullOrEmpty(itineraryConnectionString))
-            {
-                throw new ApplicationException("Could not locate the ESB itinerary connection string.");
-            }
 
-            return itineraryConnectionString;
+            return _itineraryConnectionString;
         }
     }
 }

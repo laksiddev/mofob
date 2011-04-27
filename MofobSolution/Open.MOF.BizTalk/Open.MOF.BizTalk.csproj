@@ -98,11 +98,13 @@
     <Compile Include="Adapters\MessageHandlers\OneWayQueuedEsbMessageHandler.cs" />
     <Compile Include="Adapters\MessageHandlers\TwoWayAddressedEsbMessageHandler.cs" />
     <Compile Include="Adapters\MessageHandlers\TwoWayEsbMessageHandler.cs" />
+    <Compile Include="Adapters\MessageHandlers\TwoWayEsbSoapMessageHandler.cs" />
     <Compile Include="Adapters\Proxy\EsbExceptionServiceInstance.cs" />
     <Compile Include="Adapters\Proxy\EsbOneWayAddressedServiceInstance.cs" />
     <Compile Include="Adapters\Proxy\EsbOneWayServiceInstance.cs" />
     <Compile Include="Adapters\Proxy\EsbTwoWayAddressedServiceInstance.cs" />
     <Compile Include="Adapters\Proxy\EsbTwoWayServiceInstance.cs" />
+    <Compile Include="Adapters\Proxy\EsbTwoWaySoapInstance.cs" />
     <Compile Include="Adapters\Proxy\Queued\EsbExceptionServiceInstance.cs" />
     <Compile Include="Adapters\Proxy\Queued\ItineraryOneWayBundledServiceInstance.cs" />
     <Compile Include="Adapters\Proxy\Queued\ItineraryOneWayServiceInstance.cs" />

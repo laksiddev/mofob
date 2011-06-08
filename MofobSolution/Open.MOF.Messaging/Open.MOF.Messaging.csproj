@@ -121,7 +121,6 @@
     <Compile Include="Common\IContractConfig.cs" />
     <Compile Include="Common\WcfUtility.cs" />
     <Compile Include="Common\WebContractConfig.cs" />
-    <Compile Include="Common\WebSecureContractConfig.cs" />
     <Compile Include="Configuration\AdapterConfigurationCollection.cs" />
     <Compile Include="Configuration\AdapterConfigurationElement.cs" />
     <Compile Include="Configuration\AdapterConfigurationSettings.cs" />

@@ -54,16 +54,7 @@ namespace Open.MOF.Messaging
             {
                 if (System.Web.HttpContext.Current != null)
                 {
-                    try
-                    {
-                        contractConfig = new WebContractConfig();
-                        ((WebContractConfig)contractConfig).TestSecure();
-                    }
-                    catch (Exception)
-                    {
-                        // If there is an exception trying to access the secure method, it's probably running in partially trusted mode
-                        contractConfig = new WebSecureContractConfig();
-                    }
+                    contractConfig = new WebContractConfig();
                 }
                 else
                 {
@@ -94,7 +85,15 @@ namespace Open.MOF.Messaging
             Assembly[] loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (Assembly assembly in loadedAssemblies)
             {
-                BrowseAssembly(assembly, _serviceContracts, _messageTypes);
+                try
+                {
+                    BrowseAssembly(assembly, _serviceContracts, _messageTypes);
+                }
+                catch (System.Reflection.ReflectionTypeLoadException) 
+                {
+                    // This error could happen in a partially trusted environment... just skip it and move on
+                    continue;
+                } 
             }
 
             // look through assemblies in the application directory but not yet loaded
@@ -119,6 +118,11 @@ namespace Open.MOF.Messaging
                     {
                         // HACK: dynamic assemblies do not have a (disk) location and will throw an error
                         // don't care about those assemblies anyway
+                        continue;
+                    }
+                    catch (System.ArgumentException)
+                    {
+                        // This error could happen in a partially trusted environment... just skip it and move on
                         continue;
                     }
                 }

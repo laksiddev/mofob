@@ -19,10 +19,5 @@ namespace Open.MOF.Messaging
 
             InitializeServiceLookups();
         }
-
-        public void TestSecure()
-        {
-            Assembly[] loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
-        }
     }
 }

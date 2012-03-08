@@ -71,7 +71,7 @@ namespace Open.MOF.BizTalkComponents.Pipelines
 "dDisplayName>ESB Dispatcher</CachedDisplayName>          <CachedIsManaged>true</CachedIsManaged>    "+
 "    </Component>      </Components>    </Stage>  </Stages></Document>";
         
-        private const string _versionDependentGuid = "84dc81a0-d5ce-4c4c-9a70-d7a4f1463f1c";
+        private const string _versionDependentGuid = "1d232ddb-0d93-487f-8330-5b7f93352923";
         
         public ItineraryMappedReceiveXml()
         {

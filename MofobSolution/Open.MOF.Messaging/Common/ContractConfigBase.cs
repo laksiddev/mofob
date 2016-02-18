@@ -137,41 +137,49 @@ namespace Open.MOF.Messaging
 
         protected void BrowseAssembly(Assembly assembly, Dictionary<string, Type> serviceContracts, Dictionary<string, Type> messageTypes)
         {
-            Type[] assemblyTypes = assembly.GetTypes();
-            foreach (Type type in assemblyTypes)
+            try
             {
-                if (type.IsInterface)
+                Type[] assemblyTypes = assembly.GetTypes();
+                foreach (Type type in assemblyTypes)
                 {
-                    ServiceContractAttribute[] attributes = (ServiceContractAttribute[])type.GetCustomAttributes(typeof(ServiceContractAttribute), false);
-                    if ((attributes != null) && (attributes.Length > 0))
+                    if (type.IsInterface)
                     {
-                        string configurationName;
-                        if (!String.IsNullOrEmpty(attributes[0].ConfigurationName))
+                        ServiceContractAttribute[] attributes = (ServiceContractAttribute[])type.GetCustomAttributes(typeof(ServiceContractAttribute), false);
+                        if ((attributes != null) && (attributes.Length > 0))
                         {
-                            configurationName = attributes[0].ConfigurationName;
-                        }
-                        else
-                        {
-                            configurationName = type.FullName;
-                        }
+                            string configurationName;
+                            if (!String.IsNullOrEmpty(attributes[0].ConfigurationName))
+                            {
+                                configurationName = attributes[0].ConfigurationName;
+                            }
+                            else
+                            {
+                                configurationName = type.FullName;
+                            }
 
-                        if (!serviceContracts.ContainsKey(configurationName))
-                        {
-                            serviceContracts.Add(configurationName, type);
-                        }
-                        else
-                        {
-                            EventLogUtility.LogWarningMessage("Multiple service contracts with identical names were located.  The following contract will be ignored: " + configurationName + " in type " + type.FullName + " from assembly " + assembly.FullName);
+                            if (!serviceContracts.ContainsKey(configurationName))
+                            {
+                                serviceContracts.Add(configurationName, type);
+                            }
+                            else
+                            {
+                                EventLogUtility.LogWarningMessage("Multiple service contracts with identical names were located.  The following contract will be ignored: " + configurationName + " in type " + type.FullName + " from assembly " + assembly.FullName);
+                            }
                         }
                     }
-                }
 
-                if (typeof(FrameworkMessage).IsAssignableFrom(type))
-                {
-                    string messageXmlType = FrameworkMessage.GetMessageXmlType(type);
-                    if (!messageTypes.ContainsKey(messageXmlType))
-                        messageTypes.Add(messageXmlType, type);
+                    if (typeof(FrameworkMessage).IsAssignableFrom(type))
+                    {
+                        string messageXmlType = FrameworkMessage.GetMessageXmlType(type);
+                        if (!messageTypes.ContainsKey(messageXmlType))
+                            messageTypes.Add(messageXmlType, type);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                string exceptionMessage = EventLogUtility.FormatExceptionMessage(ex);
+                EventLogUtility.LogWarningMessage(String.Format("An exception occurred during the browsing of assemblies. This error is considered non-critical but may result in reduced functionality. Error details:\r\n{0}", exceptionMessage));
             }
         }
     }

@@ -35,7 +35,7 @@ namespace Open.MOF.Messaging
             System.Diagnostics.EventLog.WriteEntry(_constEventLogSource, message, EventLogEntryType.Error, _constEventLogId);
         }
 
-        private static string FormatExceptionMessage(System.Exception ex)
+        public static string FormatExceptionMessage(System.Exception ex)
         {
             StringBuilder sbExceptionMessage = new StringBuilder();
 

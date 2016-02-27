@@ -63,12 +63,18 @@
     <AssemblyOriginatorKeyFile>mofob.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.ObjectBuilder2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.Unity, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -136,6 +142,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="mofob.snk" />
+    <None Include="nuspec.2010.7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="nuspec.2011.8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Open.MOF.BizTalk.nuspec" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -146,6 +160,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>XCOPY /Y $(TargetDir)$(TargetName).* $(SolutionDir)Published\*.*</PostBuildEvent>
+    <PostBuildEvent>XCOPY /R /Y $(TargetDir)$(TargetName).* $(SolutionDir)Published\*.*
+"$(SolutionDir)packages\NuGet.CommandLine.3.3.0\tools\NuGet.exe" pack $(ProjectPath) -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects 
+xcopy /R /Y $(TargetDir)*.nupkg $(SolutionDir)Published\*.*</PostBuildEvent>
   </PropertyGroup>
 </Project>

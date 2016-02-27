@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{63E3A6C4-11F4-49FC-BC66-A81BB60A49CA}"
 	ProjectSection(SolutionItems) = preProject
 		btsschema_svcutil.bat = btsschema_svcutil.bat
@@ -24,6 +26,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging.ExceptionHandling", "Open.MOF.Messaging.ExceptionHandling\Open.MOF.Messaging.ExceptionHandling.csproj", "{0F5D3A30-0A94-4FA9-B493-3A1BB1335046}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Installer", "Open.MOF.Installer\Open.MOF.Installer.csproj", "{43933617-2B39-4D96-9249-1DFF4BC07939}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3B22FE3A-BADB-4342-91BB-360D9BBF4FA3}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -55,9 +62,6 @@ Global
 		SccProjectUniqueName8 = Open.MOF.Installer\\Open.MOF.Installer.csproj
 		SccProjectName8 = Open.MOF.Installer
 		SccLocalPath8 = Open.MOF.Installer
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = MofobSolution.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,5 +103,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = MofobSolution.vsmdi
 	EndGlobalSection
 EndGlobal

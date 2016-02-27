@@ -142,14 +142,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="mofob.snk" />
-    <None Include="nuspec.2010.7.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="nuspec.2011.8.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Open.MOF.BizTalk.nuspec" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7446b439-3f3a-420b-aa1a-5f99c4d26451" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>true</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://jkita34943.ad.analysts.com:8001/TestCallbackService/CallbackService.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WcfMessagingCallbackService.wsdl" MetadataType="Wsdl" ID="fe4795e8-555a-4871-9935-b30d09d6e0be" SourceId="1" SourceUrl="http://jkita34943.ad.analysts.com:8001/TestCallbackService/CallbackService.svc?wsdl" />
+    <MetadataFile FileName="CallbackService1.xsd" MetadataType="Schema" ID="c78387fb-a483-444c-9d11-4d1d28520fe5" SourceId="1" SourceUrl="http://jkita34943.ad.analysts.com:8001/TestCallbackService/CallbackService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CallbackService2.xsd" MetadataType="Schema" ID="4d148406-4f14-4812-a17c-a2cd56154c6f" SourceId="1" SourceUrl="http://jkita34943.ad.analysts.com:8001/TestCallbackService/CallbackService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CallbackService.wsdl" MetadataType="Wsdl" ID="f3f003ef-4424-4fff-89f0-9ef1dffb8046" SourceId="1" SourceUrl="http://jkita34943.ad.analysts.com:8001/TestCallbackService/CallbackService.svc?wsdl=wsdl0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

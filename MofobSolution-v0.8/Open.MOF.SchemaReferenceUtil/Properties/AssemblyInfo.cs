@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("jkitagr@hotmail.com")]
 [assembly: AssemblyProduct("Message Oriented Framework On BizTalk")]
-[assembly: AssemblyCopyright("Copyright © James Kita 2009")]
+[assembly: AssemblyCopyright("Copyright © jkitagr@hotmail.com 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

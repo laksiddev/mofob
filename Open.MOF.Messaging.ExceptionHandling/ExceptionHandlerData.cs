@@ -2,19 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Configuration;
-using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
-using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Configuration;
-using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
-using Microsoft.Practices.EnterpriseLibrary.Common.Configuration.ObjectBuilder;
 
 namespace Open.MOF.Messaging.ExceptionHandling
 {
-    [Assembler(typeof(ExceptionHandlerAssembler))]
     public class ExceptionHandlerData : Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Configuration.ExceptionHandlerData
     {
-        private const string serviceNameProperty = "serviceName";
-        private const string applicationNameProperty = "applicationName";
+        private const string __serviceNameProperty = "serviceName";
+        private const string __applicationNameProperty = "applicationName";
 
         public ExceptionHandlerData()
         {
@@ -27,18 +22,23 @@ namespace Open.MOF.Messaging.ExceptionHandling
             ApplicationName = applicationName;
         }
 
-        [ConfigurationProperty(serviceNameProperty, IsRequired = false, DefaultValue = "")]
+        [ConfigurationProperty(__serviceNameProperty, IsRequired = false, DefaultValue = "")]
         public string ServiceName
         {
-            get { return (string)this[serviceNameProperty]; }
-            set { this[serviceNameProperty] = value; }
+            get { return (string)this[__serviceNameProperty]; }
+            set { this[__serviceNameProperty] = value; }
         }
 
-        [ConfigurationProperty(applicationNameProperty, IsRequired = false, DefaultValue = "")]
+        [ConfigurationProperty(__applicationNameProperty, IsRequired = false, DefaultValue = "")]
         public string ApplicationName
         {
-            get { return (string)this[applicationNameProperty]; }
-            set { this[applicationNameProperty] = value; }
+            get { return (string)this[__applicationNameProperty]; }
+            set { this[__applicationNameProperty] = value; }
+        }
+
+        public override IExceptionHandler BuildExceptionHandler()
+        {
+            return new ExceptionHandler(ServiceName, ApplicationName);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{63E3A6C4-11F4-49FC-BC66-A81BB60A49CA}"
 	ProjectSection(SolutionItems) = preProject
@@ -33,36 +33,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3B22FE
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Open.MOF.Messaging\\Open.MOF.Messaging.csproj
-		SccProjectName1 = Open.MOF.Messaging
-		SccLocalPath1 = Open.MOF.Messaging
-		SccProjectUniqueName2 = Open.MOF.BizTalk\\Open.MOF.BizTalk.csproj
-		SccProjectName2 = Open.MOF.BizTalk
-		SccLocalPath2 = Open.MOF.BizTalk
-		SccProjectUniqueName3 = Open.MOF.Messaging.Test\\Open.MOF.Messaging.Test.csproj
-		SccProjectName3 = Open.MOF.Messaging.Test
-		SccLocalPath3 = Open.MOF.Messaging.Test
-		SccProjectUniqueName4 = Open.MOF.SchemaReferenceUtil\\Open.MOF.SchemaReferenceUtil.csproj
-		SccProjectName4 = Open.MOF.SchemaReferenceUtil
-		SccLocalPath4 = Open.MOF.SchemaReferenceUtil
-		SccProjectUniqueName5 = Open.MOF.Messaging.Test.Messages\\Open.MOF.Messaging.Test.Messages.csproj
-		SccProjectName5 = Open.MOF.Messaging.Test.Messages
-		SccLocalPath5 = Open.MOF.Messaging.Test.Messages
-		SccProjectUniqueName6 = Open.MOF.Messaging.ExceptionHandling\\Open.MOF.Messaging.ExceptionHandling.csproj
-		SccProjectName6 = Open.MOF.Messaging.ExceptionHandling
-		SccLocalPath6 = Open.MOF.Messaging.ExceptionHandling
-		SccProjectUniqueName7 = Open.MOF.BizTalk.Test\\Open.MOF.BizTalk.Test.csproj
-		SccProjectName7 = Open.MOF.BizTalk.Test
-		SccLocalPath7 = Open.MOF.BizTalk.Test
-		SccProjectUniqueName8 = Open.MOF.Installer\\Open.MOF.Installer.csproj
-		SccProjectName8 = Open.MOF.Installer
-		SccLocalPath8 = Open.MOF.Installer
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -105,7 +75,38 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Open.MOF.Messaging\\Open.MOF.Messaging.csproj
+		SccProjectName1 = Open.MOF.Messaging
+		SccLocalPath1 = Open.MOF.Messaging
+		SccProjectUniqueName2 = Open.MOF.BizTalk\\Open.MOF.BizTalk.csproj
+		SccProjectName2 = Open.MOF.BizTalk
+		SccLocalPath2 = Open.MOF.BizTalk
+		SccProjectUniqueName3 = Open.MOF.Messaging.Test\\Open.MOF.Messaging.Test.csproj
+		SccProjectName3 = Open.MOF.Messaging.Test
+		SccLocalPath3 = Open.MOF.Messaging.Test
+		SccProjectUniqueName4 = Open.MOF.SchemaReferenceUtil\\Open.MOF.SchemaReferenceUtil.csproj
+		SccProjectName4 = Open.MOF.SchemaReferenceUtil
+		SccLocalPath4 = Open.MOF.SchemaReferenceUtil
+		SccProjectUniqueName5 = Open.MOF.Messaging.Test.Messages\\Open.MOF.Messaging.Test.Messages.csproj
+		SccProjectName5 = Open.MOF.Messaging.Test.Messages
+		SccLocalPath5 = Open.MOF.Messaging.Test.Messages
+		SccProjectUniqueName6 = Open.MOF.Messaging.ExceptionHandling\\Open.MOF.Messaging.ExceptionHandling.csproj
+		SccProjectName6 = Open.MOF.Messaging.ExceptionHandling
+		SccLocalPath6 = Open.MOF.Messaging.ExceptionHandling
+		SccProjectUniqueName7 = Open.MOF.BizTalk.Test\\Open.MOF.BizTalk.Test.csproj
+		SccProjectName7 = Open.MOF.BizTalk.Test
+		SccLocalPath7 = Open.MOF.BizTalk.Test
+		SccProjectUniqueName8 = Open.MOF.Installer\\Open.MOF.Installer.csproj
+		SccProjectName8 = Open.MOF.Installer
+		SccLocalPath8 = Open.MOF.Installer
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = MofobSolution.vsmdi

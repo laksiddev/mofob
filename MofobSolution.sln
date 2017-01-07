@@ -1,0 +1,113 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{63E3A6C4-11F4-49FC-BC66-A81BB60A49CA}"
+	ProjectSection(SolutionItems) = preProject
+		btsschema_svcutil.bat = btsschema_svcutil.bat
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		MofobSolution.vsmdi = MofobSolution.vsmdi
+		runsvcutil.bat = runsvcutil.bat
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging", "Open.MOF.Messaging\Open.MOF.Messaging.csproj", "{9750443B-DDB6-4A67-9470-37109B5C47D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.BizTalk", "Open.MOF.BizTalk\Open.MOF.BizTalk.csproj", "{132B49C2-5569-421A-BB75-8D4F0A798B2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging.Test", "Open.MOF.Messaging.Test\Open.MOF.Messaging.Test.csproj", "{F25E0EE1-CDDF-4293-94E4-D8DC81FFD172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.BizTalk.Test", "Open.MOF.BizTalk.Test\Open.MOF.BizTalk.Test.csproj", "{1483C606-3428-40C9-9F1B-D0299DDAB2C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.SchemaReferenceUtil", "Open.MOF.SchemaReferenceUtil\Open.MOF.SchemaReferenceUtil.csproj", "{2C0C2DBC-52E1-472A-A426-E576F253DA23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging.Test.Messages", "Open.MOF.Messaging.Test.Messages\Open.MOF.Messaging.Test.Messages.csproj", "{44AE7EC8-A4BA-4D3A-A146-7DB6FE97BC03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Messaging.ExceptionHandling", "Open.MOF.Messaging.ExceptionHandling\Open.MOF.Messaging.ExceptionHandling.csproj", "{0F5D3A30-0A94-4FA9-B493-3A1BB1335046}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.MOF.Installer", "Open.MOF.Installer\Open.MOF.Installer.csproj", "{43933617-2B39-4D96-9249-1DFF4BC07939}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3B22FE3A-BADB-4342-91BB-360D9BBF4FA3}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs08
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Open.MOF.Messaging\\Open.MOF.Messaging.csproj
+		SccProjectName1 = Open.MOF.Messaging
+		SccLocalPath1 = Open.MOF.Messaging
+		SccProjectUniqueName2 = Open.MOF.BizTalk\\Open.MOF.BizTalk.csproj
+		SccProjectName2 = Open.MOF.BizTalk
+		SccLocalPath2 = Open.MOF.BizTalk
+		SccProjectUniqueName3 = Open.MOF.Messaging.Test\\Open.MOF.Messaging.Test.csproj
+		SccProjectName3 = Open.MOF.Messaging.Test
+		SccLocalPath3 = Open.MOF.Messaging.Test
+		SccProjectUniqueName4 = Open.MOF.SchemaReferenceUtil\\Open.MOF.SchemaReferenceUtil.csproj
+		SccProjectName4 = Open.MOF.SchemaReferenceUtil
+		SccLocalPath4 = Open.MOF.SchemaReferenceUtil
+		SccProjectUniqueName5 = Open.MOF.Messaging.Test.Messages\\Open.MOF.Messaging.Test.Messages.csproj
+		SccProjectName5 = Open.MOF.Messaging.Test.Messages
+		SccLocalPath5 = Open.MOF.Messaging.Test.Messages
+		SccProjectUniqueName6 = Open.MOF.Messaging.ExceptionHandling\\Open.MOF.Messaging.ExceptionHandling.csproj
+		SccProjectName6 = Open.MOF.Messaging.ExceptionHandling
+		SccLocalPath6 = Open.MOF.Messaging.ExceptionHandling
+		SccProjectUniqueName7 = Open.MOF.BizTalk.Test\\Open.MOF.BizTalk.Test.csproj
+		SccProjectName7 = Open.MOF.BizTalk.Test
+		SccLocalPath7 = Open.MOF.BizTalk.Test
+		SccProjectUniqueName8 = Open.MOF.Installer\\Open.MOF.Installer.csproj
+		SccProjectName8 = Open.MOF.Installer
+		SccLocalPath8 = Open.MOF.Installer
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9750443B-DDB6-4A67-9470-37109B5C47D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9750443B-DDB6-4A67-9470-37109B5C47D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9750443B-DDB6-4A67-9470-37109B5C47D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9750443B-DDB6-4A67-9470-37109B5C47D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{132B49C2-5569-421A-BB75-8D4F0A798B2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{132B49C2-5569-421A-BB75-8D4F0A798B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{132B49C2-5569-421A-BB75-8D4F0A798B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{132B49C2-5569-421A-BB75-8D4F0A798B2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F25E0EE1-CDDF-4293-94E4-D8DC81FFD172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F25E0EE1-CDDF-4293-94E4-D8DC81FFD172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F25E0EE1-CDDF-4293-94E4-D8DC81FFD172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F25E0EE1-CDDF-4293-94E4-D8DC81FFD172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1483C606-3428-40C9-9F1B-D0299DDAB2C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1483C606-3428-40C9-9F1B-D0299DDAB2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1483C606-3428-40C9-9F1B-D0299DDAB2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1483C606-3428-40C9-9F1B-D0299DDAB2C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C0C2DBC-52E1-472A-A426-E576F253DA23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C0C2DBC-52E1-472A-A426-E576F253DA23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C0C2DBC-52E1-472A-A426-E576F253DA23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C0C2DBC-52E1-472A-A426-E576F253DA23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44AE7EC8-A4BA-4D3A-A146-7DB6FE97BC03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44AE7EC8-A4BA-4D3A-A146-7DB6FE97BC03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44AE7EC8-A4BA-4D3A-A146-7DB6FE97BC03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44AE7EC8-A4BA-4D3A-A146-7DB6FE97BC03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F5D3A30-0A94-4FA9-B493-3A1BB1335046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F5D3A30-0A94-4FA9-B493-3A1BB1335046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F5D3A30-0A94-4FA9-B493-3A1BB1335046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F5D3A30-0A94-4FA9-B493-3A1BB1335046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43933617-2B39-4D96-9249-1DFF4BC07939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43933617-2B39-4D96-9249-1DFF4BC07939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43933617-2B39-4D96-9249-1DFF4BC07939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43933617-2B39-4D96-9249-1DFF4BC07939}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = MofobSolution.vsmdi
+	EndGlobalSection
+EndGlobal

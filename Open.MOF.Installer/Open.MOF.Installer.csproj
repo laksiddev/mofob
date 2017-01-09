@@ -58,7 +58,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>XCOPY /Y $(TargetDir)$(TargetName).* $(SolutionDir)Published\*.*</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release XCOPY /Y $(TargetDir)$(TargetName).* $(SolutionDir)Published\*.*</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>if $(ConfigurationName) == Release $(SolutionDir)..\DevTools\BuildStamper\BuildStamper.exe $(ProjectDir)</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -127,6 +127,9 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>XCOPY /Y $(TargetDir)$(TargetName).* $(SolutionDir)Published\*.*</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release XCOPY /Y $(TargetDir)$(TargetName).* $(SolutionDir)Published\*.*</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>if $(ConfigurationName) == Release $(SolutionDir)..\DevTools\BuildStamper\BuildStamper.exe $(ProjectDir)</PreBuildEvent>
   </PropertyGroup>
 </Project>

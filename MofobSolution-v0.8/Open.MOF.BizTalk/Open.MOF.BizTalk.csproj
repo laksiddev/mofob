@@ -162,6 +162,9 @@
   <PropertyGroup>
     <PostBuildEvent>REM XCOPY /R /Y $(TargetDir)$(TargetName).* $(SolutionDir)Published\*.*
 "$(SolutionDir)packages\NuGet.CommandLine.3.3.0\tools\NuGet.exe" pack $(ProjectPath) -Properties Configuration=$(ConfigurationName)
-xcopy /R /Y $(TargetDir)*.nupkg $(SolutionDir)Published\*.*</PostBuildEvent>
+if $(ConfigurationName) == Release xcopy /R /Y $(TargetDir)*.nupkg $(SolutionDir)Published\*.*</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>if $(ConfigurationName) == Release $(SolutionDir)..\DevTools\BuildStamper\BuildStamper.exe $(ProjectDir)</PreBuildEvent>
   </PropertyGroup>
 </Project>

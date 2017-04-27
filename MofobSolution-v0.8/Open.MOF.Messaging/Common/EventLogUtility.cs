@@ -60,7 +60,7 @@ namespace Open.MOF.Messaging
         {
             StringBuilder sbExceptionMessage = new StringBuilder();
 
-            sbExceptionMessage.Append("An Exception has been raised:\r\n\r\n");
+            sbExceptionMessage.Append(String.Format("An Exception (of Type {0}) has been raised (in component {1}):\r\n\r\n", ex.GetType().FullName, __defaultEventLogSource));
             sbExceptionMessage.Append("");
             sbExceptionMessage.Append(ex.Message);
             sbExceptionMessage.Append("\r\n");
@@ -92,7 +92,7 @@ namespace Open.MOF.Messaging
         {
             StringBuilder sbExceptionMessage = new StringBuilder();
 
-            sbExceptionMessage.Append("An Exception has been raised:\r\n\r\n");
+            sbExceptionMessage.Append(String.Format("An Exception (of Type {0}) has been raised (in component {1}):\r\n\r\n", ((exceptionDetail.ExceptionType != null) ? exceptionDetail.ExceptionType : "Unavailable"), __defaultEventLogSource));
             sbExceptionMessage.Append("");
             sbExceptionMessage.Append(exceptionDetail.Message);
             sbExceptionMessage.Append("\r\n");

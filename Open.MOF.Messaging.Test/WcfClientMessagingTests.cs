@@ -17,6 +17,7 @@ namespace Open.MOF.Messaging.Test
     public class WcfClientMessagingTests
     {
         private static System.ServiceModel.ServiceHost _serviceHost;
+        private static string _submittedRequest;
         private IAsyncResult _asyncResult;
         private System.Threading.AutoResetEvent _waitHandle;
 
@@ -73,6 +74,8 @@ namespace Open.MOF.Messaging.Test
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ProcessedAsync);
+
+                Assert.IsTrue(_submittedRequest.Contains("<name>MessageName</name>"));
             }
         }
 
@@ -114,6 +117,8 @@ namespace Open.MOF.Messaging.Test
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ProcessedAsync);
+
+                Assert.IsTrue(_submittedRequest.Contains("<name>MessageName</name>"));
             }
         }
 
@@ -146,6 +151,8 @@ namespace Open.MOF.Messaging.Test
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ProcessedAsync);
+
+                Assert.IsTrue(_submittedRequest.Contains("<name>MessageName</name>"));
             }
         }
 
@@ -279,6 +286,8 @@ namespace Open.MOF.Messaging.Test
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ProcessedAsync);
+
+                Assert.IsTrue(_submittedRequest.Contains("<name>MessageName</name>"));
             }
         }
 
@@ -311,6 +320,8 @@ namespace Open.MOF.Messaging.Test
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ProcessedAsync);
+
+                Assert.IsTrue(_submittedRequest.Contains("<name>MessageName</name>"));
             }
         }
 
@@ -388,9 +399,16 @@ namespace Open.MOF.Messaging.Test
             _waitHandle.Set();
         }
 
+        protected static void MessageSubmittedCallback(string request)
+        {
+            _submittedRequest = request;
+        }
+
         private static void RunServiceHost()
         {
-            _serviceHost = new System.ServiceModel.ServiceHost(typeof(Open.MOF.Messaging.Test.WcfService.TestDataService));
+            Open.MOF.Messaging.Test.WcfService.TestDataService service = new Open.MOF.Messaging.Test.WcfService.TestDataService();
+            service.RegisterMessageHandler(MessageSubmittedCallback);
+            _serviceHost = new System.ServiceModel.ServiceHost(service);
             _serviceHost.Open();
         }
         private static void StopServiceHost()

@@ -15,14 +15,12 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
         protected string _channelEndpointName;
         protected ChannelFactory<T> _channelFactory = null;
         protected Dictionary<SimpleMessage, T> _asyncChannelCache;
-        //internal ItineraryDescription _cachedItineraryDescription;
  
         public EsbMessageHandler()
         {
             _channelEndpointName = null;
             _channelFactory = new ChannelFactory<T>();
             _asyncChannelCache = new Dictionary<SimpleMessage, T>();
-            //_cachedItineraryDescription = null;
         }
 
         public EsbMessageHandler(string channelEndpointName)
@@ -30,7 +28,6 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             _channelEndpointName = channelEndpointName;
             _channelFactory = new ChannelFactory<T>(_channelEndpointName);
             _asyncChannelCache = new Dictionary<SimpleMessage, T>();
-            //_cachedItineraryDescription = null;
         }
 
         #region IESBMessageHandler Members
@@ -46,16 +43,6 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
         }
 
         public abstract string HandlerContext { get; }
-        //{
-        //    get
-        //    {
-        //        string handlerType = this.GetType().AssemblyQualifiedName;
-        //        string itineraryName = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.ItineraryName != null)) ? _cachedItineraryDescription.ItineraryName : String.Empty);
-        //        string itineraryVersion = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.ItineraryVersion != null)) ? _cachedItineraryDescription.ItineraryVersion : String.Empty);
-        //        string itineraryLocation = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.WasItineraryInCache.HasValue)) ? ((_cachedItineraryDescription.WasItineraryInCache.Value) ? "incache" : "lookup") : "notfound");
-        //        return String.Format("<Handler type=\"{0}\"><Channel endpoint=\"{1}\" /><RecentItinerary name=\"{2}\" version=\"{3}\" location=\"{4}\" /></Handler>", handlerType, _channelEndpointName, itineraryName, itineraryVersion, itineraryLocation);
-        //    }
-        //}
 
         public IAsyncResult BeginSubmitMessage(MessagingState messagingState, AsyncCallback messageDeliveredCallback)
         {
@@ -192,15 +179,5 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
         protected abstract SimpleMessage InvokeChannelEndAsync(T channel, IAsyncResult ar);
 
         protected abstract SimpleMessage InvokeChannelSync(T channel, SimpleMessage requestMessage);
-
-        //internal ItineraryDescription MapMessageToItinerary(SimpleMessage message)
-        //{
-        //    IMessageItineraryMapper mapper = ServiceLocator.Current.GetInstance<IMessageItineraryMapper>();
-        //    ItineraryDescription itineraryDescription = mapper.MapMessageToItinerary(message);
-        //    if (itineraryDescription == null)
-        //        throw new MessagingException("An ESB Itinerary was not found for this message when attempting to send a message.  This indicates an error in the framework since the framework should not attempt to send the message without an Itinerary.");
-
-        //    return itineraryDescription;
-        //}
     }
 }

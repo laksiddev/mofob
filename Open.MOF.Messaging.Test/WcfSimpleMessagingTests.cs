@@ -13,6 +13,7 @@ namespace Open.MOF.Messaging.Test
     public class WcfSimpleMessagingTests
     {
         private static System.ServiceModel.ServiceHost _serviceHost;
+        private static string _submittedRequest;
         private IAsyncResult _asyncResult;
         private System.Threading.AutoResetEvent _waitHandle;
 
@@ -44,8 +45,11 @@ namespace Open.MOF.Messaging.Test
         [TestMethod]
         public void TestSubmitSimpleMessage()
         {
+            string originalMessageContent = "<PerformSimpleMethodRequest>ThisIsMyRequest</PerformSimpleMethodRequest>";
+            string expectedMessageResponse = "<PerformSimpleMethodResponse>MessageResponse</PerformSimpleMethodResponse>";
+
             TwoWayMessage requestMessage = new TwoWayMessage();
-            requestMessage.LoadContent("<PerformSimpleMethodRequest>ThisIsMyRequest</PerformSimpleMethodRequest>");
+            requestMessage.LoadContent(originalMessageContent);
 
             using (IMessagingAdapter adapter = MessagingAdapter.CreateInstance(requestMessage))
             {
@@ -69,6 +73,10 @@ namespace Open.MOF.Messaging.Test
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.WasDelivered);
                 Assert.AreEqual(true, adapter.MessageHandlingSummary.ResponseReceived);
                 Assert.AreEqual(false, adapter.MessageHandlingSummary.ProcessedAsync);
+
+                // Test the sent and received messages
+                Assert.AreEqual(originalMessageContent, _submittedRequest);
+                Assert.AreEqual(expectedMessageResponse, responseMessage.ToXmlString());
             }
      
         }
@@ -111,15 +119,21 @@ namespace Open.MOF.Messaging.Test
             _waitHandle.Set();
         }
 
+        protected static void MessageSubmittedCallback(string request)
+        {
+            _submittedRequest = request;
+        }
+
         private static void RunServiceHost()
         {
-            _serviceHost = new System.ServiceModel.ServiceHost(typeof(Open.MOF.Messaging.Test.WcfService.SimpleService));
+            Open.MOF.Messaging.Test.WcfService.SimpleService service = new Open.MOF.Messaging.Test.WcfService.SimpleService();
+            service.RegisterMessageHandler(MessageSubmittedCallback);
+            _serviceHost = new System.ServiceModel.ServiceHost(service);
             _serviceHost.Open();
         }
 
         private static void StopServiceHost()
         {
-
             if (_serviceHost != null)
                 _serviceHost.Close();
         }

@@ -30,17 +30,12 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             get
             {
                 string handlerType = this.GetType().AssemblyQualifiedName;
-                //string itineraryName = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.ItineraryName != null)) ? _cachedItineraryDescription.ItineraryName : String.Empty);
-                //string itineraryVersion = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.ItineraryVersion != null)) ? _cachedItineraryDescription.ItineraryVersion : String.Empty);
-                //string itineraryLocation = (((_cachedItineraryDescription != null) && (_cachedItineraryDescription.WasItineraryInCache.HasValue)) ? ((_cachedItineraryDescription.WasItineraryInCache.Value) ? "incache" : "lookup") : "notfound");
                 return String.Format("<Handler type=\"{0}\"><Channel endpoint=\"{1}\" /></Handler>", handlerType, _channelEndpointName);
             }
         }
 
         public override bool CanSupportMessage(SimpleMessage message)
         {
-            //IMessageItineraryMapper mapper = ServiceLocator.Current.GetInstance<IMessageItineraryMapper>();
-            //_cachedItineraryDescription = mapper.MapMessageToItinerary(message);
             List<Type> responseTypes = ((message is FrameworkMessage) ? ((FrameworkMessage)message).ResponseTypes : new List<Type>());
 
             bool messageHasSendToAddress = false;
@@ -48,9 +43,6 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
             {
                 messageHasSendToAddress = ((((FrameworkMessage)message).To != null) && (((FrameworkMessage)message).To.IsValid()));
             }
-            //bool messageHasItinerary = (_cachedItineraryDescription != null);
-            // Open question: Should a two way interface be used if no response type has been defined?
-            //bool messageSupportsTwoWay = ((responseTypes != null) && (responseTypes.Count > 0));
             // Until all use cases are determined, if a message does not require two-way, it should not be processed as two-way
             bool messageSupportsTwoWay = message.RequiresTwoWay;
             bool isMessageSupported = (!messageHasSendToAddress && messageSupportsTwoWay);    // (messageHasItinerary && messageSupportsTwoWay);
@@ -146,13 +138,7 @@ namespace Open.MOF.BizTalk.Adapters.MessageHandlers
 
         private Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.SubmitRequestResponseRequest MapMessageToEsbRequest(SimpleMessage requestMessage)
         {
-            //_cachedItineraryDescription = MapMessageToItinerary(requestMessage);
-
-            Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.ItineraryDescription itineraryDescription = null;    // new Open.MOF.BizTalk.Adapters.Proxy.ItineraryTwoWayServiceInstance.ItineraryDescription();
-            //itineraryDescription.Name = _cachedItineraryDescription.ItineraryName;
-            //if (_cachedItineraryDescription.ItineraryVersion != null)
-            //    itineraryDescription.Version = _cachedItineraryDescription.ItineraryVersion;
-
+            Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.ItineraryDescription itineraryDescription = null;
             Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.SubmitRequestResponseRequest itineraryRequest = new Open.MOF.BizTalk.Adapters.Proxy.EsbTwoWayServiceInstance.SubmitRequestResponseRequest(itineraryDescription, requestMessage.ToXmlString());
 
             return itineraryRequest;
